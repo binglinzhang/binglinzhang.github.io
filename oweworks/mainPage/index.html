@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pages</title>
+        <!-- <meta name="viewport" content="width=device-width,inital-scale=1.0,
+        maximum-scale=1.0,user-scalable=no"> -->
+        <link rel="stylesheet" href="./css/bootstrap.css">
+        <link rel="stylesheet" href="./css/mystyle.css">
+    </head>
+    <body>
+
+        <div class="fixNavbar">    <!--顶部固定栏-->
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="divPic"><a href="index.html"><img src="./img/logo.png"></a></div>
+                <button class="navbar-toggle" data-toggle="collapse" data-target="#Mnavbar-collapse">    <!--实现小屏幕的导航收缩-->
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="divNav">
+                    <div class="collapse navbar-collapse myNav" id="Mnavbar-collapse">
+                                <ul class="nav navbar-nav">
+                                    <li class="active"><a href="index.html"><span></span>首页</a></li>
+                                    <li><a href="information.html"><span></span>资讯</a></li>
+                                    <li><a href="case.html"><span></span>案例</a></li>
+                                    <li><a href="about.html"><span></span>关于</a></li>
+                                </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="lunBoPic">    <!--轮播-->
+            <div class="carousel slide" id="myCarousel">
+                <ul class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ul>
+                <div class="carousel-inner">
+                    <div class="item active"><img src="./img/slide2.png"></div>
+                    <div class="item"><img src="./img/slide3.png"></div>
+                    <div class="item"><img src="./img/slide1.png"></div>
+                </div>
+                <a href="#myCarousel" data-slide="prev" class="carousel-control left">&lsaquo;</a>
+                <a href="#myCarousel" data-slide="next" class="carousel-control right">&rsaquo;</a>
+            </div>
+        </div>
+
+        <div class="midSlogan">    <!--中间显示大字-->
+            <h2 class="response">学习的十大好习惯和坏习惯</h2>
+            <h4>欢迎观看，祝你天天有收获，怀抱好心情</h4>
+        </div>
+
+        <div class="Fourtabs">    <!--中间图片字拼接-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 Adiv">
+                        <ul class="media-list">
+                        <li class="media">
+                                <div class="media-left">
+                                    <img src="./img/tab1-1.png">
+                                </div>
+                                <div class="media-body">
+                                    <h3 class="media-heading">tab1</h3>
+                                    <p style="color:#aaa;text-decoration:line-through">反复求解同一类型问题</p>
+                                    <p>使用解释和简单的类比</p>
+                                </div>
+                        </li>
+                    </ul>
+                </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 Adiv">
+                        <ul class="media-list">
+                            <li class="media">
+                                    <div class="media-left">
+                                        <img src="./img/tab1-2.png">
+                                    </div>
+                                    <div class="media-body">
+                                        <h3 class="media-heading">tab2</h3>
+                                        <p style="color:#aaa;text-decoration:line-through">不和导师或同学来讨论困惑点</p>
+                                        <p>交替练习不同解决问题的技巧</p>
+                                    </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 Adiv">
+                        <ul class="media-list">
+                            <li class="media">
+                                    <div class="media-left">
+                                        <img src="./img/tab1-3.png">
+                                    </div>
+                                    <div class="media-body">
+                                        <h3 class="media-heading">tab3</h3>
+                                        <p style="color:#aaa;text-decoration:line-through">被动重读，被动地坐着而你的眼球回到了同一个页面</p>
+                                        <p>先吃你的青蛙</p>
+                                    </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 Adiv">
+                        <ul class="media-list">
+                            <li class="media">
+                                    <div class="media-left">
+                                        <img src="./img/tab1-4.png">
+                                    </div>
+                                    <div class="media-body">
+                                        <h3 class="media-heading">tab4</h3>
+                                        <p style="color:#aaa;text-decoration:line-through">先看答案，你以为你知道该怎么做</p>
+                                        <p>使用回忆，勿忘初心</p>
+                                    </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab2">    <!--中间大图文拼接-->
+            <div class="container">
+              <div class="row">
+                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-push-6">
+                    <img src="./img/tab2.png" class="img-responsive" style="width:40%;height:40%;margin:0 auto;"/>
+                  </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-pull-6"  style="text-align:center;margin-top:20px;">
+                  <h3>好习惯带来好生活</h3>
+                  <p>一个美好习惯的养成需要坚持21天</p>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="tab3">    <!--中间大图文拼接-->
+            <div class="container" >
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <img src="./img/tab3.png" class="img-responsive" style="width:60%;height:60%;margin:0 auto;"/>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"  style="text-align:center;margin-top:20px;">
+                        <h3>不良的习惯影响生活质量</h3>
+                        <p>一个不好习惯的养成只要3天，3天后就行动将习惯于如此</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fixFooter">    <!--脚本-->
+            <nav class="navbar navbar-default myFooter">
+                <ul class="breadcrumb">
+                    <li><a href="#">企业合作</a></li>
+                    <li><a href="#">合作事宜</a></li>
+                    <li><a href="#">版权声明</a></li>
+                </ul>
+                <div class="">CopyRight  2017 @ zbling </div>
+            </nav>
+        </div>
+
+    <script type="text/javascript" src="./css/jquery-1.12.4.js"></script>
+
+    <script type="text/javascript" src="./css/bootstrap.js"></script>
+    <script type="text/javascript">
+        $("#myCarousel").carousel({
+            "interval":3000,
+            "pause":"hover"
+        })
+        var height = $(".carousel-control").height();
+        $(".carousel-control").css({
+        	"line-height":height+"px"
+        });
+        $(window).resize(function(){
+        	height = $(".carousel-control").height();
+        	$(".carousel-control").css({
+        		"line-height":height+"px"
+        	});
+        });
+
+    </script>
+
+    </body>
+
+</html>

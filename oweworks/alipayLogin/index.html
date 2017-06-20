@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>login</title>
+    <!-- <meta name="viewport" content="width=device-width,inital-scale=1.0,
+    maximum-scale=1.0,user-scalable=no"> -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="aDiv">
+    <ul>
+        <li class="active">快速注册</li>
+        <li>直接登录</li>
+        <br style="clear:both;">
+    </ul>
+
+    <div class="bDiv">
+        <span><label>*</label>用户名 <input type="text" autofocus class="bInput"></span>
+        <span><label>*</label>密    码 <input type="password" class="bInput"></span>
+        <span><label>*</label>邮    箱 <input type="email" name="email" class="bInput"></span>
+        <span><label style="visibility:hidden">*</label>手机号码 <input type="text" class="bInput"></span><br>
+        <span>
+          <button type="button" onclick="submit()" class="button2">注册</button>
+        <button type="button" onclick="location.reload()" class="button2">重置</button>
+        </span>
+        <br><br>
+    </div>
+
+    <div class="cDiv" style="display:none;">
+        <span>用户名 <input type="text" autofocus class="cInput"></span>
+        <span>密    码 <input type="password" class="cInput"></span>
+        <span><a href="javascript:;" onclick="findPwd()">忘记密码?</a></span>
+        <button type="button" onclick="login()" id="buttonID">登录</button>
+        <br><br>
+    </div>
+
+    <div class="eDiv" style="display:none;color:white;">
+        <h4 style="margin:20px 0 20px;text-align:20px;color:lightgrey;">找回密码 </h4>
+        <span>请输入注册的用户名 </span><br>
+        <input type="text" autofocus class="eInput"><br><br>
+        <span style="color:white;">请输入注册的邮箱 </span><br>
+        <input type="email" class="eInput"><br><br>
+        <button type="button" class="button3">确认</button>
+    </div>
+
+    <div class="fDiv" style="display:none;">
+      <span style="color:red;margin-top:30px;display:inline-block">验证通过，请重置密码：</span><br>
+      <input type="password" class="fInput"><br><br>
+      <button class='button4' onclick='submitCode()'>确认</button>
+    </div>
+    <!-- <iframe src="f.html" width="" height=""></iframe> -->
+</div>
+</body>
+
+<script type="text/javascript">
+
+    var XHR = new XMLHttpRequest()
+    var li = document.getElementsByTagName("li")
+
+    li[0].onclick = function () {
+        li[0].classList.add("active");
+        li[1].classList.remove("active");
+        document.getElementsByClassName("cDiv")[0].style.display = "none";
+        document.getElementsByClassName("eDiv")[0].style.display = "none";
+        document.getElementsByClassName("bDiv")[0].style.display = "block";
+    }
+    li[1].onclick = function () {
+        li[1].classList.add("active");
+        li[0].classList.remove("active");
+        document.getElementsByClassName("bDiv")[0].style.display = "none";
+        document.getElementsByClassName("eDiv")[0].style.display = "none";
+        document.getElementsByClassName("cDiv")[0].style.display = "block";
+    }
+    function findPwd() {
+        document.getElementsByClassName("bDiv")[0].style.display = "none";
+        document.getElementsByClassName("cDiv")[0].style.display = "none";
+        document.getElementsByClassName("eDiv")[0].style.display = "block";
+    }
+
+    function submit() {
+        var allInputB = document.getElementsByClassName("bInput")
+        if (allInputB[0].value.length == 0 || allInputB[1].value.length == 0 || allInputB[2].value.length == 0) {
+            alert("标记*为必填项")
+        } else {
+            var objB = {}
+            objB.userName = allInputB[0].value
+            objB.userPwd = allInputB[1].value
+            objB.userEmail = allInputB[2].value
+            objB.userCel = allInputB[3].value
+            objB.id = "0"
+            XHR.open("post", "/goto")
+            XHR.onreadystatechange = function () {
+                if (XHR.readyState == XMLHttpRequest.DONE && XHR.status == 200) {
+                    if (XHR.responseText == "1") {
+                        alert("注册成功,请登录");
+                        document.getElementsByClassName("bDiv")[0].style.display = "none";
+                        document.getElementsByClassName("cDiv")[0].style.display = "block";
+                    }
+                    if (XHR.responseText == "2") {
+                        alert("该邮箱已注册，请直接登录");
+                        document.getElementsByClassName("bDiv")[0].style.display = "none";
+                        document.getElementsByClassName("cDiv")[0].style.display = "block";
+                    }
+                    if (XHR.responseText == "0") {
+                        alert("注册失败...");
+                    }
+                }
+            }
+            XHR.send(JSON.stringify(objB));
+        }
+    }
+
+    function login() {
+        var allInputC = document.getElementsByClassName("cInput")
+        var objC = {}
+        objC.userName = allInputC[0].value
+        objC.userPwd = allInputC[1].value
+        objC.id = "1"
+        XHR.open("POST", "/goto")
+        XHR.onreadystatechange = function () {
+            if (XHR.readyState == XMLHttpRequest.DONE && XHR.status == 200) {
+                if (XHR.responseText == "1") {
+                    location.href = "/index.html"
+                } else {
+                    alert("用户名或密码错误，请重新输入")
+                }
+            }
+        }
+        XHR.send(JSON.stringify(objC))
+    }
+
+    document.getElementsByClassName("button3")[0].onclick = function () {
+        var allInputC = document.getElementsByClassName("eInput")
+        var objE = {}
+        objE.userName = allInputC[0].value
+        objE.userEmail = allInputC[1].value
+        objE.id = "2"
+        XHR.open("POST", "/goto")
+        XHR.onreadystatechange = function () {
+            if (XHR.readyState == XMLHttpRequest.DONE && XHR.status == 200) {
+                if (XHR.responseText == "1") {
+                  document.getElementsByClassName("eDiv")[0].style.display = "none";
+                  document.getElementsByClassName("fDiv")[0].style.display = "block";
+                } else {
+                  alert("用户名或邮箱错误...")
+                }
+            }
+        }
+        XHR.send(JSON.stringify(objE))
+    }
+
+    function submitCode() {
+      var fObj = {};
+      fObj.userEmail = document.getElementsByClassName("eInput")[1].value;
+      fObj.userPwd = document.getElementsByClassName("fInput")[0].value;
+      fObj.id = "3";
+      XHR.open("POST","/goto")
+      XHR.onreadystatechange = function(){
+        if (XHR.readyState == XMLHttpRequest.DONE && XHR.status == 200) {
+          if (XHR.responseText == "1") {
+            alert("修改成功，请登录")
+            document.getElementsByClassName("eDiv")[0].style.display = "none";
+            document.getElementsByClassName("fDiv")[0].style.display = "none";
+            document.getElementsByClassName("cDiv")[0].style.display = "block";
+          } else {
+            alert("服务器开小车啦...")
+          }
+        }
+      }
+      XHR.send(JSON.stringify(fObj))
+    }
+
+
+</script>
+</html>

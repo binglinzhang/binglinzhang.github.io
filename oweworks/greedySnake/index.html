@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style media="screen">
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            #border {
+                position: fixed;
+                width: 300px;
+                height: 300px;
+                background: lightgrey;
+            }
+            .food {
+                position:absolute;
+                width: 20px;
+                height: 20px;
+                background: green;
+            }
+            .head {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                background: orange;
+            }
+        </style>
+        <script src="jquery-1.12.4.js"></script>
+        <script src="jquery.touchSwipe.min.js"></script>
+        <script src="tcs.js"></script>
+    </head>
+    <body>
+        <div id="border">
+            <div class="food"></div>
+            <div class="head"></div>
+        </div>
+    </body>
+</html>

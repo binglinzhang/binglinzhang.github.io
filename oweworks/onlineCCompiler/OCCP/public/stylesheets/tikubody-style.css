@@ -1,0 +1,256 @@
+@charset "UTF-8";
+body {
+    background: white;
+}
+.mainspan {
+    width:195px;
+    float:left;
+    line-height:45px;
+    color: white;
+    background: #f1014e;
+    font-size:18px;
+     font-weight:bold;
+     text-align: center;
+}
+.mainspan:hover {
+    cursor: pointer;
+}
+.tiku {
+    display: inline-block;
+    position:absolute;
+    top:45px;
+    left: 0px;
+    margin-top: 10px;
+    width: 98%;
+}
+.tiku_span1 {
+    line-height: 30px;
+    font-size: 18px;
+    padding-left: 20px;
+    float:right;
+    color: lightgrey;
+}
+.tiku_div1 {
+    width: 100%;
+    height: 30px;
+    text-align: justify;
+    text-align-last: justify;
+    overflow: hidden;
+}
+.tiku_div2 {
+    height: 30px;
+    margin-top: 15px;
+    overflow: hidden;
+    display: block;
+}
+.searchinput {
+    width: 230px !important;
+    float: left;
+    padding-left: 5px;
+}
+.searchbtn {
+    width: 80px;
+    height: 24px;
+    border: 2px solid lightgrey;
+}
+.searchbtn:hover {
+    cursor: pointer;
+}
+.qushead {
+    display: inline-block;
+    width: 35% !important;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.frameA {
+    width: 100%;
+    bottom: 20px;
+    top: 45px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    position: absolute;
+    overflow: auto;
+}
+.frameB {
+    position: absolute;
+    top: 14%;
+    height: 25%;
+    width: 100%;
+}
+.frameB textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+.frameC {
+    position: absolute;
+    top: 42%;
+    bottom: 20px;
+    width: 100%;
+}
+.frameC textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+.savebtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 30px;
+    text-align: left;
+    overflow: hidden;
+}
+.savebtn>input {
+    margin-right: 8%;
+}
+.frameA input {
+    margin-left: 10px;
+    /*margin-top: 10px;*/
+}
+#logoutspan {
+    float:right;
+    margin-right: 25px;
+    display: inline-block;
+    line-height: 45px;
+    color: green;
+    font-size: 12px;
+}
+#logoutspan:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.posSet {
+    position: absolute;
+    left: 10px;
+    top: 5px;
+}
+#searchIcon {
+    cursor: pointer;
+}
+.CodeMirror {
+    height: 280px !important;
+    border-radius: 6px;
+}
+
+
+#col-3 {
+    padding: 0;
+    position: absolute;
+    left: 1.5%;
+    top: 65px;
+    bottom: 20px;
+    width: 22%;
+    z-index: -666;
+}
+#col-9 {
+    padding: 0;
+    position: absolute;
+    right: 1.5%;
+    top: 65px;
+    bottom: 20px;
+    width: 73%;
+    z-index: -999;
+}
+.headline-input-search {
+    position: absolute;
+    width: 100%;
+    height: 32px;
+    top: 45px;
+}
+.search {
+    display: inline-block;
+    width: 65%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+}
+.search>i {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: url(../images/search_32.ico);
+    background-size: cover;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+}
+.search>i:hover {
+    background: url(../images/search_32_2.jpg);
+}
+.search>input {
+    display: inline-block;
+    position: absolute;
+    width: 12%;
+    height: 100%;
+    top: 0;
+    right: 40px;
+}
+.media-2 {
+    display: none;
+}
+.media-4 {
+    display: none;
+}
+@media (max-width:1220px) {
+    .media-1 {
+        display: none;
+    }
+    .media-2 {
+        display: block;
+    }
+    .media-3 {
+        display: none;
+    }
+    .media-4 {
+        display: block;
+    }
+}
+@media (max-width:1040px) {
+    .media-2 {
+        display: none;
+    }
+    .media-4 {
+        display: none;
+    }
+}
+@media (max-height:750px) {
+    .headline-input-search>.search {
+        display: none;
+    }
+    #col-3 {
+        top: 30px;
+    }
+    #col-9 {
+        top: 30px;
+    }
+    .tiku_span1 {
+        margin-top: 40px;
+        font-size: 20px;
+    }
+}
+@media (max-height:620px) {
+    .headline-input-search {
+        display: none;
+    }
+}
+@media (max-height:540px) {
+    .frameB {
+        display: none;
+    }
+}
+
+.form-group>.checkbox:first-child {
+    margin-top: 0;
+}
+.checkbox>span {
+    cursor:pointer;
+    margin-left: 8px;
+}
+.checkbox>.icheckbox_minimal-green>input {
+    display: none;
+}

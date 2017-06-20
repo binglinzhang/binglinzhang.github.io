@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <!-- <meta name="viewport" content="width=device-width,inital-scale=1.0,
+    maximum-scale=1.0,user-scalable=no"> -->
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="header">
+        <div class="nav">
+          <div class="logo"></div>
+          <div class="entry">
+            <span>我已有支付宝账户</span>
+            <a href="#">  快速登录</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+          <div class="wrap">
+            <div class="slogan"></div>
+            <div class="mid">
+              <a href="#"><span><i></i>我是开发者</span></a>
+              <a href="#"><span><i></i>我是商家用户</span></a>
+              <a href="#"><span><i></i>我是个人用户</span></a>
+            </div>
+          </div>
+        <div class="backimg"></div>
+      </div>
+
+      <div class="footer">
+        <div class="nav-link">
+          <ul>
+            <li><a href="#">蚂蚁金服集团</a></li>
+            <li>|</li>
+            <li><a href="#">支付宝</a></li>
+            <li>|</li>
+            <li><a href="#">余额宝</a></li>
+            <li>|</li>
+            <li><a href="#">招财宝</a></li>
+            <li>|</li>
+            <li><a href="#">蚂蚁商家中心</a></li>
+            <li>|</li>
+            <li><a href="#">芝麻信用</a></li>
+            <li>|</li>
+            <li><a href="#">蚂蚁微贷</a></li>
+            <li>|</li>
+            <li><a href="#">网商银行</a></li>
+            <li>|</li>
+            <li><a href="#">开放平台</a></li>
+            <li>|</li>
+          </ul>
+        </div>
+        <div class="ownership">
+          <span>支付宝版权所有 2004-2017 ICP证：沪B2-20150087</span>
+        </div>
+        <div class="nav-icon"></div>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="text/javascript">
+  document.body.onload = function(){
+  var count = 2;
+  setInterval(function(){
+    var picN = count + ".jpg";
+    // console.log(picN);
+    document.getElementsByClassName('backimg')[0].style.background = "url("+picN+")";
+    document.getElementsByClassName('backimg')[0].style.backgroundSize = "cover";
+    // document.getElementsByClassName("backimg")[0].stlye.animation = "5s myfirst infinite";
+    if (count<3){
+      count++;
+    }
+    else{
+        count = 1;
+    }
+  },2000);
+}
+</script>
