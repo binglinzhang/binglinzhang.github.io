@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        CProject
+    </title>
+    <link rel='stylesheet' href='./public/stylesheets/bootstrap.min.css'>
+    <link rel='stylesheet' href='./public/stylesheets/qikoo.css'>
+    <link rel="stylesheet" href="./public/stylesheets/icheck-green.css">
+    <link rel="stylesheet" href="./public/stylesheets/header-style.css">
+    <link rel="stylesheet" href="./public/stylesheets/tikubody-style.css">
+
+</head>
+<body>
+
+    <div class="container-position">
+        <nav class="navbar navbar-default equinav" role="navigation">
+
+            <!--缩小下拉的标题 -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-brand">在线C编译系统</span>
+            </div>
+
+            <!--导航栏 -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/home">在线C编译系统</a></li>
+                    <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">题库 <b class="caret"></b></a>
+                        <ul class="dropdown-menu depth_0">
+                            <li><a href=/tiku/HTML5>HTML5</a></li><li><a href=/tiku/MySQL>MySQL</a></li><li><a href=/tiku/Express>Express</a></li><li><a href=/tiku/Nodejs>Nodejs</a></li><li><a href=/tiku/MongoDB>MongoDB</a></li><li><a href=/tiku/CSS>CSS</a></li><li><a href=/tiku/JavaScript>JavaScript</a></li><li><a href=/tiku/FreeCodeCamp>FreeCodeCamp</a></li>
+                                <li data-target="#myModal-2" data-toggle="modal" data-backdrop="true"><a href="#"><b>+</b></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">考试题库 <b class="caret"></b></a>
+                        <ul class="dropdown-menu depth_0">
+                            <li><a href="#">2016年C语言程序设计期末考试</a></li>
+                            <li><a href="#">2016年计算机原理期末考试</a></li>
+                            <li><a href="#">2017年人工智能第一次考试</a></li>
+                            <li><a href="#">C++2017年人工智能第二次考试</a></li>
+                            <li><a href="#">C++2017年编译原理基础试题</a></li>
+                            <li data-target="#myModal-3" data-toggle="modal" data-backdrop="true"><a href="#"><b>+</b></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">题目批改</a></li>
+                    <li><a href="#">导出成绩</a></li>
+                    <li><a href="#">学生管理</a></li>
+                    <li><a href="http://zhangbinglin.cn/oweworks/onlineCCompiler/login/">退出</a></li>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+
+    <!--模态框__新建题库-->
+    <div class="modal" id="myModal-2" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <b class="text-primary">新建题库</b>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="new-headline" class="form-control" autofocus>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" id="addMore">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="myModal-3" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <b class="text-success">新建考试题库</b>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="new-headline" class="form-control" autofocus>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="addMore">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="mainbody">
+
+    <div class="row">
+        <div class="col-lg-3 col-md-3" id="col-3">
+
+            <div class="tiku_div1 media-1">
+                <input type="button" class="btn btn-info btn-sm" value="全选 / 反选" id="selectAll" onclick="selectAll()">
+                <input type="button" class="btn btn-info btn-sm" value="新增题目" id="addMoreExercise" onclick="addMoreExercise()">
+                <input type="button" class="btn btn-info btn-sm" value="编辑题目" id="editExercise" onclick="editExercise()">
+                <input type="button" class="btn btn-info btn-sm" value="删除题目" id="deleteExercise" onclick="deleteExercise()">
+            </div>
+
+            <div class="tiku_div1 media-2">
+                <input type="button" class="btn btn-info btn-xs" value="全选 / 反选" id="selectAll" onclick="selectAll()">
+                <input type="button" class="btn btn-info btn-xs" value="新增题目" id="addMoreExercise" onclick="addMoreExercise()">
+                <input type="button" class="btn btn-info btn-xs" value="编辑题目" id="editExercise" onclick="editExercise()">
+                <input type="button" class="btn btn-info btn-xs" value="删除题目" id="deleteExercise" onclick="deleteExercise()">
+            </div>
+
+          <div class="frameA">
+              <form class="posSet">
+                   <div class="form-group"><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampFreeCodeMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampSearchandReplace</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCodeCodeCampSearchand</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampSearchandReplace</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCodeCodeCampSearchand</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampSearchandReplace</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCodeCodeCampSearchand</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampSearchandReplace</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCodeCodeCampSearchand</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampSearchandReplace</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCodeCodeCampSearchand</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampSearchandReplace</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCodeCodeCampSearchand</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeCodeCampSearchandReplace</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>FreeChunkyMonkey</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div><div class='checkbox'><input type='checkbox'><span onclick='getValBack(this)'>SlasherFlick</span></div></div>
+               </form>
+          </div>
+
+        </div>
+        <div class="col-lg-9 col-md-9" id="col-9">
+
+            <div class="savebtn media-3">
+                <input type="button" class="tiku_button btn btn-info btn-sm" value="生成试卷" onclick="qikoo.dialog.alert('开发中...');">
+                <input type="button" value="取消" class="btn btn-info btn btn-sm" id="cancelSubmit" onclick="cancelSubmit()">
+                <input type="button" value="保存" class="btn btn-info btn btn-sm" id="saveInput" onclick="saveInput()">
+            </div>
+
+            <div class="savebtn media-4">
+                <input type="button" class="tiku_button btn btn-info btn-xs" value="生成试卷" onclick="qikoo.dialog.alert('开发中...');">
+                <input type="button" value="取消" class="btn btn-info btn btn-xs" id="cancelSubmit" onclick="cancelSubmit()">
+                <input type="button" value="保存" class="btn btn-info btn btn-xs" id="saveInput" onclick="saveInput()">
+            </div>
+
+            <!--右侧显示题库名-->
+            <span class="tiku_span1" data-target="#myModal" data-toggle="modal" data-backdrop="true"><a href="javascript:;"><i><b>FreeCodeCamp</b></i></a></span>
+
+            <!--新建题目标题-->
+            <div class="headline-input-search">
+                <input class="form-control input-sm qushead" type="text" size="50" placeholder="请输入题目标题 (必填，且标题不可重复)" disabled value="Search and Replace">
+                <div class="search"><input type="text" placeholder="search" class="form-control">
+                    <i id="search-hidden"></i>
+                </div>
+            </div>
+
+             <!--题干输入框-->
+            <div class="frameB ">
+                <textarea class="form-control" name="name" rows="8" cols="80" placeholder="在此输入题目要求" id="textareaHeadline">使用给定的参数对句子执行一次查找和替换，然后返回新句子。
+
+第一个参数是将要对其执行查找和替换的句子。
+
+第二个参数是将被替换掉的单词（替换前的单词）。
+
+第三个参数用于替换第二个参数（替换后的单词）。
+
+注意：替换时保持原单词的大小写。例如，如果你想用单词 "dog" 替换单词 "Book" ，你应该替换成 "Dog"。</textarea>
+            </div>
+
+            <!--答案输入框-->
+            <div class="frameC">
+                <textarea class="form-control" name="name" rows="8" cols="80" placeholder="在此输入题目参考答案" id="textareaContent">function myReplace(str, before, after) {
+
+  var regExp = new RegExp(before,"g");
+
+  var anStr = "";
+
+  if(before.charAt(0)>="A" && before.charAt(0)<="Z"){
+
+    anStr = str.replace(regExp,after.charAt(0).toUpperCase() + after.slice(1));
+
+  }
+  else{
+
+    anStr = str.replace(regExp,after);
+
+  }
+
+  return anStr;
+}</textarea>
+            </div>
+
+        </div>
+
+        <!--模态框修改题库信息-->
+        <div class="modal fade" id="myModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                        <h3 class="text-muted">编辑题库</h3>
+                    </div> -->
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button><br><br>
+                        <input type="text" id="headlineMSG" class="form-control" value=FreeCodeCamp autofocus>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" id="renameHeadline">重命名</button>
+                        <button class="btn btn-danger" id="deleteTiku">删除题库</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="./public/javascripts/jquery-1.12.4.min.js"></script>
+<script src='./public/javascripts/bootstrap.min.js'></script>
+<script src="./public/javascripts/qikoo.js"></script>
+<script src="./public/javascripts/icheck.min.js"></script>
+<script src="./public/javascripts/header.js"></script>
+<script src="./public/javascripts/tikubody.js"></script>
+<!-- <script src="./public/javascripts/codemirror.js"></script>
+<script src="./public/javascripts/javascript.js"></script> -->
+
+<script>
+    function beautifyBox() {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_minimal-green',
+            radioClass: 'iradio_minimal-green',
+            // increaseArea: '20%' // optional
+        });
+    }
+    $(document).ready(function() { //复选框美化
+        beautifyBox();
+    });
+</script>
+</body>
+
+</html>

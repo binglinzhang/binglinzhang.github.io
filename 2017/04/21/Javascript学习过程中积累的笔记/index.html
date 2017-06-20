@@ -1,0 +1,1153 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="前端,Javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="最近整理先前作为初学者积累的Javascript学习笔记，回过头来看还是觉得基础很重要啊，虽然随着积累的知识越多，经验越丰富，但基本的知识点万变不离宗，还是要回过头时常翻看下，想起了当年我高考的语文作文：“回到原点”，多恰当哈哈 …">
+<meta name="keywords" content="前端,Javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript学习过程中积累的笔记">
+<meta property="og:url" content="http://zhangbinglin.cn/2017/04/21/Javascript学习过程中积累的笔记/index.html">
+<meta property="og:site_name" content="ZhangBinglin">
+<meta property="og:description" content="最近整理先前作为初学者积累的Javascript学习笔记，回过头来看还是觉得基础很重要啊，虽然随着积累的知识越多，经验越丰富，但基本的知识点万变不离宗，还是要回过头时常翻看下，想起了当年我高考的语文作文：“回到原点”，多恰当哈哈 …">
+<meta property="og:updated_time" content="2017-06-04T01:29:31.998Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript学习过程中积累的笔记">
+<meta name="twitter:description" content="最近整理先前作为初学者积累的Javascript学习笔记，回过头来看还是觉得基础很重要啊，虽然随着积累的知识越多，经验越丰富，但基本的知识点万变不离宗，还是要回过头时常翻看下，想起了当年我高考的语文作文：“回到原点”，多恰当哈哈 …">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangbinglin.cn/2017/04/21/Javascript学习过程中积累的笔记/"/>
+
+
+
+
+
+  <title>Javascript学习过程中积累的笔记 | ZhangBinglin</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ZhangBinglin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活不止非黑即白，<br>还有笔下的五彩 ...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-clock-o"></i> <br />
+            
+            时光轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于 <i style="vertical-align:super;color:#f59b80;">me</i>
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            站内搜索
+          </a>
+        </li>
+
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup" style="background:none">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result" style="display:none;background:#fff;"></div>
+</div>
+<script>
+document.getElementById('local-search-input').onkeyup = function() {
+  document.getElementById('local-search-result').style.display = 'none'
+  if (document.getElementById('local-search-input').value) {
+      document.getElementById('local-search-result').style.display = 'block'
+      document.getElementsByClassName('local-search-popup')[0].focus()
+  }
+}
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2017/04/21/Javascript学习过程中积累的笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZhangBinglin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Javascript学习过程中积累的笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-21T22:13:59+08:00">
+                2017-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近整理先前作为初学者积累的Javascript学习笔记，回过头来看还是觉得基础很重要啊，虽然随着积累的知识越多，经验越丰富，但基本的知识点万变不离宗，还是要回过头时常翻看下，想起了当年我高考的语文作文：“回到原点”，多恰当哈哈 …</p>
+<a id="more"></a>
+<p>解释型语言：可直接在浏览器或者操作系统执行的文件<br>编译型语言：源代码通过编译器编译生成二进制可执行文件（特点：运行速度快，执行效率高）</p>
+<p>局部变量只能在本变量声明的函数内部调用，跳出该函数体之后即无法调用。全局变量在整个代码中都可以进行调用。<br><strong>栗子：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> i = <span class="string">"bling"</span>;    <span class="comment">//通过var定义了全局之后在控制台中输出i跟输出window.i效果一样</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myName</span>(<span class="params"></span>) </span>&#123;</div><div class="line"> <span class="keyword">var</span> i = <span class="string">"Bryn"</span>;    <span class="comment">// 注意此处通过var定义变量之后，i变为局部变量，如果把var关键字去掉,则变成了给i重新赋值，i还是挂载在window下的全局变量，返回输出的结果即为“Bryn"</span></div><div class="line">&#125;   </div><div class="line">myName();      </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myLikes</span>(<span class="params"></span>) </span>&#123;</div><div class="line"> alert(i);</div><div class="line">&#125;</div><div class="line">myLikes();    <span class="comment">//返回结果为"bling"</span></div></pre></td></tr></table></figure>
+<p>在for语句或者switch选择语句中有以下2个关键语句：<br>continue:执行该语句后即停止当前循环，进入下一次循环；<br>break:执行该语句后立马跳出循环体，不再执行后面动作。</p>
+<p>A+=10等效于A=A+10<br>A-=10等效于A=A-10<br>同理还有A<em>=10；A/=10<br><em>*栗子：</em></em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a=<span class="number">10</span>, b=<span class="number">20</span> , c=<span class="number">30</span>;</div><div class="line">++a;       <span class="comment">//立马执行，a即为11</span></div><div class="line">a++;       <span class="comment">//再次调用时执行，此时a还是11</span></div><div class="line">e=++a+(++b)+(c++)+a++;		<span class="comment">//e = 13 + 21 + 30 + 13</span></div><div class="line">alert(e);    <span class="comment">//弹出提示对话框：77</span></div></pre></td></tr></table></figure>
+<p>形参即形式，实参即内容，形参只充当占位符，实参决定形参真正的值。<br>函数内的局部变量优先级高于全局变量。</p>
+<p>全等运算符（===）：只有当数值大小与数值类型一样才能返回true。<br>&amp;&amp;表示与逻辑运算符，只有当多个参数同时满足条件才执行；<br>||表示或逻辑运算符，只要有任一参数满足条件即执行；</p>
+<p>JavaScript Object Notation 简称 JSON，它使用JavaScript对象的格式来存储数据。JSON是灵活的，因为它允许数据结构是字符串，数字，布尔值，字符串，和对象的任意组合。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Math</span>.random();            <span class="comment">//生成一个[0,1)之间的随机数</span></div><div class="line"><span class="built_in">Math</span>.round();              <span class="comment">//把一个数字四舍五入为最接近的整数,算法为Math.floor(x+0.5)，将原来的数字加上0.5后再向下取整，所以Math.round(11.5)结果为12，Math.round(-11.5)结果为-11</span></div><div class="line"><span class="built_in">Math</span>.floor();              <span class="comment">//向下取整，如floor(8.9)=8</span></div><div class="line"><span class="built_in">Math</span>.ceil();               <span class="comment">//向上取整,如ceil(8.1)=9</span></div><div class="line"><span class="built_in">parseInt</span>();                <span class="comment">//字符串取整，如parseInt("15.49")=15,parseInt(1.5)=1</span></div><div class="line"></div><div class="line"><span class="built_in">Math</span>.max.apply(<span class="literal">null</span>,arr);    <span class="comment">//取任意长度数组中的最大值</span></div><div class="line"><span class="built_in">Math</span>.min.apply(<span class="literal">null</span>.arr);    <span class="comment">//取任意长度数组中的最小值</span></div></pre></td></tr></table></figure>
+<p>正则表达式支持的通配符：<br>.   通配任何字符中的一个字符；<br>\d  通配数字中的一个字符,[0,9]；<br>\D  不是数字的字符；<br>\s  空白字符（空白字符有5个，空格” “、换行\n、回车\r、制表符\t、换页符\f）；<br>\S  非空白字符；<br>\w  通配所有的单词字符，包括数字、大小写字母、下划线（63个字符）；<br>\W  通配非单词字符；<br>[a-z]、[A-Z]、[0-9]、[A-Za-z]（包含大小写英文字符）、[a-z0-9]；<br><strong>栗子：</strong> <code>[afg]==(a|f|g)</code>；<code>[a\-fg]==(a|-|f|g)</code> ;<br>^  以什么开始；<br>$  以什么结束；<br>？ 出现0次或者1次（用于修饰前面的通配字符，不可单独使用，下面同理）；<br>*  出现0次或者多次，即可匹配任意长度 ;<br>+  出现1次或者多次；<br>{m,n}  出现m到n次；<br>\b  不会消耗任何字符只匹配一个位置，常用于匹配单词边界；<br><strong>栗子：</strong>从字符串中”This is Regex”匹配单独的单词 “is” 正则表达式为：<code>\bis\b</code>；\b 不匹配”is”两边的字符，只识别两边是否为单词的边界；<br><strong>栗子：</strong><br>/^[a-z].$/  表示以小写字母开头的任意2个字符,如a7；p8<br>/^[a-z].？$/  aaa错误<br>/^[a-z].*$/  aaa正确<br>/^[a-z].+$/  aaa正确<br>/^[a-z].{1,3}$/  aaaa正确<br>/^[a-z].{3}$/    只有aaaa正确</p>
+<p>/\d/   只匹配包含一个数字的字符，如2，5；<br>/\d+/  +用于修饰d，所以匹配到包含一个或者多个的数字组合，如50,123；<br>/\d/g  匹配全局包含一个数字的字符，如25匹配得到[“2”,”5”]；<br>/\d+/g  如25,123匹配得到[“25”,”123”]；<br>/\d+/gi  不分大小写匹配；<br>([ab]+)\1：\1是对前面括号内容的引用次数，因此该匹配只会匹配多个重复a或重复b；</p>
+<p>以下这些正则表达式中”^”表示字符类的否定：<br>[^a]表示“匹配除了a的任意字符”;<br>[^a-zA-Z0-9]表示”找到一个非字母也非数字的字符”;<br>[\^abc]表示”找到一个插入符^或者a或者b或者c”;<br>[^\^]表示”找到除了插入符^外的任意字符”;<br>经过对比，发现只要是”^”这个字符是在中括号”[]”中被使用的话就是表示字符类的否定，如果不是的话就是表示限定开头，也就是说”[]”代表的是一个字符集，”^”只有在字符集中才是反向字符集的意思。</p>
+<p><strong>字符串与数组一些常用的内置函数：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> regExp=<span class="keyword">new</span> <span class="built_in">RegExp</span>()    <span class="comment">//创建正则表达式；</span></div><div class="line"><span class="keyword">new</span> <span class="built_in">RegExp</span>().test(string)	    <span class="comment">//测试字符串是否包含表达式，返回值为true or false；</span></div><div class="line">string.replace(<span class="keyword">new</span> <span class="built_in">RegExp</span>(),and)	    <span class="comment">//用and把字符串中的所有.替换成and；</span></div><div class="line">string.match(<span class="keyword">new</span> <span class="built_in">RegExp</span>())    <span class="comment">//输出匹配到的数组结果，最长匹配原则；</span></div><div class="line">string.search(<span class="keyword">new</span> <span class="built_in">RegExp</span>())    <span class="comment">//输出匹配到的值的首个索引号；</span></div><div class="line"><span class="keyword">var</span> myArr=<span class="keyword">new</span> <span class="built_in">Array</span>()    <span class="comment">//数组创建的其他方式 ;</span></div><div class="line">Arr.push()    <span class="comment">//往最后一个元素后添加数组元素，返回数组长度，更改原数组；</span></div><div class="line">Arr.pop()    <span class="comment">//移除数组最后一个元素,并返回该元素的值,更改原数组的长度；</span></div><div class="line">Arr.shift()    <span class="comment">//移除数组第一个元素，并返回该元素的值,更改原数组的长度；</span></div><div class="line">Arr.unshift()    <span class="comment">//添加元素作为数组的第一个元素，返回值为数组长度；</span></div><div class="line"><span class="comment">//以上4个方法作用效果相反，push(),pop(),shift(),unshift();</span></div><div class="line">string.split(<span class="comment">//)    //split后面可以加正则表达式按最长匹配原则进行分割；</span></div><div class="line">string.slice()    <span class="comment">//截断字符串，左边括号部分包括，右边括号部分不包括，不改变原数组；</span></div><div class="line">string.substr()    <span class="comment">//返回字符串中从指定位置开始到指定长度的子字符串；</span></div><div class="line">string.charCodeAt()    <span class="comment">//字符串转ASCII码；</span></div><div class="line"><span class="built_in">String</span>.fromCharCode()    <span class="comment">//ASCII码转字符串；</span></div><div class="line">array.reverse()    <span class="comment">//就地反转数组顺序，改变原数组；</span></div><div class="line">array.join()    <span class="comment">//数组连成字符串；</span></div><div class="line">array.toString()    <span class="comment">//数组转换为字符串；</span></div><div class="line">array.slice()    <span class="comment">//截断数组，左边括号部分包括，右边括号部分不包括；</span></div><div class="line">array.slice(n,array.length)    <span class="comment">//返回一个数组被截断n个元素之后还剩余的元素；</span></div><div class="line">array.map(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;)    <span class="comment">//mapmap函数对每一个数组元素进行计算，如+3，-50，*4a等；</span></div><div class="line">array.reduce(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,<span class="number">0</span>)    <span class="comment">//reduce函数对数组内部元素间进行操作，如前后相加相减等；</span></div><div class="line">array.filter(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;)    <span class="comment">//filter过滤函数，不改变原数组；</span></div><div class="line">array.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">return</span> a-b;&#125;)    <span class="comment">//sort实现重新排序数组大小，升降序通过reverse()改变；</span></div><div class="line">array.splice()    <span class="comment">//增加或减少数组内元素，返回值为被删除元素组成的数组，该函数改变原数组；</span></div></pre></td></tr></table></figure></p>
+<p><strong>不会改变原数组的函数操作有：</strong> filter();concat();map();slice();replace();<br><strong>改变原数组的函数操作有：</strong> push();shift();unshift();splice();reverse();sort();</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/15/GitHub + Hexo +Markdown 搭建个人博客关键步骤/" rel="next" title="GitHub + Hexo +Markdown 搭建个人博客关键步骤">
+                <i class="fa fa-chevron-left"></i> GitHub + Hexo +Markdown 搭建个人博客关键步骤
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/23/Express + Formidable 实现前端拖拽文件上传服务器/" rel="prev" title="Express + Formidable 实现拖拽文件上传服务器">
+                Express + Formidable 实现拖拽文件上传服务器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+<ul class="-mob-share-list">
+    <li class="-mob-share-weixin"><p class="describeP">微信</p></li>
+    <li class="-mob-share-weibo"><p class="describeP">新浪微博</p></li>
+    <li class="-mob-share-qq"><p class="describeP">QQ好友</p></li>
+    <li class="-mob-share-qzone"><p class="describeP">QQ空间</p></li>
+    <li class="-mob-share-facebook"><p class="describeP">Facebook</p></li>
+    <li class="-mob-share-twitter"><p class="describeP">Twitter</p></li>
+</ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1db2155cc54e0"></script>
+<!--MOB SHARE END-->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="ZhangBinglin" />
+          <p class="site-author-name" itemprop="name">ZhangBinglin</p>
+           
+              <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count redNumber">19</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/binglinzhang/binglinzhang.github.io" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://i2.muimg.com/588926/46f22becb5fe0573.jpg" target="_blank" title="微信公众号">
+                  
+                    <i class="fa fa-fw fa-wechat"></i>
+                  
+                  微信公众号
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              资源链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://hexo.io/" title="Hexo官网" target="_blank">Hexo官网</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhangbinglin.cn/oweworks/" title="个人作品 Demo" target="_blank">个人作品 Demo</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=308 height=52 src="//music.163.com/outchain/player?type=2&id=857896&auto=0&height=32" class="musicIN"></iframe>
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZhangBinglin</span>
+</div>
+
+
+<div class="powered-by">
+  由 <span class="theme-link" href="https://hexo.io">Hexo</span> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <span class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
