@@ -1,0 +1,197 @@
+/*字体图标*/
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.ttf');
+  src: url('../fonts/glyphicons-halflings-regular.woff');
+}
+/*导航栏*/
+.header .navbar-default {
+    background: url('../images/menu_bg.jpg') repeat-x 0 0;
+    width: 100%;
+    border: none;
+    margin-bottom: 0;
+}
+.navbar-default .navbar-left > .navbar-brand {
+    color:white;
+    font-size: 20px;
+}
+.navbar-default .navbar-right > li {
+    position: relative;
+}
+.navbar-default .navbar-right > li > a {
+    color: #fff;
+    margin-right: 10px;
+}
+.navbar-default .navbar-right > li > a:hover {
+    /*background: url('../images/menu_on.jpg') no-repeat 0 0;*/
+    color: yellow;
+}
+.navbar-default .navbar-right > li > a.active {
+    color: yellow;
+}
+.navbar-default .navbar-right > li > i {
+    position: absolute;
+    top: 12px;
+    left: 85px;
+}
+/*轮播图*/
+.carousel-indicators li {
+    background: grey;
+    border: 1px solid grey;
+}
+.carousel-indicators .active {
+    background-color: #079a2f;
+    border: 1px solid #079a2f;
+}
+
+/*页脚*/
+.footer {
+    width: 100%;
+    height: 90px;
+    background-color: #079a2f;
+    text-align: center;
+    color: #fff;
+}
+.footer ul {
+    display: block;
+    list-style: none;
+    margin-bottom: 5px;
+}
+.footer ul > li {
+    display: inline-block;
+    margin-top: 10px;
+}
+.footer ul > li > a {
+    color: #fff;
+}
+.footer .copyright {
+    margin-bottom: 5px;
+}
+.footer .copyright > span> a {
+    display: inline-block;
+    color: #fff;
+}
+.footer-icon {
+    margin: 0 8px;
+    border-right: 2px solid grey;
+    height: 10px;
+}
+/*流动图片*/
+.content {
+    margin: 20px 0;
+}
+.content .title {
+    background: url('../images/beicon.jpg') no-repeat;
+}
+.content .title > h1 {
+    color: #079a2f;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: '微软雅黑';
+    margin: 0;
+    margin-left: 45px;
+}
+.content .title > span {
+    color: #80d00b;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial;
+    margin-left: 45px;
+}
+.content .contactUs {
+    height: 20px;
+    border-top: 2px solid #09da43;
+    margin-top: 5px;
+}
+.content .contactUs > i {
+    display: inline-block;
+    margin-top: 10px;
+    border-left: 3px solid #079a2f;
+    height: 28px;
+}
+.content .contactUs > a {
+    display: inline-block;
+    padding-left: 10px;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #079a2f;
+    vertical-align:super;
+    cursor: pointer;
+    text-decoration: none;
+}
+.contactUs .contactUs-info > span {
+    display: block;
+    line-height: 1.8;
+    color: grey;
+}
+.contactUs .contactUs-info > span:first-child {
+    margin-top: 5px;
+    color: #009900;
+    font-weight: bold;
+}
+.contactUs .contactUs-info > span a {
+    display: inline-block;
+    color: grey;
+}
+#images-container {
+    overflow: hidden;
+    height: 250px;
+}
+#in-images-container {
+    float: left;
+    width: 800%;
+}
+#in-images-container>#images,#in-images-container>#images-copy {
+    float: left;
+    /*border: 1px solid lightgrey;*/
+}
+#in-images-container>#images > a,#in-images-container>#images-copy > a {
+    display: inline;
+}
+#in-images-container>#images img,#in-images-container>#images-copy img {
+    display: inline;
+    margin: 0 80px;
+}
+.banner {
+    margin: 20px 0;
+    text-align: center;
+}
+
+/*媒介查询*/
+@media (min-width: 768px) {
+    .navbar {
+        border-radius: 0;
+    }
+
+}
+@media (max-width: 768px) {
+    .navbar-default .navbar-left > .navbar-brand {
+        color:lightblue;
+        margin-left: 10px;
+    }
+    .navbar-default .navbar-left > button {
+        margin-right: 20px;
+    }
+    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+        background-color: transparent;
+    }
+    .navbar-default .navbar-toggle {
+        border-color: transparent;
+    }
+    .navbar-default .navbar-right > li > i {
+        display: none;
+    }
+    .navbar-default .navbar-right > li > a {
+        color: #fff;
+        margin-right: 10px;
+    }
+    #navbar-collapse {
+        background-color: #079a2f;
+        margin: 0;
+        margin-top:4px;
+    }
+    .header .container {
+        padding: 0;
+    }
+}

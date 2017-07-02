@@ -1,0 +1,45 @@
+.content .produciton-header > h3  {
+    width: 170px;
+    height: 40px;
+    position:relative;
+    line-height: 40px;
+    text-align: center;
+    color: #079a2f;
+}
+.content .produciton-header > h3::after {
+    content:"";
+    border-left: 12px solid green;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    width:0px;
+    height:0px;
+    position:absolute;
+    left:0;
+    top:8px;
+}
+.content .produciton {
+    margin-top: 20px;
+}
+.produciton .thumbnail {
+    border: 1px solid #09da43;
+    border-radius: 0;
+}
+.produciton .thumbnail img {
+    width: 180px;
+    height: 250px;
+    cursor: pointer;
+}
+.produciton .thumbnail:hover {
+    z-index: 9;
+}
+.produciton .thumbnail:hover > img {
+    transform: scale(1.5, 1.5);
+    transition: .3s transform;
+}
+.produciton .thumbnail p {
+    text-align: center;
+    color: rgb(133, 133, 133);
+}
+.navigation {
+    text-align: center;
+}
