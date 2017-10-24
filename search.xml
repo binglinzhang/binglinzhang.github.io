@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[前端安全]]></title>
+    <url>%2F2017%2F10%2F01%2F%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8%2F</url>
+    <content type="text"><![CDATA[常见的前端安全问题有XSS、CSRF、点击劫持、SQL注入等，以下简单的记录学习过程中的笔记与要点。 第一种：xss跨站攻击类型有：反射型：URL参数直接注入(可通过短网址等方式进行url转换，从而更加隐秘)存储型：存储数据到DB时读取注入，危害更大 xss攻击注入点：1、html节点内容(即利用了innerHTML插入执行的脚本)2、html属性(利用src属性，或者图片的onerror属性)3、javascript代码4、富文本的本质就是一段复杂的html代码，这样才得以保留富文本的格式。当富文本保存到DB时保存的即该html代码。当存在html时会存在xss攻击风险。 防御措施：1、浏览器自带防御(针对反射型，且只能防御html节点内容及属性，针对JavaScript代码无法防御) 2、针对html节点内容，转义&lt;&gt;1234let escapeHtml = function(str) &#123; str = str.replace(/&lt;/g, '&amp;lt;').replace(/&gt;/g, '&amp;gt;') return str&#125; 3、针对html属性，转义””1234567let escapeHtmlProperty = function(str) &#123;if(!str) return ''str = str.replace(/"/g,'&amp;quto;')str = str.replace(/'/g,'&amp;#39;')str = str.replace(/ /g,'&amp;#32;')return str&#125; 以上两个函数合并成一个：123456789let escapeHtml = function(str) &#123; if(!str) return '' str = str.replace(/&lt;/g, '&amp;lt;') str = str.replace(/&gt;/g, '&amp;gt;') str = str.replace(/"/g,'&amp;quto;') str = str.replace(/'/g,'&amp;#39;') //str = str.replace(/ /g,'&amp;#32;') 按html标准书写代码，该处可以不对空格进行转义 return str&#125; 4、针对js的转义(注意html转义与js代码转义不一样)123456let escapeForjs = function(str) &#123; if(!str) return '' str = str.replace(/\\/g,'\\\\') str = str.replace(/"/g,'\\"') return str&#125; 上面的转义函数可以防御大部分js代码注入，但还不是很安全，最保险的方式是直接将用户输入的代码用JSON.stringify格式化，再原封返回即可。 5、富文本的输入一般在输入数据库之前进行过滤5.1、黑名单过滤的方式(比较繁琐)1234567let xssFilter = function(html) &#123; if(!html) return '' html = html.replace(/&lt;\s*\/?script\s*&gt;/g,'') html.replace(/javascript:[^'"]*/g,'') ... return html&#125; 5.2、白名单过滤的方式(只保留部分标签与属性，比较保险)介绍一个cheerio库进行解析dom还可以直接利用第三方库–js-xss6、CSP(content-security-policy设置，可查看MDN) 第二种：CSRF跨站请求伪造原理：1.用户登录A网站2.A网站确认身份信息3.B网站页面向A网站发起请求(带A网站身份信息)…特征：B网站向A网站发起请求带A网站的cookies不访问A网站的前端referer指向B网站…危害：利用了用户登录态用户不知情完成业务请求防御：1.在服务器返回的cookies中将samesite属性设置为strict，这样只有同域网站才能获取到cookies(但是该属性目前只有在谷歌浏览器中支持)2.向服务器提交信息的时候需要前端A网站的验证信息，比如验证码，token等(nodejs中ccp插件用于提供图形验证码)3.利用前后端匹配token值(前端可以通过在input输入框中隐藏直接提交或者通过将token值保存到meta标签中)，从而判断是否来自正规的A网站的请求4.验证referer，禁止第三方网站请求1/^https?:\/\/localhost/.test(request.header.referer) cookies特性1、只能使用自己域名下的cookies2、有效期3、设置URL上的层级有效4、http-only只允许请求或者接受的时候读取，不允许document.cookie读取5、secure只允许在https中获取6、sameSite7、删除的方式只能通过设置有效期为过去式cookies作用1.存储个性化设置2.存储未登录时用户的唯一标识3.存储已经登录的用户凭证4.存储其他业务数据cookies-登录用户凭证的使用方式：1.用户ID + 后台签名(服务器通过sha2等方式对用户ID进行算法加密之后连着用户ID及签名字符串一块通过cookies返回到前端，当前端提交请求时将该cookies一并提交，后台再计算用户ID进行校验)2.sessionId(用户初次登录成功的时候服务器根据用户ID匹配生成一个sessionId返回给到前端cookies中，之后前端每次请求将带着该sessionId与后台服务器缓存或者数据库中进行匹配获取到对应的用户信息)cookis的安全策略有：1.使用签名防止篡改2.对用户ID进行加密(避免明文显示)3.设置http-only(防止XSS盗用cookies)4.设置secure(只允许https获取cookies)5.设置same-site(防止CSRF利用用户的登录态) 点击劫持用户不知情情况下亲手点击(将实际真实的A网站通过iframe嵌入到B网站中，并设置opacity为0，在用户看不到的情况下诱导用户点击B网站上的信息，实则已点击了透明的A网站)防御方法：1.通过JavaScript脚本禁止内嵌(通过判断top.location == window.location)2.X-FRAME-OPTIONS禁止内嵌(通过在相应头header中设置X-Frame-Options属性值为DENY即可禁止该网站被内嵌)，该方法各浏览器兼容很好，推荐使用 http传输窃听篡改(traceroute/window下tracert可以查看网站访问背后的链路节点(各种代理转发)，任何一个节点都可以查看http的明文内容)https原理在浏览器端用SSL(也叫TLS)进行加密之后在链路节点间用密文传输，到达服务器之后再按规则进行明文转换 密码-哈希算法1.明文-密文 == 一一对应2.雪崩效应，只要明文有一个差异，整个密文都会不一样3.密文-明文无法反推4.密文固定长度常用的哈希算法：md5、sha1、sha256等单向变换可以通过彩虹表(彩虹表罗列多种密码组合，然后通过查询密文获取对应的明文)进行查询，如果要对抗彩虹表防止密码轻易在彩虹表中被查询到，可以增加密码长度及复杂度，甚至通过多重md5加密，如md5(md5(codecodecode…))，md5(sha1(codecodecode…))等帮用户密码加盐 SQL注入防御1.关闭错误输出2.入参时检查数据类型3.对入参数据进行转义4.使用参数化查询(更有保障)5.使用ORM(对象关系映射) 服务器大规模流量攻击(很难防御)1.TCP半连接2.Http连接3.DNS(解析域名服务器)4.大规模DDOS攻击防御1.防火墙2.交换机、路由器3.流量清洗4.高防IP(云服务厂商重指向到高防IP进行流量清洗)预防1.避免重逻辑业务2.快速失败快速返回3.防雪崩机制4.有损服务5.CDN(静态请求,减轻服务器压力) 课程总结1.简述XSS原理来自用户输入的数据被当做脚本程序被执行，主要包括2.简述XSS防御方法浏览器内置方法对数据进行适当转义&lt;&gt;”‘&amp;对富文本设置白名单CSP指定哪些内容可以被执行哪些不被执行3.XSS防御需要注意的点转义的时候需要注意使用的场景与范围4.CSRF的原理盗用用户登录态，携带cookies对目标网站发起请求5.CSRF危害在用户不知情情况下盗用用户身份6.如何防御same-site规定只允许指定网站访问带验证码或token判断referer7.cookies的作用浏览器存储数据，用户个性化设置、登录标识、身份识别8.cookies与localStorage最大区别是cookies在范围网站时可以自动携带，而storage不可以9.cookies与session关系：服务端产生sessionId通过cookies存在到浏览器中10.cookies具有：无法跨域、存在path层级、有效期、http-only无法通过js读取、secure、same-site等特性，cookies只能通过设置过期时间才能进行删除]]></content>
+      <categories>
+        <category>前端开发</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[jsonp的2种跨域请求方式]]></title>
     <url>%2F2017%2F06%2F10%2Fjsonp%E7%9A%842%E7%A7%8D%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[JSON和JSONP虽然只有一个字母的差别，但其实两者根本不是一回事：JSON是一种数据交换格式，而JSONP是一种依靠开发人员的聪明才智创造出的一种非官方跨域数据交互协议。本文主要介绍下常用的jsonp跨域请求方式传输JSON格式数据以及jsonp与ajax的区别。 先解释下JSONP的由来： 1、因为浏览器的安全机制，只要请求资源与当前页面地址的域名或端口号不一致，那么ajax发送的数据请求皆会存在跨域无权限访问的问题，不管是静态页面、动态网页、web服务资源，都访问不了。 2、我们都知道凡带有”src”属性的标签都拥有跨域的能力，常见的标签如&lt;script&gt;、&lt;img&gt;、&lt;iframe&gt;，加上Web页面上只要能获取js脚本文件即可调用或执行，不受跨域影响。 3、于是，推演出了一种称作JSONP的非正式传输协议，该协议的要点就是允许用户传递一个callback参数给服务端，然后服务端通过该callback参数作为函数名包装JSON数据，然后返回数据给到客户端，客户端提供一个自定义回调函数进行数据处理。 4、这种获取远程数据的方式看起来很像ajax，但ajax和jsonp两者本质上是不同的东西。ajax的核心是通过XmlHttpRequest获取非本页内容，而jsonp的核心则是动态添加&lt;script&gt;标签调用服务器提供的js脚本。ajax与jsonp的区别并不在于是否跨域，ajax通过服务端代理一样可以实现跨域，jsonp本身也不排斥同域的数据的获取。所以两者最大的区别还是在于获取服务器数据的行为方式上的不一样。 基于以上几点，本文介绍jsonp跨域发送数据请求常用的2种方法，虽然写法上不同，但实质上都是一致的，只是jq在ajax中对其进行了封装，但注意ajax与jsonp没有实质关系。 本文以百度搜索提供的一个支持JSONP请求的API接口进行发送请求，地址为：http://suggestion.baidu.com/su?wd=#content#&amp;cb=callback (#content#为搜索关键词) 一、原生js实现12345678910111213141516171819// 定义一个数组，发送多次请求 let arr = ['苹果', 'apple', 'fruit', '我爱苹果'], headEle = document.querySelector('head'), resultArr = [] arr.forEach(val =&gt; &#123; let scriptEle = document.createElement('script') let url = `http://suggestion.baidu.com/su?wd=$&#123;val&#125;&amp;cb=callback` // ES6的反引号写法 // 注意！上面的`cb`为百度定义的格式，不可以更改！！！ scriptEle.src = encodeURI(url) // encodeURI为js原生的中文url编码方法 headEle.appendChild(scriptEle) headEle.removeChild(headEle.querySelector('script')) // 先添加再移除 &#125;) function callback(data) &#123; // 回调函数调用接受响应数据 resultArr.push(data.s) // 's'属性是返回json数据中的属性 if (resultArr.length === arr.length) console.log(resultArr) // 输出包含4个数组元素的一个数组 &#125; 二、使用JQuery封装实现12345678910111213141516171819202122&lt;script src='http://code.jquery.com/jquery-latest.js'&gt;&lt;/script&gt; let arr = ['苹果', 'apple', 'fruit', '我爱苹果'], resultArr = [] arr.forEach(val =&gt; &#123; let url = `http://suggestion.baidu.com/su?wd=$&#123;val&#125;` $.ajax(&#123; type: 'get', url: encodeURI(url), // 指定此请求为jsonp请求，响应返回的数据格式即为jsonp格式 dataType: 'jsonp', jsonp: 'cb', success: function(data) &#123; resultArr.push(data.s) if (resultArr.length === arr.length) console.log(resultArr) &#125;, error: function(err) &#123; console.log(err) &#125; &#125;) &#125;) 注意点： json格式的数据结构长这样: {‘a’:’apple’,’b’:’banana’}，而jsonp格式的数据结构长这样: callback({‘a’:’apple’,’b’:’banana’})，由上面的定义知道，发送jsonp请求需要服务器返回一个callback参数作为函数名包装的JSON数据，所以如果服务器没有设定允许返回jsonp格式的数据，那么我们是无法完成jsonp跨域请求的，哪怕强制在url地址上加了”&amp;callback=handleCallbackFunction”,服务器返回的数据还是json数据，无法被客户端定义的回调函数获取，下面这个url地址就无法进行jsonp请求，有兴趣的可以将上面代码中的url换成这个试一试。替换url：1`http://api.tmkoo.com/search.php?keyword=$&#123;val&#125;&amp;apiKey=4399320012393234&amp;apiPassword=331nd3342d&amp;pageSize=30&amp;pageNo=1` 解决方案由后端发起http跨域请求，以nodejs为例，引入request模块，关键代码如下：1234567891011121314const express = require('express')const request = require('request')const app = express()let url = `http://api.tmkoo.com/search.php?keyword=$&#123;val&#125;&amp;apiKey=4399320012393234&amp;apiPassword=331nd3342d&amp;pageSize=30&amp;pageNo=1`request(encodeURI(url), (error, response, body) =&gt; &#123; if (!error &amp;&amp; response.statusCode == 200) &#123; console.log(body) //body中即可获得返回的json数据 &#125;&#125;)app.listen(8888, () =&gt; &#123; console.log('started...')&#125;)]]></content>
@@ -8,8 +19,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -68,8 +79,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -92,8 +103,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -104,8 +115,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -197,8 +208,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Express</tag>
         <tag>前端</tag>
+        <tag>Express</tag>
       </tags>
   </entry>
   <entry>
@@ -209,8 +220,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
