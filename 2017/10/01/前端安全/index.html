@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="常见的前端安全问题有XSS、CSRF、点击劫持、SQL注入等，以下简单的记录学习过程中的笔记与要点。">
+<meta name="description" content="常见的前端安全问题有XSS、CSRF、cookies、点击劫持、SQL注入、流量攻击等，以下简单的记录学习过程中的笔记与要点。">
 <meta name="keywords" content="前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端安全">
 <meta property="og:url" content="http://zhangbinglin.cn/2017/10/01/前端安全/index.html">
 <meta property="og:site_name" content="ZhangBinglin">
-<meta property="og:description" content="常见的前端安全问题有XSS、CSRF、点击劫持、SQL注入等，以下简单的记录学习过程中的笔记与要点。">
-<meta property="og:updated_time" content="2017-10-24T03:29:01.385Z">
+<meta property="og:description" content="常见的前端安全问题有XSS、CSRF、cookies、点击劫持、SQL注入、流量攻击等，以下简单的记录学习过程中的笔记与要点。">
+<meta property="og:updated_time" content="2017-10-24T03:44:48.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端安全">
-<meta name="twitter:description" content="常见的前端安全问题有XSS、CSRF、点击劫持、SQL注入等，以下简单的记录学习过程中的笔记与要点。">
+<meta name="twitter:description" content="常见的前端安全问题有XSS、CSRF、cookies、点击劫持、SQL注入、流量攻击等，以下简单的记录学习过程中的笔记与要点。">
 
 
 
@@ -408,9 +408,9 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
-        <p>常见的前端安全问题有XSS、CSRF、点击劫持、SQL注入等，以下简单的记录学习过程中的笔记与要点。</p>
+        <p>常见的前端安全问题有XSS、CSRF、cookies、点击劫持、SQL注入、流量攻击等，以下简单的记录学习过程中的笔记与要点。</p>
 <a id="more"></a>
-<p>第一种：<br>xss跨站攻击类型有：<br>反射型：URL参数直接注入(可通过短网址等方式进行url转换，从而更加隐秘)<br>存储型：存储数据到DB时读取注入，危害更大</p>
+<h3 id="一、XSS"><a href="#一、XSS" class="headerlink" title="一、XSS"></a>一、XSS</h3><p>xss跨站攻击类型有：<br>反射型：URL参数直接注入(可通过短网址等方式进行url转换，从而更加隐秘)<br>存储型：存储数据到DB时读取注入，危害更大</p>
 <p>xss攻击注入点：<br>1、html节点内容(即利用了innerHTML插入执行的脚本)<br>2、html属性(利用src属性，或者图片的onerror属性)<br>3、javascript代码<br>4、富文本的本质就是一段复杂的html代码，这样才得以保留富文本的格式。<br>当富文本保存到DB时保存的即该html代码。当存在html时会存在xss攻击风险。</p>
 <p>防御措施：<br>1、浏览器自带防御(针对反射型，且只能防御html节点内容及属性，针对JavaScript代码无法防御)</p>
 <p>2、针对html节点内容，转义&lt;&gt;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> escapeHtml = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">    str = str.replace(<span class="regexp">/&lt;/g</span>, <span class="string">'&amp;lt;'</span>).replace(<span class="regexp">/&gt;/g</span>, <span class="string">'&amp;gt;'</span>)</div><div class="line">    <span class="keyword">return</span> str</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -420,14 +420,14 @@ document.getElementById('local-search-input').onkeyup = function() {
 <p>上面的转义函数可以防御大部分js代码注入，但还不是很安全，<br>最保险的方式是直接将用户输入的代码用JSON.stringify格式化，再原封返回即可。</p>
 <p>5、富文本的输入一般在输入数据库之前进行过滤<br>5.1、黑名单过滤的方式(比较繁琐)<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> xssFilter = <span class="function"><span class="keyword">function</span>(<span class="params">html</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(!html) <span class="keyword">return</span> <span class="string">''</span></div><div class="line">    html = html.replace(<span class="regexp">/&lt;\s*\/?script\s*&gt;/g</span>,<span class="string">''</span>)</div><div class="line">    html.replace(<span class="regexp">/javascript:[^'"]*/g</span>,<span class="string">''</span>)</div><div class="line">    ...</div><div class="line">    return html</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>5.2、白名单过滤的方式(只保留部分标签与属性，比较保险)<br>介绍一个cheerio库进行解析dom<br>还可以直接利用第三方库–js-xss<br>6、CSP(content-security-policy设置，可查看MDN)</p>
-<p>第二种：<br>CSRF跨站请求伪造原理：<br>1.用户登录A网站<br>2.A网站确认身份信息<br>3.B网站页面向A网站发起请求(带A网站身份信息)<br>…<br>特征：<br>B网站向A网站发起请求<br>带A网站的cookies<br>不访问A网站的前端<br>referer指向B网站<br>…<br>危害：<br>利用了用户登录态<br>用户不知情<br>完成业务请求<br>防御：<br>1.在服务器返回的cookies中将samesite属性设置为strict，这样只有同域网站才能获取到cookies(但是该属性目前只有在谷歌浏览器中支持)<br>2.向服务器提交信息的时候需要前端A网站的验证信息，比如验证码，token等(nodejs中ccp插件用于提供图形验证码)<br>3.利用前后端匹配token值(前端可以通过在input输入框中隐藏直接提交或者通过将token值保存到meta标签中)，从而判断是否来自正规的A网站的请求<br>4.验证referer，禁止第三方网站请求<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/^https?:\/\/localhost/.test(request.header.referer)</div></pre></td></tr></table></figure></p>
-<p>cookies特性<br>1、只能使用自己域名下的cookies<br>2、有效期<br>3、设置URL上的层级有效<br>4、http-only只允许请求或者接受的时候读取，不允许document.cookie读取<br>5、secure只允许在https中获取<br>6、sameSite<br>7、删除的方式只能通过设置有效期为过去式<br>cookies作用<br>1.存储个性化设置<br>2.存储未登录时用户的唯一标识<br>3.存储已经登录的用户凭证<br>4.存储其他业务数据<br>cookies-登录用户凭证的使用方式：<br>1.用户ID + 后台签名(服务器通过sha2等方式对用户ID进行算法加密之后连着用户ID及签名字符串一块通过cookies返回到前端，当前端提交请求时将该cookies一并提交，后台再计算用户ID进行校验)<br>2.sessionId(用户初次登录成功的时候服务器根据用户ID匹配生成一个sessionId返回给到前端cookies中，之后前端每次请求将带着该sessionId与后台服务器缓存或者数据库中进行匹配获取到对应的用户信息)<br>cookis的安全策略有：<br>1.使用签名防止篡改<br>2.对用户ID进行加密(避免明文显示)<br>3.设置http-only(防止XSS盗用cookies)<br>4.设置secure(只允许https获取cookies)<br>5.设置same-site(防止CSRF利用用户的登录态)</p>
-<p>点击劫持<br>用户不知情情况下亲手点击(将实际真实的A网站通过iframe嵌入到B网站中，并设置opacity为0，在用户看不到的情况下诱导用户点击B网站上的信息，实则已点击了透明的A网站)<br>防御方法：<br>1.通过JavaScript脚本禁止内嵌(通过判断top.location == window.location)<br>2.X-FRAME-OPTIONS禁止内嵌(通过在相应头header中设置X-Frame-Options属性值为DENY即可禁止该网站被内嵌)，该方法各浏览器兼容很好，推荐使用</p>
-<p>http传输窃听篡改(traceroute/window下tracert可以查看网站访问背后的链路节点(各种代理转发)，任何一个节点都可以查看http的明文内容)<br>https原理<br>在浏览器端用SSL(也叫TLS)进行加密之后在链路节点间用密文传输，到达服务器之后再按规则进行明文转换</p>
-<p>密码-哈希算法<br>1.明文-密文 == 一一对应<br>2.雪崩效应，只要明文有一个差异，整个密文都会不一样<br>3.密文-明文无法反推<br>4.密文固定长度<br>常用的哈希算法：md5、sha1、sha256等<br>单向变换可以通过彩虹表(彩虹表罗列多种密码组合，然后通过查询密文获取对应的明文)进行查询，如果要对抗彩虹表防止密码轻易在彩虹表中被查询到，可以增加密码长度及复杂度，甚至通过多重md5加密，如md5(md5(codecodecode…))，md5(sha1(codecodecode…))等<br>帮用户密码加盐</p>
-<p>SQL注入防御<br>1.关闭错误输出<br>2.入参时检查数据类型<br>3.对入参数据进行转义<br>4.使用参数化查询(更有保障)<br>5.使用ORM(对象关系映射)</p>
-<p>服务器大规模流量攻击(很难防御)<br>1.TCP半连接<br>2.Http连接<br>3.DNS(解析域名服务器)<br>4.大规模DDOS攻击<br>防御<br>1.防火墙<br>2.交换机、路由器<br>3.流量清洗<br>4.高防IP(云服务厂商重指向到高防IP进行流量清洗)<br>预防<br>1.避免重逻辑业务<br>2.快速失败快速返回<br>3.防雪崩机制<br>4.有损服务<br>5.CDN(静态请求,减轻服务器压力)</p>
-<p>课程总结<br>1.简述XSS原理<br>来自用户输入的数据被当做脚本程序被执行，主要包括<br>2.简述XSS防御方法<br>浏览器内置方法<br>对数据进行适当转义&lt;&gt;”‘&amp;<br>对富文本设置白名单<br>CSP指定哪些内容可以被执行哪些不被执行<br>3.XSS防御需要注意的点<br>转义的时候需要注意使用的场景与范围<br>4.CSRF的原理<br>盗用用户登录态，携带cookies对目标网站发起请求<br>5.CSRF危害<br>在用户不知情情况下盗用用户身份<br>6.如何防御<br>same-site规定只允许指定网站访问<br>带验证码或token<br>判断referer<br>7.cookies的作用<br>浏览器存储数据，用户个性化设置、登录标识、身份识别<br>8.cookies与localStorage最大区别是cookies在范围网站时可以自动携带，而storage不可以<br>9.cookies与session关系：服务端产生sessionId通过cookies存在到浏览器中<br>10.cookies具有：无法跨域、存在path层级、有效期、http-only无法通过js读取、secure、same-site等特性，cookies只能通过设置过期时间才能进行删除</p>
+<h3 id="二、CSRF"><a href="#二、CSRF" class="headerlink" title="二、CSRF"></a>二、CSRF</h3><p>CSRF跨站请求伪造原理：<br>1.用户登录A网站<br>2.A网站确认身份信息<br>3.B网站页面向A网站发起请求(带A网站身份信息)<br>…<br>特征：<br>B网站向A网站发起请求<br>带A网站的cookies<br>不访问A网站的前端<br>referer指向B网站<br>…<br>危害：<br>利用了用户登录态<br>用户不知情<br>完成业务请求<br>防御：<br>1.在服务器返回的cookies中将samesite属性设置为strict，这样只有同域网站才能获取到cookies(但是该属性目前只有在谷歌浏览器中支持)<br>2.向服务器提交信息的时候需要前端A网站的验证信息，比如验证码，token等(nodejs中ccp插件用于提供图形验证码)<br>3.利用前后端匹配token值(前端可以通过在input输入框中隐藏直接提交或者通过将token值保存到meta标签中)，从而判断是否来自正规的A网站的请求<br>4.验证referer，禁止第三方网站请求<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/^https?:\/\/localhost/.test(request.header.referer)</div></pre></td></tr></table></figure></p>
+<h3 id="三、cookies特性"><a href="#三、cookies特性" class="headerlink" title="三、cookies特性"></a>三、cookies特性</h3><p>1、只能使用自己域名下的cookies<br>2、有效期<br>3、设置URL上的层级有效<br>4、http-only只允许请求或者接受的时候读取，不允许document.cookie读取<br>5、secure只允许在https中获取<br>6、sameSite<br>7、删除的方式只能通过设置有效期为过去式<br>cookies作用<br>1.存储个性化设置<br>2.存储未登录时用户的唯一标识<br>3.存储已经登录的用户凭证<br>4.存储其他业务数据<br>cookies-登录用户凭证的使用方式：<br>1.用户ID + 后台签名(服务器通过sha2等方式对用户ID进行算法加密之后连着用户ID及签名字符串一块通过cookies返回到前端，当前端提交请求时将该cookies一并提交，后台再计算用户ID进行校验)<br>2.sessionId(用户初次登录成功的时候服务器根据用户ID匹配生成一个sessionId返回给到前端cookies中，之后前端每次请求将带着该sessionId与后台服务器缓存或者数据库中进行匹配获取到对应的用户信息)<br>cookis的安全策略有：<br>1.使用签名防止篡改<br>2.对用户ID进行加密(避免明文显示)<br>3.设置http-only(防止XSS盗用cookies)<br>4.设置secure(只允许https获取cookies)<br>5.设置same-site(防止CSRF利用用户的登录态)</p>
+<h3 id="四、点击劫持"><a href="#四、点击劫持" class="headerlink" title="四、点击劫持"></a>四、点击劫持</h3><p>用户不知情情况下亲手点击(将实际真实的A网站通过iframe嵌入到B网站中，并设置opacity为0，在用户看不到的情况下诱导用户点击B网站上的信息，实则已点击了透明的A网站)<br>防御方法：<br>1.通过JavaScript脚本禁止内嵌(通过判断top.location == window.location)<br>2.X-FRAME-OPTIONS禁止内嵌(通过在相应头header中设置X-Frame-Options属性值为DENY即可禁止该网站被内嵌)，该方法各浏览器兼容很好，推荐使用</p>
+<h3 id="五、https"><a href="#五、https" class="headerlink" title="五、https"></a>五、https</h3><p>http传输窃听篡改(traceroute/window下tracert可以查看网站访问背后的链路节点(各种代理转发)，任何一个节点都可以查看http的明文内容)<br>https原理<br>在浏览器端用SSL(也叫TLS)进行加密之后在链路节点间用密文传输，到达服务器之后再按规则进行明文转换</p>
+<h3 id="六、密码-哈希算法"><a href="#六、密码-哈希算法" class="headerlink" title="六、密码-哈希算法"></a>六、密码-哈希算法</h3><p>1.明文-密文 == 一一对应<br>2.雪崩效应，只要明文有一个差异，整个密文都会不一样<br>3.密文-明文无法反推<br>4.密文固定长度<br>常用的哈希算法：md5、sha1、sha256等<br>单向变换可以通过彩虹表(彩虹表罗列多种密码组合，然后通过查询密文获取对应的明文)进行查询，如果要对抗彩虹表防止密码轻易在彩虹表中被查询到，可以增加密码长度及复杂度，甚至通过多重md5加密，如md5(md5(codecodecode…))，md5(sha1(codecodecode…))等<br>帮用户密码加盐</p>
+<h3 id="七、SQL注入防御"><a href="#七、SQL注入防御" class="headerlink" title="七、SQL注入防御"></a>七、SQL注入防御</h3><p>1.关闭错误输出<br>2.入参时检查数据类型<br>3.对入参数据进行转义<br>4.使用参数化查询(更有保障)<br>5.使用ORM(对象关系映射)</p>
+<h3 id="八、流量攻击"><a href="#八、流量攻击" class="headerlink" title="八、流量攻击"></a>八、流量攻击</h3><p>服务器大规模流量攻击(很难防御)<br>1.TCP半连接<br>2.Http连接<br>3.DNS(解析域名服务器)<br>4.大规模DDOS攻击<br>防御<br>1.防火墙<br>2.交换机、路由器<br>3.流量清洗<br>4.高防IP(云服务厂商重指向到高防IP进行流量清洗)<br>预防<br>1.避免重逻辑业务<br>2.快速失败快速返回<br>3.防雪崩机制<br>4.有损服务<br>5.CDN(静态请求,减轻服务器压力)</p>
+<h3 id="九、总结"><a href="#九、总结" class="headerlink" title="九、总结"></a>九、总结</h3><p>1.简述XSS原理<br>来自用户输入的数据被当做脚本程序被执行，主要包括<br>2.简述XSS防御方法<br>浏览器内置方法<br>对数据进行适当转义&lt;&gt;”‘&amp;<br>对富文本设置白名单<br>CSP指定哪些内容可以被执行哪些不被执行<br>3.XSS防御需要注意的点<br>转义的时候需要注意使用的场景与范围<br>4.CSRF的原理<br>盗用用户登录态，携带cookies对目标网站发起请求<br>5.CSRF危害<br>在用户不知情情况下盗用用户身份<br>6.如何防御<br>same-site规定只允许指定网站访问<br>带验证码或token<br>判断referer<br>7.cookies的作用<br>浏览器存储数据，用户个性化设置、登录标识、身份识别<br>8.cookies与localStorage最大区别是cookies在范围网站时可以自动携带，而storage不可以<br>9.cookies与session关系：服务端产生sessionId通过cookies存在到浏览器中<br>10.cookies具有：无法跨域、存在path层级、有效期、http-only无法通过js读取、secure、same-site等特性，cookies只能通过设置过期时间才能进行删除</p>
 
       
     </div>
@@ -543,8 +543,17 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -647,6 +656,22 @@ document.getElementById('local-search-input').onkeyup = function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、XSS"><span class="nav-number">1.</span> <span class="nav-text">一、XSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、CSRF"><span class="nav-number">2.</span> <span class="nav-text">二、CSRF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、cookies特性"><span class="nav-number">3.</span> <span class="nav-text">三、cookies特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、点击劫持"><span class="nav-number">4.</span> <span class="nav-text">四、点击劫持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、https"><span class="nav-number">5.</span> <span class="nav-text">五、https</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、密码-哈希算法"><span class="nav-number">6.</span> <span class="nav-text">六、密码-哈希算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、SQL注入防御"><span class="nav-number">7.</span> <span class="nav-text">七、SQL注入防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、流量攻击"><span class="nav-number">8.</span> <span class="nav-text">八、流量攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#九、总结"><span class="nav-number">9.</span> <span class="nav-text">九、总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
