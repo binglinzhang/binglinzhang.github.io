@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="前端," />
 
 
 
@@ -88,15 +88,17 @@
 
 
 
-<meta name="description" content="You deserve IT Do More Do Better">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ZhangBinglin">
-<meta property="og:url" content="http://zhangbinglin.cn/index.html">
+<meta name="description" content="集合一些常用的函数封装，持续更新。">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数封装库">
+<meta property="og:url" content="http://zhangbinglin.cn/2017/10/10/函数封装库/index.html">
 <meta property="og:site_name" content="ZhangBinglin">
-<meta property="og:description" content="You deserve IT Do More Do Better">
+<meta property="og:description" content="集合一些常用的函数封装，持续更新。">
+<meta property="og:updated_time" content="2017-10-25T09:48:32.971Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ZhangBinglin">
-<meta name="twitter:description" content="You deserve IT Do More Do Better">
+<meta name="twitter:title" content="函数封装库">
+<meta name="twitter:description" content="集合一些常用的函数封装，持续更新。">
 
 
 
@@ -124,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://zhangbinglin.cn/"/>
+  <link rel="canonical" href="http://zhangbinglin.cn/2017/10/10/函数封装库/"/>
 
 
 
 
 
-  <title>ZhangBinglin</title>
+  <title>函数封装库 | ZhangBinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -155,9 +157,7 @@
     
   
 
-  <div class="container sidebar-position-right 
-   page-home 
- ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -304,9 +304,9 @@ document.getElementById('local-search-input').onkeyup = function() {
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -336,10 +336,7 @@ document.getElementById('local-search-input').onkeyup = function() {
             
             
               
-                
-                <a class="post-title-link" href="/2017/10/10/函数封装库/" itemprop="url">
-                  函数封装库
-                </a>
+                函数封装库
               
             
           </h1>
@@ -411,755 +408,99 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
+        <p>集合一些常用的函数封装，持续更新。</p>
+<a id="more"></a>
+<h3 id="通过系统获取时间数据"><a href="#通过系统获取时间数据" class="headerlink" title="通过系统获取时间数据"></a>通过系统获取时间数据</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDays</span>(<span class="params">beginDay = <span class="string">'2017-9-28'</span>, endDay = <span class="string">'2017-10-15'</span></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> beginArr = beginDay.split(<span class="string">'-'</span>)</div><div class="line">    <span class="keyword">let</span> endArr = endDay.split(<span class="string">'-'</span>)</div><div class="line">    beginArr[<span class="number">1</span>] = <span class="built_in">parseInt</span>(beginArr[<span class="number">1</span>]) - <span class="number">1</span> + <span class="string">''</span> <span class="comment">//月份减1,系统才能按正确日期排列</span></div><div class="line">    endArr[<span class="number">1</span>] = <span class="built_in">parseInt</span>(endArr[<span class="number">1</span>]) - <span class="number">1</span> + <span class="string">''</span></div><div class="line">    <span class="keyword">let</span> begin = <span class="keyword">new</span> <span class="built_in">Date</span>(...beginArr) <span class="comment">//将日期格式转换为标准格式</span></div><div class="line">    <span class="keyword">let</span> end = <span class="keyword">new</span> <span class="built_in">Date</span>(...endArr)</div><div class="line">    <span class="keyword">let</span> days = []</div><div class="line">    <span class="keyword">while</span> ((end.getTime() - begin.getTime()) &gt;= <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">let</span> year = begin.getFullYear() <span class="comment">//获取起始日期的年月日</span></div><div class="line">        <span class="keyword">let</span> month = (begin.getMonth() + <span class="number">1</span>).toString() <span class="comment">//月份重新加1输出</span></div><div class="line">        <span class="keyword">if</span> (month.length === <span class="number">1</span>) month = <span class="string">'0'</span> + month</div><div class="line">        <span class="keyword">let</span> day = begin.getDate().toString()</div><div class="line">        <span class="keyword">if</span> (day.length === <span class="number">1</span>) day = <span class="string">'0'</span> + day</div><div class="line">        days.push(year + <span class="string">'-'</span> + month + <span class="string">'-'</span> + day)</div><div class="line">        begin.setDate(begin.getDate() + <span class="number">1</span>)</div><div class="line">        <span class="comment">//setDate()方法是将当前日期的日设置为指定的1~31，同理有setMonth、setYear等方法</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> days</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="vue中利用axios封装Promise请求对象"><a href="#vue中利用axios封装Promise请求对象" class="headerlink" title="vue中利用axios封装Promise请求对象"></a>vue中利用axios封装Promise请求对象</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">requestLoginon</span>(<span class="params">params</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> instance = axios.create(&#123;</div><div class="line">        <span class="attr">headers</span>: &#123;</div><div class="line">            <span class="string">"X-Service-Id"</span>: <span class="string">""</span>,</div><div class="line">            <span class="string">"X-Service-Method"</span>: <span class="string">""</span>,</div><div class="line">            <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span></div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">    <span class="keyword">return</span> instance.post(<span class="string">`<span class="subst">$&#123;base&#125;</span>/pcn-core/login`</span>, params).then(<span class="function"><span class="params">res</span> =&gt;</span> res.data)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="通过身份证获取生日"><a href="#通过身份证获取生日" class="headerlink" title="通过身份证获取生日"></a>通过身份证获取生日</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getBirthdayByIdNo</span>(<span class="params">idNo</span>) </span>&#123;</div><div class="line">    iIdNo = idNo.trim()</div><div class="line">    <span class="keyword">let</span> tmpStr = <span class="string">""</span></div><div class="line">    <span class="keyword">if</span> (iIdNo.length === <span class="number">15</span>) &#123;</div><div class="line">        tmpStr = iIdNo.substring(<span class="number">6</span>, <span class="number">12</span>)</div><div class="line">        tmpStr = <span class="string">"19"</span> + tmpStr</div><div class="line">        tmpStr = tmpStr.substring(<span class="number">0</span>, <span class="number">4</span>) + <span class="string">"-"</span> + tmpStr.substring(<span class="number">4</span>, <span class="number">6</span>) + <span class="string">"-"</span> + tmpStr.substring(<span class="number">6</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (iIdNo.length === <span class="number">18</span>) &#123;</div><div class="line">        tmpStr = iIdNo.substring(<span class="number">6</span>, <span class="number">14</span>)</div><div class="line">        tmpStr = tmpStr.substring(<span class="number">0</span>, <span class="number">4</span>) + <span class="string">"-"</span> + tmpStr.substring(<span class="number">4</span>, <span class="number">6</span>) + <span class="string">"-"</span> + tmpStr.substring(<span class="number">6</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> tmpStr</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="通过身份证获取性别"><a href="#通过身份证获取性别" class="headerlink" title="通过身份证获取性别"></a>通过身份证获取性别</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSexCodeByIdNo</span>(<span class="params">idNo</span>) </span>&#123;</div><div class="line">    iIdNo = idNo.trim()</div><div class="line">    <span class="keyword">let</span> tmpStr = <span class="string">""</span></div><div class="line">    <span class="keyword">if</span> (iIdNo.length === <span class="number">15</span>) &#123;</div><div class="line">        tmpStr = iIdNo.substring(<span class="number">14</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (iIdNo.length === <span class="number">18</span>) &#123;</div><div class="line">        tmpStr = iIdNo.substring(<span class="number">16</span>, <span class="number">17</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (tmpStr) <span class="keyword">return</span></div><div class="line">    <span class="keyword">return</span> <span class="built_in">parseInt</span>(tmpStr) % <span class="number">2</span> === <span class="number">0</span> ? <span class="number">2</span> : <span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="时间格式化"><a href="#时间格式化" class="headerlink" title="时间格式化"></a>时间格式化</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatDate</span>(<span class="params">timestamp</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> d = timestamp ? <span class="keyword">new</span> <span class="built_in">Date</span>(timestamp) : <span class="keyword">new</span> <span class="built_in">Date</span>()</div><div class="line">    <span class="keyword">let</span> year = d.getFullYear()</div><div class="line">    <span class="keyword">let</span> month = d.getMonth() + <span class="number">1</span></div><div class="line">    <span class="keyword">let</span> date = d.getDate()</div><div class="line">    <span class="keyword">let</span> hour = d.getHours()</div><div class="line">    <span class="keyword">let</span> minute = d.getMinutes()</div><div class="line">    <span class="keyword">let</span> second = d.getSeconds()</div><div class="line">    <span class="keyword">return</span> year + <span class="string">"-"</span> + (month &lt; <span class="number">10</span> ? <span class="string">'0'</span> + month : month) + <span class="string">"-"</span> + (date &lt; <span class="number">10</span> ? <span class="string">'0'</span> + date : date)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="移动端获取当前操作系统及浏览器信息跳转下载app地址"><a href="#移动端获取当前操作系统及浏览器信息跳转下载app地址" class="headerlink" title="移动端获取当前操作系统及浏览器信息跳转下载app地址"></a>移动端获取当前操作系统及浏览器信息跳转下载app地址</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">appDownload</span>(<span class="params">appleUrl, androidUrl</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> ua = navigator.userAgent</div><div class="line">    <span class="keyword">let</span> browserInfo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">//获取移动终端浏览器版本信息</span></div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            <span class="attr">trident</span>: ua.indexOf(<span class="string">'Trident'</span>) &gt; <span class="number">-1</span>, <span class="comment">//IE内核</span></div><div class="line">            presto: ua.indexOf(<span class="string">'Presto'</span>) &gt; <span class="number">-1</span>, <span class="comment">//opera内核</span></div><div class="line">            webKit: ua.indexOf(<span class="string">'AppleWebKit'</span>) &gt; <span class="number">-1</span>, <span class="comment">//苹果、谷歌内核</span></div><div class="line">            gecko: ua.indexOf(<span class="string">'Gecko'</span>) &gt; <span class="number">-1</span> &amp;&amp; ua.indexOf(<span class="string">'KHTML'</span>) == <span class="number">-1</span>, <span class="comment">//火狐内核</span></div><div class="line">            mobile: !!ua.match(<span class="regexp">/AppleWebKit.*Mobile.*/</span>), <span class="comment">//是否为移动终端</span></div><div class="line">            ios: !!ua.match(<span class="regexp">/\(i[^;]+;( U;)? CPU.+Mac OS X/</span>), <span class="comment">//ios终端</span></div><div class="line">            android: ua.indexOf(<span class="string">'Android'</span>) &gt; <span class="number">-1</span> || ua.indexOf(<span class="string">'Linux'</span>) &gt; <span class="number">-1</span>, <span class="comment">//android终端或uc浏览器</span></div><div class="line">            iPhone: ua.indexOf(<span class="string">'iPhone'</span>) &gt; <span class="number">-1</span>, <span class="comment">//是否为iPhone或者QQHD浏览器</span></div><div class="line">            iPad: ua.indexOf(<span class="string">'iPad'</span>) &gt; <span class="number">-1</span>, <span class="comment">//是否iPad</span></div><div class="line">            webApp: ua.indexOf(<span class="string">'Safari'</span>) == <span class="number">-1</span> <span class="comment">//是否web应该程序，没有头部与底部</span></div><div class="line">        &#125;</div><div class="line">    &#125;()</div><div class="line">    <span class="keyword">if</span> (ua.toLowerCase().match(<span class="regexp">/MicroMessenger/i</span>) == <span class="string">"micromessenger"</span>) &#123;</div><div class="line">        <span class="built_in">document</span>.write(<span class="string">"&lt;img src='../../static/download_default.png' alt='点击右上角打开默认浏览器下载' width='100%'/&gt;"</span>)</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (browserInfo.ios || browserInfo.iPhone || browserInfo.iPad) &#123;</div><div class="line">        <span class="built_in">window</span>.location.href = appleUrl <span class="comment">//跳转苹果市场</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">window</span>.location.href = androidUrl <span class="comment">//跳转安卓市场</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
         
-          <p>集合一些常用的函数封装，持续更新。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/10/函数封装库/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
-      
-    </div>
-
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2017/09/22/vue路由传参加密/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/09/22/vue路由传参加密/" itemprop="url">
-                  vue路由传参加密
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-22T21:33:00+08:00">
-                2017-09-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">前端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>vue单页面应用 + vue-router的特性，以及组件间的通讯需求，造就前端路由传参这一可期性。但路由传参由于参数的低安全性容易被随意篡改，从而轻易暴露用户隐私，因此对参数进行适当加密且不影响性能就成了另一个需求。本文列出一种对称加密算法对路由传参进行序列化加密供参考。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/22/vue路由传参加密/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2017/08/11/前端安全/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/11/前端安全/" itemprop="url">
-                  前端安全
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T11:27:41+08:00">
-                2017-08-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">前端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>常见的前端安全问题有XSS、CSRF、cookies、点击劫持、SQL注入、流量攻击等，以下简单的记录学习过程中的笔记与要点。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/11/前端安全/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2017/07/14/日常开发笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/14/日常开发笔记/" itemprop="url">
-                  日常开发笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-14T21:14:17+08:00">
-                2017-07-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">前端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>收集整理日常开发中的雷区以及可汲取之处，以期日后回望，并不定期更新。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/14/日常开发笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2017/06/10/jsonp的2种跨域请求方式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/10/jsonp的2种跨域请求方式/" itemprop="url">
-                  jsonp的2种跨域请求方式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-10T13:18:03+08:00">
-                2017-06-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">前端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>JSON和JSONP虽然只有一个字母的差别，但其实两者根本不是一回事：JSON是一种数据交换格式，而JSONP是一种依靠开发人员的聪明才智创造出的一种非官方跨域数据交互协议。本文主要介绍下常用的jsonp跨域请求方式传输JSON格式数据以及jsonp与ajax的区别。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/10/jsonp的2种跨域请求方式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-  <aside id="sidebar2" class="sidebar myDefine" style="display:none">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.png"
-               alt="ZhangBinglin" />
-          <p class="site-author-name" itemprop="name">ZhangBinglin</p>
-           
-              <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
+            <a href="/tags/前端/" rel="tag"># 前端</a>
           
         </div>
-        <nav class="site-state motion-element">
+      
 
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count redNumber">23</span>
-                <span class="site-state-item-name">日志</span>
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/22/vue路由传参加密/" rel="next" title="vue路由传参加密">
+                <i class="fa fa-chevron-left"></i> vue路由传参加密
               </a>
-            </div>
-          
+            
+          </div>
 
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
+          <span class="post-nav-divider"></span>
 
-          
+          <div class="post-nav-prev post-nav-item">
             
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/binglinzhang/binglinzhang.github.io" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://i2.muimg.com/588926/46f22becb5fe0573.jpg" target="_blank" title="微信公众号">
-                  
-                    <i class="fa fa-fw fa-wechat"></i>
-                  
-                  微信公众号
-                </a>
-              </span>
-            
-          
+          </div>
         </div>
-
-        
-        
-
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              资源链接
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://hexo.io/" title="Hexo官网" target="_blank">Hexo官网</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://zhangbinglin.cn/oweworks/" title="个人作品 Demo" target="_blank">个人作品 Demo</a>
-                </li>
-              
-            </ul>
-          </div>
-        
-
-        
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=308 height=52 src="//music.163.com/outchain/player?type=2&id=857896&auto=0&height=32" class="musicIN"></iframe>
-
-        
-
-
-      </section>
-
       
 
       
+      
+    </footer>
+  </article>
 
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+<ul class="-mob-share-list">
+    <li class="-mob-share-weixin"><p class="describeP">微信</p></li>
+    <li class="-mob-share-weibo"><p class="describeP">新浪微博</p></li>
+    <li class="-mob-share-qq"><p class="describeP">QQ好友</p></li>
+    <li class="-mob-share-qzone"><p class="describeP">QQ空间</p></li>
+    <li class="-mob-share-facebook"><p class="describeP">Facebook</p></li>
+    <li class="-mob-share-twitter"><p class="describeP">Twitter</p></li>
+</ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1db2155cc54e0"></script>
+<!--MOB SHARE END-->
+
+      
     </div>
-  </aside>
-
+  </div>
 
 
           </div>
@@ -1167,6 +508,10 @@ document.getElementById('local-search-input').onkeyup = function() {
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -1186,8 +531,17 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -1290,6 +644,22 @@ document.getElementById('local-search-input').onkeyup = function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过系统获取时间数据"><span class="nav-number">1.</span> <span class="nav-text">通过系统获取时间数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vue中利用axios封装Promise请求对象"><span class="nav-number">2.</span> <span class="nav-text">vue中利用axios封装Promise请求对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过身份证获取生日"><span class="nav-number">3.</span> <span class="nav-text">通过身份证获取生日</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过身份证获取性别"><span class="nav-number">4.</span> <span class="nav-text">通过身份证获取性别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间格式化"><span class="nav-number">5.</span> <span class="nav-text">时间格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动端获取当前操作系统及浏览器信息跳转下载app地址"><span class="nav-number">6.</span> <span class="nav-text">移动端获取当前操作系统及浏览器信息跳转下载app地址</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1411,6 +781,10 @@ document.getElementById('local-search-input').onkeyup = function() {
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
