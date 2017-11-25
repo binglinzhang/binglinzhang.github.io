@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[一道js基础算法题引发的]]></title>
+    <url>%2F2017%2F11%2F21%2F%E4%B8%80%E9%81%93js%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E9%A2%98%E5%BC%95%E5%8F%91%E7%9A%84%2F</url>
+    <content type="text"><![CDATA[最近工作中遇到一个需求如下：需要将不确定长度的数组[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;]转换为JSON对象{&#39;a&#39;:{&#39;b&#39;:{&#39;c&#39;:{&#39;d&#39;:&#39;e&#39;}}}},由此探讨了几种可能性,并尝试反之由{a:{b:{c:{d:e}}}} =&gt; [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;]的实现方案，一并记录如下。 [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;] =&gt; {a:{b:{c:{d:e}}}}几种实现方案 第一种方法特点：简单粗暴,基本没有什么逻辑。123456789101112131415161718function arr2Obj(arr, str = '') &#123; let len = arr.length if (len &lt; 2) &#123; return &#125; for (var i = 0; i &lt; len; i++) &#123; if (i &lt; len - 1) &#123; str += `&#123;"$&#123;arr[i]&#125;":` &#125; else &#123; str += `"$&#123;arr[i]&#125;"` &#125; &#125; for (var j = 0; j &lt; len - 1; j++) &#123; str += '&#125;' &#125; return JSON.parse(str) // 或 return eval('(' + str + ')')&#125; 第二种方法特点：采用由里及外逆向扒开循环。1234567891011121314function arr2Obj2(arr) &#123; if (arr.length &lt; 2) &#123; return &#125; let obj = &#123;&#125;, len = arr.length obj[arr[len - 2]] = arr[len - 1] for (let i = len - 3; i &gt;= 0; i--) &#123; let objTemp = &#123;&#125; objTemp[arr[i]] = obj obj = objTemp &#125; return obj&#125; 第三种方法特点：采用递归循环,看时容易写时难。123456789101112131415function arr2Obj3(arrs, obj = &#123;&#125;) &#123; let el = arrs[0] if (arrs.length &gt; 2) &#123; if (!obj.hasOwnProperty(el)) &#123; obj[el] = &#123;&#125; &#125; arrs.splice(0, 1) arr2Obj4(arrs, obj[el]) return obj //注意此处的return位置以及return值很关键 &#125; if (arrs.length === 2) &#123; obj[el] = arrs[1] &#125;&#125; 递归方式实现{a:{b:{c:{d:e}}}} =&gt; [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;] 1234567891011function obj2Arr(obj, arr = []) &#123; for (var prop in obj) &#123; arr.push(prop) if (typeof(obj[prop]) === 'object') &#123; return obj2Arr(obj[prop], arr) &#125; else &#123; arr.push(obj[prop]) return arr &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>前端开发</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[函数封装库]]></title>
     <url>%2F2017%2F10%2F10%2F%E5%87%BD%E6%95%B0%E5%B0%81%E8%A3%85%E5%BA%93%2F</url>
     <content type="text"><![CDATA[集合一些常用的函数封装，持续更新。 通过系统获取时间数据1234567891011121314151617181920function getDays(beginDay = '2017-9-28', endDay = '2017-10-15') &#123; let beginArr = beginDay.split('-') let endArr = endDay.split('-') beginArr[1] = parseInt(beginArr[1]) - 1 + '' //月份减1,系统才能按正确日期排列 endArr[1] = parseInt(endArr[1]) - 1 + '' let begin = new Date(...beginArr) //将日期格式转换为标准格式 let end = new Date(...endArr) let days = [] while ((end.getTime() - begin.getTime()) &gt;= 0) &#123; let year = begin.getFullYear() //获取起始日期的年月日 let month = (begin.getMonth() + 1).toString() //月份重新加1输出 if (month.length === 1) month = '0' + month let day = begin.getDate().toString() if (day.length === 1) day = '0' + day days.push(year + '-' + month + '-' + day) begin.setDate(begin.getDate() + 1) //setDate()方法是将当前日期的日设置为指定的1~31，同理有setMonth、setYear等方法 &#125; return days&#125; vue中利用axios封装Promise请求对象12345678910function requestLoginon(params) &#123; let instance = axios.create(&#123; headers: &#123; "X-Service-Id": "", "X-Service-Method": "", "Content-Type": "application/json" &#125; &#125;) return instance.post(`$&#123;base&#125;/pcn-core/login`, params).then(res =&gt; res.data)&#125; 通过身份证获取生日1234567891011121314function getBirthdayByIdNo(idNo) &#123; iIdNo = idNo.trim() let tmpStr = "" if (iIdNo.length === 15) &#123; tmpStr = iIdNo.substring(6, 12) tmpStr = "19" + tmpStr tmpStr = tmpStr.substring(0, 4) + "-" + tmpStr.substring(4, 6) + "-" + tmpStr.substring(6) &#125; if (iIdNo.length === 18) &#123; tmpStr = iIdNo.substring(6, 14) tmpStr = tmpStr.substring(0, 4) + "-" + tmpStr.substring(4, 6) + "-" + tmpStr.substring(6) &#125; return tmpStr&#125; 通过身份证获取性别123456789101112function getSexCodeByIdNo(idNo) &#123; iIdNo = idNo.trim() let tmpStr = "" if (iIdNo.length === 15) &#123; tmpStr = iIdNo.substring(14) &#125; if (iIdNo.length === 18) &#123; tmpStr = iIdNo.substring(16, 17) &#125; if (tmpStr) return return parseInt(tmpStr) % 2 === 0 ? 2 : 1&#125; 时间格式化12345678910function formatDate(timestamp) &#123; let d = timestamp ? new Date(timestamp) : new Date() let year = d.getFullYear() let month = d.getMonth() + 1 let date = d.getDate() let hour = d.getHours() let minute = d.getMinutes() let second = d.getSeconds() return year + "-" + (month &lt; 10 ? '0' + month : month) + "-" + (date &lt; 10 ? '0' + date : date)&#125; 移动端获取当前操作系统及浏览器信息跳转下载app地址1234567891011121314151617181920212223242526function appDownload(appleUrl, androidUrl) &#123; let ua = navigator.userAgent let browserInfo = function() &#123; //获取移动终端浏览器版本信息 return &#123; trident: ua.indexOf('Trident') &gt; -1, //IE内核 presto: ua.indexOf('Presto') &gt; -1, //opera内核 webKit: ua.indexOf('AppleWebKit') &gt; -1, //苹果、谷歌内核 gecko: ua.indexOf('Gecko') &gt; -1 &amp;&amp; ua.indexOf('KHTML') == -1, //火狐内核 mobile: !!ua.match(/AppleWebKit.*Mobile.*/), //是否为移动终端 ios: !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端 android: ua.indexOf('Android') &gt; -1 || ua.indexOf('Linux') &gt; -1, //android终端或uc浏览器 iPhone: ua.indexOf('iPhone') &gt; -1, //是否为iPhone或者QQHD浏览器 iPad: ua.indexOf('iPad') &gt; -1, //是否iPad webApp: ua.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部 &#125; &#125;() if (ua.toLowerCase().match(/MicroMessenger/i) == "micromessenger") &#123; document.write("&lt;img src='../../static/download_default.png' alt='点击右上角打开默认浏览器下载' width='100%'/&gt;") &#125; else if (browserInfo.ios || browserInfo.iPhone || browserInfo.iPad) &#123; window.location.href = appleUrl //跳转苹果市场 &#125; else &#123; window.location.href = androidUrl //跳转安卓市场 &#125; return&#125; 产生随机长度字符串12345678910111213141516171819202122232425// 第一种方式function randomStr(length) &#123; length = parseInt(length, 10) || 6 if (length &lt;= 6) &#123; return Math.random().toString(36).slice(2, length + 2) &#125; else &#123; let str = '' for (let i = 0; i &lt; Math.ceil(length / 6); i++) &#123; str += Math.random().toString(36).slice(2, 8) &#125; return str.slice(0, length) &#125;&#125;// 第二种常规方式function randomStr2(len) &#123; len = parseInt(len, 10) || 32 let chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678' /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/ let str = '' for (i = 0; i &lt; len; i++) &#123; str += chars[Math.floor(Math.random() * chars.length]) &#125; return str&#125;]]></content>
@@ -76,8 +87,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Express</tag>
         <tag>Vue</tag>
+        <tag>Express</tag>
         <tag>MongoDB</tag>
       </tags>
   </entry>
@@ -124,8 +135,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Express</tag>
         <tag>Vue</tag>
+        <tag>Express</tag>
       </tags>
   </entry>
   <entry>
