@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[vue开发项目的一些规范]]></title>
+    <url>%2F2018%2F01%2F11%2Fvue%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E8%A7%84%E8%8C%83%2F</url>
+    <content type="text"><![CDATA[总结利用vue开发几个项目过程中应用到的几条规范，规范对于多人团队开发极为重要，后续将继续总结维护更新。 vue规范1、所有命名必须具有语义化，不允许直接后缀加上1,2,3，js代码使用驼峰命名法，css代码使用-或者_连接符，组件首字符大写。2、关键代码需要注释说明，公用组件需要说明调用方式以及入参、响应参数。3、代码必须格式化，console.log以及注释之类的代码在调试完成后全部删除。4、组件书写顺序按照统一结构排版：。5、组件template最外层标签添加唯一className，组件的name属性名于此相同，书写样式时最外层加上统一加上改className。6、生命周期书写顺序一般按照name、mixins、components、props、data、computed、watch、created、mounted、methods排序。7、提取公共css样式库，解耦css代码，提高className复用性。可参考css库8、公用组件放置components文件夹下，且对于常用的公用组件，将其注册为全局组件使用，非公用组件放置views相关模块文件夹下，所有组件必须首字母大写。9、一个组件逻辑代码部分总行数尽量不超过400行，如果超过考虑进行组件拆分，拆分有2种方式，一种是通过vue提供的mixins功能，一种是直接引入js文件方式，但需要注意作用域问题。同理methods里面尽量编写纯函数，函数解耦，函数功能单一化等。10、所有api的url路径统一提取到一个文件进行维护，可写为常量的形式。11、views文件目录按照功能模块的router层级设置，且最好每个功能模块有个index入口文件，方便快捷根据路由地址找到相关代码。12、vue项目文件目录中不允许存在中文字符，否则热加载失败。13、assets文件夹中尽量按照css、font、images、js文件夹进行区分，非静态资源尽量不要放置在static文件夹。]]></content>
+      <categories>
+        <category>前端开发</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[vue递归组件的使用]]></title>
     <url>%2F2017%2F12%2F14%2Fvue%E9%80%92%E5%BD%92%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[vue、react等MVVM框架其中一个最大特点是充分利用了组件化可复用性的特点，这个优点体现在管理系统层级菜单的生成中。当层级菜单未知层级或者由后台动态生成时，此时便需要对组件进行递归渲染，vue中称之为递归组件。本文将通过展示一个demo说明使用递归组件时需要注意的几个点，以供参考。 简单聊聊递归递归至少有以下2个特点，一个是调用自己，一个是有结束条件。针对普通的递归函数，如果是具名函数，则可以通过直接使用函数名的方式调用自己，如果是匿名函数，则通过arguments提供的callee进行调用。而对于vue组件，若要调用自己，则需要先给组件赋名，通过设置name属性之后进行调用。至于结束条件是必备条件，满足条件则结束递归，否则将陷入死循环导致堆栈溢出，因此写递归的时候最重要的就是要考虑递归的边界条件。12345678910111213141516171819202122232425262728293031323334353637383940//普通递归函数写法function getMenus(arr = [], menus = []) &#123; arr.forEach(item =&gt; &#123; if (item.path) &#123; routes.push(item) &#125; if (!item.component) &#123; //条件判断 getMenus(item.children, menus) //调用自己 &#125; &#125;) return menus&#125;//递归组件写法&lt;template&gt; &lt;ul&gt; &lt;li v-for="(item, index) in data" :key='index'&gt; &lt;span @click="toggle(item, index)"&gt;&lt;/span&gt; &lt;treeMenu :data="item.children" v-if="scope[index]" /&gt; //v-if是关键 &lt;/li&gt; &lt;/ul&gt;&lt;/template&gt;&lt;script&gt;export default &#123; name: 'treeMenu', //关键 props: &#123; data: &#123; type: Array, default: [] &#125; &#125;, data() &#123; return &#123; scope: &#123;&#125; &#125; &#125;, methods: &#123; toggle(item, index) &#123; if (item.children &amp;&amp; item.children.length) &#123; this.$set(this.scope, index, !this.scope[index]) &#125; &#125; &#125;&#125;&lt;/script&gt; 说说几个要点1、组件需要设置name属性，命名规则与组件引用相似。2、组件设计的时候需要考虑外部传递参数的形式，比如数组或map对象，需要统一约定好。3、由于需要生成多级菜单，因此会在li标签中嵌套递归自身组件，但每个组件之间没有太多关联，彼此之间数据独立，生命周期独立，因此设计组件的时候需要充分考虑组件的周期，避免不必要或者不合适钩子出现。4、通过引入scope对象，用于单独存储每个组件自身的状态，记录点击的item序号，结合v-if控制组件的显示隐藏，并相应切换icon。最终实现效果如图示： 可能存在的问题1、点击一级icon展开后，再点击二级icon展开，当一级icon收回之后，再展开时先前二级展开的状态丢失，这是由于使用了v-if的原因，可通过v-show替换，但因此也可能带来渲染性能上的问题。2、递归组件继承相同的样式，导致无法针对性设置样式，除非通过数据项进行判断覆盖渲染。]]></content>
@@ -98,8 +109,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Express</tag>
         <tag>Vue</tag>
+        <tag>Express</tag>
         <tag>MongoDB</tag>
       </tags>
   </entry>
@@ -146,8 +157,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Express</tag>
         <tag>Vue</tag>
+        <tag>Express</tag>
       </tags>
   </entry>
   <entry>
