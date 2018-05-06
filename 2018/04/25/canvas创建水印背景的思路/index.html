@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="ZhangBinglin">
 <meta property="og:description" content="最近入职一家金融公司，由于金融安全等级比较高，公司内部所有电脑、app等页面均默认带上个人登录账号信息水印，本文尝试着模拟实现一个添加自适应水印背景的方案。">
 <meta property="og:image" content="https://t1.picb.cc/uploads/2018/05/06/2qTaLD.png">
-<meta property="og:updated_time" content="2018-05-06T03:13:29.916Z">
+<meta property="og:updated_time" content="2018-05-06T04:05:26.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="canvas创建水印背景的思路">
 <meta name="twitter:description" content="最近入职一家金融公司，由于金融安全等级比较高，公司内部所有电脑、app等页面均默认带上个人登录账号信息水印，本文尝试着模拟实现一个添加自适应水印背景的方案。">
@@ -406,7 +406,7 @@ document.getElementById('local-search-input').onkeyup = function() {
 </li>
 </ol>
 <h3 id="step-three-窗口监听"><a href="#step-three-窗口监听" class="headerlink" title="step three: 窗口监听"></a>step three: 窗口监听</h3><p>这里对窗口大小的缩放进行监听并动态修改背景图片大小，考虑到窗口大小缩放频率比较高，因此采用防抖函数节省性能支出。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//窗口监听</span></div><div class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  debounce(<span class="function"><span class="params">()</span> =&gt;</span> &#123; getWaterMark(<span class="string">'#canvas'</span>, <span class="string">'#container'</span>, <span class="string">'zhangbinglin666'</span>) &#125;)</div><div class="line">&#125;</div><div class="line"><span class="comment">//防抖函数</span></div><div class="line"><span class="keyword">let</span> debounce = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> timer = <span class="literal">null</span></div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">fn, delay = <span class="number">300</span></span>) </span>&#123;</div><div class="line">    clearTimeout(timer)</div><div class="line">    timer = setTimeout(fn, delay)</div><div class="line">  &#125;</div><div class="line">&#125;)()</div></pre></td></tr></table></figure></p>
-<h3 id="step-final-效果"><a href="#step-final-效果" class="headerlink" title="step final: 效果"></a>step final: 效果</h3><p>最后的展示效果如下：<br><img src="https://t1.picb.cc/uploads/2018/05/06/2qTaLD.png" alt=""></p>
+<h3 id="step-final-效果"><a href="#step-final-效果" class="headerlink" title="step final: 效果"></a>step final: 效果</h3><p>最后的展示效果如下，源码地址<a href="https://github.com/binglinzhang/myCollects/blob/master/watermark.html" target="_blank" rel="external">这里</a><br><img src="https://t1.picb.cc/uploads/2018/05/06/2qTaLD.png" alt=""></p>
 
       
     </div>
