@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[canvas创建水印背景的思路]]></title>
+    <url>%2F2018%2F04%2F25%2Fcanvas%E5%88%9B%E5%BB%BA%E6%B0%B4%E5%8D%B0%E8%83%8C%E6%99%AF%E7%9A%84%E6%80%9D%E8%B7%AF%2F</url>
+    <content type="text"><![CDATA[最近入职一家金融公司，由于金融安全等级比较高，公司内部所有电脑、app等页面均默认带上个人登录账号信息水印，本文尝试着模拟实现一个添加自适应水印背景的方案。 step one: 创建canvas元素及容器 首先老样子，上来先写好所需元素结构，然后给点color see see，注意一点的是canvas元素添加宽高方式不能直接在样式表里面设置，转换一下思路，把canvas元素当做一个img标签来看就能明白为什么了，图片如果直接通过style设置宽高，将会有拉伸的可能。 canvas没有写width跟height属性时，默认值为300和150，这里先不写，因为后面需要根据容器的大小动态设置。 给canvas元素设置display:none是因为该画布并不需要出现在页面上，且不应该占据页面文档流位置。1234567891011&lt;!--元素部分--&gt;&lt;body&gt; &lt;canvas id="canvas" style="display:none"&gt;&lt;/canvas&gt; &lt;div id='container'&gt;test&lt;/div&gt;&lt;/body&gt;&lt;!--样式部分--&gt;&lt;style&gt;html,body &#123; margin: 0; padding: 0; &#125;#container &#123; width: 100vw; height: 100vh; &#125;&lt;/style&gt; step two: 函数实现部分考虑到函数的可复用性，将实现函数进行作用域封装，通过FIFE方式的好处是变量跟函数的声明动作只需要进行一次，当然也因此造成了作用域链长的问题。作用域内部全局声明2个变量，一个类似jq的$元素选择器，一个是不同函数间传递的图片变量。之后是3个实现的具体步骤，也分别通过函数方式进行区分。 动态获取容器宽高。首先获取需要添加背景水印的容器尺寸，由于元素的宽高设置可能通过内联也可能是外联样式进行设置，因此这里使用getComputedStyle方法进行获取元素的宽高(IE下是另外一个方法)，由于获取到的值是带px单位的字符串，而canvas只接受数字类型的宽高，因此通过parseInt方法进行一下转换，最后将值赋给canvas的width、height属性即可。 生成canvs图片。canvas是参数设置先行的特点，即所有的参数设置需要在画笔画下去之前进行设置才能生效，这里通过canvas画布的大小动态设置水印字符的规格可根据需求调整，比如间隔、字体、大小等，设置canvas字符串的关键方法是fillText，接受3个参数，分别是字符串、x坐标、y坐标。最后将canvas画布通过toDataURL方法导出为base64的图片格式。 设置canvas图片作为背景图。这一步比较简单，就是将第二步获取到的图片设置为容器的背景。12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849let getWaterMark = (function() &#123; //声明2个全局变量 const $ = document.querySelector.bind(document) let watermarkImage = null //声明3个函数 function getContainerSize(canvas, containerId) &#123; const containerEle = window.getComputedStyle($(containerId)) canvas.width = parseInt(containerEle.width, 10) canvas.height = parseInt(containerEle.height, 10) &#125; function getCanvasImg(canvas, str) &#123; let ctx = canvas.getContext("2d") ctx.font = "20px Helvetica" ctx.fillStyle = "rgba(225, 0, 0, .5)" ctx.rotate(-45 * Math.PI / 180) const canvasW = canvas.width * 1.414 const canvasH = canvas.height * 2 let widthArr = [], heightArr = [], n = 0 while (n &lt;= canvasW) &#123; widthArr.push(n) n += canvasW * .2 &#125; n = 100 while (n &lt;= canvasH) &#123; heightArr.push(n) n += canvasH * .15 &#125; widthArr.forEach(function(item) &#123; heightArr.forEach(function(it) &#123; ctx.fillText(str, item, it) item !== -item &amp;&amp; ctx.fillText(str, -item, it) &#125;) &#125;) watermarkImage = canvas.toDataURL("image/png") &#125; function setWatermark(id) &#123; watermarkImage &amp;&amp; $(id).style.background = `url($&#123;watermarkImage&#125;) no-repeat fixed` &#125; //返回调用函数 return function(canvasId = 'canvas', containerId = 'body', waterText = 'I am default') &#123; let canvas = $(canvasId) // 动态获取容器宽高 getContainerSize(canvas, containerId) //生成canvs图片 getCanvasImg(canvas, waterText) // 设置canvas图片作为背景图 setWatermark(containerId) &#125;&#125;)() step three: 窗口监听这里对窗口大小的缩放进行监听并动态修改背景图片大小，考虑到窗口大小缩放频率比较高，因此采用防抖函数节省性能支出。123456789101112//窗口监听window.onresize = function() &#123; debounce(() =&gt; &#123; getWaterMark('#canvas', '#container', 'zhangbinglin666') &#125;)&#125;//防抖函数let debounce = (function() &#123; let timer = null return function(fn, delay = 300) &#123; clearTimeout(timer) timer = setTimeout(fn, delay) &#125;&#125;)() step final: 效果最后的展示效果如下：]]></content>
+      <categories>
+        <category>前端开发</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[vue开发项目的一些规范]]></title>
     <url>%2F2018%2F01%2F11%2Fvue%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E8%A7%84%E8%8C%83%2F</url>
     <content type="text"><![CDATA[总结利用vue开发几个项目过程中应用到的几条规范，规范对于多人团队开发极为重要，后续将继续总结维护更新。 vue规范1、所有命名必须具有语义化，不允许直接后缀加上1,2,3，js代码使用驼峰命名法，css代码使用-或者_连接符，组件首字符大写。2、关键代码需要注释说明，公用组件需要说明调用方式以及入参、响应参数。3、代码必须格式化，console.log以及注释之类的代码在调试完成后全部删除。4、组件书写顺序按照统一结构排版：&lt;template&gt;&lt;/template&gt;&lt;script&gt;&lt;/script&gt;&lt;style&gt;&lt;/style&gt;。5、组件template最外层标签添加唯一className，组件的name属性名于此相同，书写样式时最外层加上统一加上改className。6、生命周期书写顺序一般按照name、mixins、components、props、data、computed、watch、created、mounted、methods排序。7、提取公共css样式库，解耦css代码，提高className复用性。可参考css库8、公用组件放置components文件夹下，且对于常用的公用组件，将其注册为全局组件使用，非公用组件放置views相关模块文件夹下，所有组件必须首字母大写。9、一个组件逻辑代码部分总行数尽量不超过400行，如果超过考虑进行组件拆分，拆分有2种方式，一种是通过vue提供的mixins功能，一种是直接引入js文件方式，但需要注意作用域问题。同理methods里面尽量编写纯函数，函数解耦，函数功能单一化等。10、所有api的url路径统一提取到一个文件进行维护，可写为常量的形式。11、views文件目录按照功能模块的router层级设置，且最好每个功能模块有个index入口文件，方便快捷根据路由地址找到相关代码。12、vue项目文件目录中不允许存在中文字符，否则热加载失败。13、assets文件夹中尽量按照css、font、images、js文件夹进行区分，非静态资源尽量不要放置在static文件夹。]]></content>
@@ -285,8 +296,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Express</tag>
         <tag>前端</tag>
+        <tag>Express</tag>
       </tags>
   </entry>
   <entry>
