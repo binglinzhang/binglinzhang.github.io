@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="前端," />
 
 
 
@@ -88,15 +88,17 @@
 
 
 
-<meta name="description" content="You deserve IT Do More Do Better">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ZhangBinglin">
-<meta property="og:url" content="http://zhangbinglin.cn/index.html">
+<meta name="description" content="前端开发中，对于大多数的事件监听都会导致页面的高频触发重渲染，诸如滚动事件、窗口缩放、鼠标事件等，而浏览器最常见的页面渲染的帧频为60fps，即每秒刷新帧数为60，约1000/16=16.7ms刷新一帧，因此任何低于高频率的操作皆无法及时的放映到页面上，消费无用功且极大消耗CPU性能。因此对于大多数高频执行考虑通过延迟执行的方式进行优化，类似的有防抖、节流等处理，详见本文。">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于防抖节流函数的实现与优化">
+<meta property="og:url" content="http://zhangbinglin.cn/2018/02/27/关于防抖节流函数的实现与优化/index.html">
 <meta property="og:site_name" content="ZhangBinglin">
-<meta property="og:description" content="You deserve IT Do More Do Better">
+<meta property="og:description" content="前端开发中，对于大多数的事件监听都会导致页面的高频触发重渲染，诸如滚动事件、窗口缩放、鼠标事件等，而浏览器最常见的页面渲染的帧频为60fps，即每秒刷新帧数为60，约1000/16=16.7ms刷新一帧，因此任何低于高频率的操作皆无法及时的放映到页面上，消费无用功且极大消耗CPU性能。因此对于大多数高频执行考虑通过延迟执行的方式进行优化，类似的有防抖、节流等处理，详见本文。">
+<meta property="og:updated_time" content="2018-05-06T09:52:47.900Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ZhangBinglin">
-<meta name="twitter:description" content="You deserve IT Do More Do Better">
+<meta name="twitter:title" content="关于防抖节流函数的实现与优化">
+<meta name="twitter:description" content="前端开发中，对于大多数的事件监听都会导致页面的高频触发重渲染，诸如滚动事件、窗口缩放、鼠标事件等，而浏览器最常见的页面渲染的帧频为60fps，即每秒刷新帧数为60，约1000/16=16.7ms刷新一帧，因此任何低于高频率的操作皆无法及时的放映到页面上，消费无用功且极大消耗CPU性能。因此对于大多数高频执行考虑通过延迟执行的方式进行优化，类似的有防抖、节流等处理，详见本文。">
 
 
 
@@ -124,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://zhangbinglin.cn/"/>
+  <link rel="canonical" href="http://zhangbinglin.cn/2018/02/27/关于防抖节流函数的实现与优化/"/>
 
 
 
 
 
-  <title>ZhangBinglin</title>
+  <title>关于防抖节流函数的实现与优化 | ZhangBinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -155,9 +157,7 @@
     
   
 
-  <div class="container sidebar-position-right 
-   page-home 
- ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,155 +284,9 @@ document.getElementById('local-search-input').onkeyup = function() {
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/04/25/canvas创建水印背景的思路/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/04/25/canvas创建水印背景的思路/" itemprop="url">
-                  canvas创建水印背景的思路
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-25T19:57:10+08:00">
-                2018-04-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">前端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近入职一家金融公司，由于金融安全等级比较高，公司内部所有电脑、app等页面均默认带上个人登录账号信息水印，本文尝试着模拟实现一个添加自适应水印背景的方案。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/25/canvas创建水印背景的思路/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
 
   
 
@@ -462,10 +316,7 @@ document.getElementById('local-search-input').onkeyup = function() {
             
             
               
-                
-                <a class="post-title-link" href="/2018/02/27/关于防抖节流函数的实现与优化/" itemprop="url">
-                  关于防抖节流函数的实现与优化
-                </a>
+                关于防抖节流函数的实现与优化
               
             
           </h1>
@@ -537,591 +388,107 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
+        <p>前端开发中，对于大多数的事件监听都会导致页面的高频触发重渲染，诸如滚动事件、窗口缩放、鼠标事件等，而浏览器最常见的页面渲染的帧频为60fps，即每秒刷新帧数为60，约1000/16=16.7ms刷新一帧，因此任何低于高频率的操作皆无法及时的放映到页面上，消费无用功且极大消耗CPU性能。因此对于大多数高频执行考虑通过延迟执行的方式进行优化，类似的有防抖、节流等处理，详见本文。</p>
+<a id="more"></a>
+<h3 id="防抖函数"><a href="#防抖函数" class="headerlink" title="防抖函数"></a>防抖函数</h3><p>防抖函数的思路是通过屏蔽事件监听的过程，忽略其他阶段，只考虑执行最后一次事件处理函数。下面的方法默认最后一个事件处理的延迟执行操作时间为300毫秒，可以很好的屏蔽大部分的高频操作事件，达到提升性能的作用，且延迟执行时间可自由配置。<br>栗子中设置了延迟时间为1000毫秒，假设用户持续操作窗口缩放的时间为2000毫秒，那么防抖函数将在2000毫秒之后+1000毫秒延迟时间，共3000毫秒之后执行处理函数。因此，该方式只适合时效性要求不是很高的事件处理上，不适合图片懒加载等要求及时的应用上面。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//窗口监听事件</span></div><div class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  debounce(<span class="function"><span class="params">()</span> =&gt;</span> &#123; doSth() &#125;, <span class="number">1000</span>)</div><div class="line">&#125;</div><div class="line"><span class="comment">//防抖函数</span></div><div class="line"><span class="keyword">let</span> debounce = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> timer = <span class="literal">null</span></div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">fn, delay = <span class="number">300</span></span>) </span>&#123;</div><div class="line">    timer &amp;&amp; clearTimeout(timer)</div><div class="line">    timer = setTimeout(fn, delay)</div><div class="line">  &#125;</div><div class="line">&#125;)()</div><div class="line"><span class="comment">//业务处理函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSth</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'well, some action here...'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="节流函数"><a href="#节流函数" class="headerlink" title="节流函数"></a>节流函数</h3><p>防抖函数的思路是通过类似轮询的方式，根据设置的定时间隔，每隔固定时长执行一次事件处理函数，相对于防抖函数具有更高的时效性。<br>栗子中设置了延迟时间为1000毫秒，假设用户持续操作窗口缩放的时间为3000毫秒，那么节流函数将每隔1000毫秒执行一次处理函数，整个过程总共执行3次。但假如用户持续操作窗口缩放的时间比延迟时间短，只有500毫秒，则将退回防抖函数的处理方式。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//窗口监听事件</span></div><div class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  throttle(<span class="function"><span class="params">()</span> =&gt;</span> &#123; doSth() &#125;, <span class="number">1000</span>)</div><div class="line">&#125;</div><div class="line"><span class="comment">//节流函数</span></div><div class="line"><span class="keyword">let</span> throttle = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> timer = <span class="literal">null</span>, prev = <span class="literal">null</span>, now = <span class="literal">null</span></div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">fn, delay = <span class="number">1000</span></span>) </span>&#123;</div><div class="line">    now = <span class="keyword">new</span> <span class="built_in">Date</span>()</div><div class="line">    <span class="keyword">if</span>(!prev) &#123;</div><div class="line">      prev = <span class="keyword">new</span> <span class="built_in">Date</span>()</div><div class="line">      <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line">    timer &amp;&amp; clearTimeout(timer)</div><div class="line">    <span class="keyword">if</span>(now - prev &lt;= delay) &#123;</div><div class="line">      timer = setTimeout(fn, delay)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      fn()</div><div class="line">      prev = now</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)()</div><div class="line"><span class="comment">//业务处理函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSth</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'well, some action here...'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="一种更优化的思路"><a href="#一种更优化的思路" class="headerlink" title="一种更优化的思路"></a>一种更优化的思路</h3><p>这种方式与以上2种有以下几点不同：</p>
+<ol>
+<li>通过一个标志位控制业务函数的执行；</li>
+<li>事件一触发立即执行业务函数，而不是延迟执行，且之后每隔所设置的延迟时间间隔后再次执行；</li>
+<li>假设两种场景，一种是用户缩放窗口时间比所设置延迟时间小，则该方法立即执行了一次业务函数，之后延迟时间到达后标志位恢复；另外一种是用户缩放窗口时间比所设置延迟时间长，则该方法立即执行一次之后，每隔相同的延迟时间后标志位恢复循环执行。<br>结合以上几点，个人感觉这种方式比以上2种更优，如有不同意见，欢迎探讨。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//防抖节流函数</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Optimistic</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(fn, delay) &#123;</div><div class="line">    <span class="keyword">this</span>.method = <span class="keyword">this</span>.method.bind(<span class="keyword">this</span>)</div><div class="line">    <span class="keyword">this</span>.flag = <span class="literal">true</span></div><div class="line">    <span class="keyword">this</span>.fn = fn</div><div class="line">    <span class="keyword">this</span>.delay = delay</div><div class="line">    <span class="keyword">this</span>.timer = <span class="literal">null</span></div><div class="line">  &#125;</div><div class="line">  method() &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.flag) &#123;</div><div class="line">      <span class="keyword">this</span>.timer &amp;&amp; clearTimeout(<span class="keyword">this</span>.timer)</div><div class="line">      <span class="keyword">this</span>.flag = <span class="literal">false</span></div><div class="line">      <span class="keyword">this</span>.fn()</div><div class="line">      <span class="keyword">this</span>.timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">this</span>.flag = <span class="literal">true</span></div><div class="line">      &#125;, <span class="keyword">this</span>.delay)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> optimistic = <span class="keyword">new</span> Optimistic(doSth, <span class="number">1000</span>).method</div><div class="line"><span class="comment">// 窗口监听事件</span></div><div class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; optimistic() &#125;</div><div class="line"><span class="comment">//业务处理函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSth</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'well, some action here...'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>以上几种方案源码<a href="https://github.com/binglinzhang/myCollects/blob/master/%E5%87%BD%E6%95%B0%E7%9A%84%E9%98%B2%E6%8A%96%E8%8A%82%E6%B5%81.html" target="_blank" rel="external">这里</a></p>
+
+      
+    </div>
+
+    <div>
+      
         
-          <p>前端开发中，对于大多数的事件监听都会导致页面的高频触发重渲染，诸如滚动事件、窗口缩放、鼠标事件等，而浏览器最常见的页面渲染的帧频为60fps，即每秒刷新帧数为60，约1000/16=16.7ms刷新一帧，因此任何低于高频率的操作皆无法及时的放映到页面上，消费无用功且极大消耗CPU性能。因此对于大多数高频执行考虑通过延迟执行的方式进行优化，类似的有防抖、节流等处理，详见本文。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/27/关于防抖节流函数的实现与优化/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
-      
-    </div>
-
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/01/11/vue开发项目的一些规范/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/01/11/vue开发项目的一些规范/" itemprop="url">
-                  vue开发项目的一些规范
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-11T11:11:11+08:00">
-                2018-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">前端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>总结利用vue开发几个项目过程中应用到的几条规范，规范对于多人团队开发极为重要，这里只针对vue框架的一个规范，js与css部分未加入，后续将继续总结维护更新。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/11/vue开发项目的一些规范/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2017/12/14/vue递归组件的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/12/14/vue递归组件的使用/" itemprop="url">
-                  vue递归组件的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-14T23:01:13+08:00">
-                2017-12-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">前端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>vue、react等MVVM框架其中一个最大特点是充分利用了组件化可复用性的特点，这个优点体现在管理系统层级菜单的生成中。当层级菜单未知层级或者由后台动态生成时，此时便需要对组件进行递归渲染，vue中称之为递归组件。本文将通过展示一个demo说明使用递归组件时需要注意的几个点，以供参考。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/14/vue递归组件的使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2017/11/21/一道js基础算法题引发的/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/21/一道js基础算法题引发的/" itemprop="url">
-                  一道js基础算法题引发的
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-21T15:24:23+08:00">
-                2017-11-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">前端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近工作中遇到一个需求如下：需要将不确定长度的数组<code>[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;]</code>转换为JSON对象<code>{&#39;a&#39;:{&#39;b&#39;:{&#39;c&#39;:{&#39;d&#39;:&#39;e&#39;}}}}</code>,由此探讨了几种可能性,并尝试反之由<code>{a:{b:{c:{d:e}}}}</code> =&gt; <code>[&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;]</code>的实现方案，一并记录如下。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/21/一道js基础算法题引发的/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-  <aside id="sidebar2" class="sidebar myDefine" style="display:none">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.png"
-               alt="ZhangBinglin" />
-          <p class="site-author-name" itemprop="name">ZhangBinglin</p>
-           
-              <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
+            <a href="/tags/前端/" rel="tag"># 前端</a>
           
         </div>
-        <nav class="site-state motion-element">
+      
 
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count redNumber">29</span>
-                <span class="site-state-item-name">日志</span>
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/11/vue开发项目的一些规范/" rel="next" title="vue开发项目的一些规范">
+                <i class="fa fa-chevron-left"></i> vue开发项目的一些规范
               </a>
-            </div>
-          
+            
+          </div>
 
-          
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">分类</span>
+              <a href="/2018/04/25/canvas创建水印背景的思路/" rel="prev" title="canvas创建水印背景的思路">
+                canvas创建水印背景的思路 <i class="fa fa-chevron-right"></i>
               </a>
-            </div>
-          
-
-          
             
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/binglinzhang/binglinzhang.github.io" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://i2.muimg.com/588926/46f22becb5fe0573.jpg" target="_blank" title="微信公众号">
-                  
-                    <i class="fa fa-fw fa-wechat"></i>
-                  
-                  微信公众号
-                </a>
-              </span>
-            
-          
+          </div>
         </div>
-
-        
-        
-
-        
-        
-
-        
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=308 height=52 src="//music.163.com/outchain/player?type=2&id=857896&auto=0&height=32" class="musicIN"></iframe>
-
-        
-
-
-      </section>
-
       
 
       
+      
+    </footer>
+  </article>
 
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+<ul class="-mob-share-list">
+    <li class="-mob-share-weixin"><p class="describeP">微信</p></li>
+    <li class="-mob-share-weibo"><p class="describeP">新浪微博</p></li>
+    <li class="-mob-share-qq"><p class="describeP">QQ好友</p></li>
+    <li class="-mob-share-qzone"><p class="describeP">QQ空间</p></li>
+    <li class="-mob-share-facebook"><p class="describeP">Facebook</p></li>
+    <li class="-mob-share-twitter"><p class="describeP">Twitter</p></li>
+</ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1db2155cc54e0"></script>
+<!--MOB SHARE END-->
+
+      
     </div>
-  </aside>
-
+  </div>
 
 
           </div>
@@ -1129,6 +496,10 @@ document.getElementById('local-search-input').onkeyup = function() {
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -1148,8 +519,17 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -1234,6 +614,22 @@ document.getElementById('local-search-input').onkeyup = function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#防抖函数"><span class="nav-number">1.</span> <span class="nav-text">防抖函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#节流函数"><span class="nav-number">2.</span> <span class="nav-text">节流函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一种更优化的思路"><span class="nav-number">3.</span> <span class="nav-text">一种更优化的思路</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1355,6 +751,10 @@ document.getElementById('local-search-input').onkeyup = function() {
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
