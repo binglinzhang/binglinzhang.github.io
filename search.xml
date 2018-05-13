@@ -12,9 +12,20 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[谈谈new的实例化过程]]></title>
+    <url>%2F2018%2F03%2F22%2F%E8%B0%88%E8%B0%88new%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%BF%87%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[浏览器实现new实例化的过程我们都知道有三个步骤，分别是创建一个空的实例化对象this、将this的原型（__proto__属性）指向构造函数的prototype（实例原型）、执行构造函数并最终默认返回this。现假设业务开发中提出这么3点需求，需要代码层面进行实现，本文将尝试通过自定义一个方法模拟实现该业务的功能需求。 new的栗子首先看一下实际应用中new的使用，实例对象包括浏览器内置的Object、Array、Date等及自定义构造函数，其中构造函数内部的返回值如果没写或者返回的不是基本类型的值，则默认返回this。而对于构造函数原型上的方法默认返回值为undefined，因此如果需要支持链式调用，则需要显性返回一个this，即实例对象。如果使用ES6新定义的class关键字，则类的书写结构更加清晰，但要知道这只是语法糖，背后的实现还是通过构造函数的方式实现。12345678910111213141516171819202122232425262728//创建一个JQ构造函数，并支持链式调用function JQ(el) &#123; this.el = el return this //默认返回值，可以不写&#125;JQ.prototype.on = function(type, fn) &#123; this.el.addEventListener(type, fn) return this&#125;//使用方式var jq = new JQ(document.getElementById('id'))jq.on('mouseover', function() &#123; console.log('mouseover')&#125;).on('mouseleave', function() &#123; console.log('mouseleave')&#125;)// 使用ES6 class关键字的方式创建的类class JQ &#123; constructor(el) &#123; this.el = el &#125; on(type, fn) &#123; this.el.addEventListener(type, fn) return this &#125;&#125; 初步实现由于new是js的关键字，无法像浏览器内置函数如bind、forEach等直接覆盖，所以这里的模拟通过封装一个函数进行模拟，函数支持1个以上参数，第一个参数即为构造函数，剩下参数为该构造函数的参数，使用方式如下：var jq = myNew(JQ, el)。基本思路： 创建一个新的空对象，并获取构造函数 将构造函数的prototype赋给实例对象的原型，实现继承 实例对象通过call的方式调用构造函数 返回实例化对象1234567function myNew() &#123; var Constructor = [].shift.call(arguments) var obj = &#123;&#125; obj.__proto__ = Constructor.prototype Constructor.call(obj, arguments) return obj&#125; 优化版本以上版本整体思路是对的，但中间有几个点需要注意： 构造函数的prototype直接等于实例对象的proto，这种实现继承方式有2个问题，一个会导致原型可被实例对象轻易修改，一个是proto不兼容； 直接返回实例化对象，即默认返回this，没有考虑到构造函数返回其他类型值的可能。以下版本对上面2点进行优化：1234567891011121314151617181920212223242526function myNew() &#123; //第一步：获取构造函数 var Constructor = [].shift.call(arguments) //第二步：创建一个空的新对象并将原型指向构造函数的prototype属性 var obj = Object.create(Constructor.prototype) //第三步：传入参数执行构造函数，这里要保证调用对象为上面创建的对象，确保this的指向 var result = Constructor.apply(obj, arguments) //第四步：判断构造函数的返回值决定return内容，这里需要注意返回值为null的情况 return (result &amp;&amp; typeof result === 'object') ? result : obj&#125;// 使用方式var jq = myNew(JQ, document.getElementById('id'))jq.on('mouseover', function() &#123; console.log('mouseover')&#125;).on('mouseleave', function() &#123; console.log('mouseleave')&#125;)//关于Object.create的兼容Object.prototype.create = Object.prototype.create || function(obj) &#123; var F = function() &#123;&#125; F.prototype = obj return new F()&#125; end]]></content>
+      <categories>
+        <category>前端开发</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[关于防抖节流函数的实现与优化]]></title>
     <url>%2F2018%2F02%2F27%2F%E5%85%B3%E4%BA%8E%E9%98%B2%E6%8A%96%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E4%BC%98%E5%8C%96%2F</url>
-    <content type="text"><![CDATA[前端开发中，对于大多数的事件监听都会导致页面的高频触发重渲染，诸如滚动事件、窗口缩放、鼠标事件等，而浏览器最常见的页面渲染的帧频为60fps，即每秒刷新帧数为60，约1000/16=16.7ms刷新一帧，因此任何低于高频率的操作皆无法及时的放映到页面上，消费无用功且极大消耗CPU性能。因此对于大多数高频执行考虑通过延迟执行的方式进行优化，类似的有防抖、节流等处理，详见本文。 防抖函数防抖函数的思路是通过屏蔽事件监听的过程，忽略其他阶段，只考虑执行最后一次事件处理函数。下面的方法默认最后一个事件处理的延迟执行操作时间为300毫秒，可以很好的屏蔽大部分的高频操作事件，达到提升性能的作用，且延迟执行时间可自由配置。栗子中设置了延迟时间为1000毫秒，假设用户持续操作窗口缩放的时间为2000毫秒，那么防抖函数将在2000毫秒之后+1000毫秒延迟时间，共3000毫秒之后执行处理函数。因此，该方式只适合时效性要求不是很高的事件处理上，不适合图片懒加载等要求及时的应用上面。12345678910111213141516//窗口监听事件window.onresize = function() &#123; debounce(() =&gt; &#123; doSth() &#125;, 1000)&#125;//防抖函数let debounce = (function() &#123; let timer = null return function(fn, delay = 300) &#123; timer &amp;&amp; clearTimeout(timer) timer = setTimeout(fn, delay) &#125;&#125;)()//业务处理函数function doSth() &#123; console.log('well, some action here...')&#125; 节流函数防抖函数的思路是通过类似轮询的方式，根据设置的定时间隔，每隔固定时长执行一次事件处理函数，相对于防抖函数具有更高的时效性。栗子中设置了延迟时间为1000毫秒，假设用户持续操作窗口缩放的时间为3000毫秒，那么节流函数将每隔1000毫秒执行一次处理函数，整个过程总共执行3次。但假如用户持续操作窗口缩放的时间比延迟时间短，只有500毫秒，则将退回防抖函数的处理方式。1234567891011121314151617181920212223242526//窗口监听事件window.onresize = function() &#123; throttle(() =&gt; &#123; doSth() &#125;, 1000)&#125;//节流函数let throttle = (function() &#123; let timer = null, prev = null, now = null return function(fn, delay = 1000) &#123; now = new Date() if(!prev) &#123; prev = new Date() return &#125; timer &amp;&amp; clearTimeout(timer) if(now - prev &lt;= delay) &#123; timer = setTimeout(fn, delay) &#125; else &#123; fn() prev = now &#125; &#125;&#125;)()//业务处理函数function doSth() &#123; console.log('well, some action here...')&#125; 一种更优化的思路这种方式与以上2种有以下几点不同： 通过一个标志位控制业务函数的执行； 事件一触发立即执行业务函数，而不是延迟执行，且之后每隔所设置的延迟时间间隔后再次执行； 假设两种场景，一种是用户缩放窗口时间比所设置延迟时间小，则该方法立即执行了一次业务函数，之后延迟时间到达后标志位恢复；另外一种是用户缩放窗口时间比所设置延迟时间长，则该方法立即执行一次之后，每隔相同的延迟时间后标志位恢复循环执行。结合以上几点，个人感觉这种方式比以上2种更优，如有不同意见，欢迎探讨。123456789101112131415161718192021222324252627//防抖节流函数class Optimistic &#123; constructor(fn, delay) &#123; this.method = this.method.bind(this) this.flag = true this.fn = fn this.delay = delay this.timer = null &#125; method() &#123; if (this.flag) &#123; this.timer &amp;&amp; clearTimeout(this.timer) this.flag = false this.fn() this.timer = setTimeout(() =&gt; &#123; this.flag = true &#125;, this.delay) &#125; &#125;&#125;const optimistic = new Optimistic(doSth, 1000).method// 窗口监听事件window.onresize = function() &#123; optimistic() &#125;//业务处理函数function doSth() &#123; console.log('well, some action here...')&#125; 以上几种方案源码这里]]></content>
+    <content type="text"><![CDATA[前端开发中，对于大多数的事件监听都会导致页面的高频触发重渲染，诸如滚动事件、窗口缩放、鼠标事件等，而浏览器最常见的页面渲染的帧频为60fps，即每秒刷新帧数为60，约1000/16=16.7ms刷新一帧，因此任何低于高频率的操作皆无法及时的放映到页面上，消费无用功且极大消耗CPU性能。因此对于大多数高频执行考虑通过延迟执行的方式进行优化，类似的有防抖、节流等处理，详见本文。 防抖函数防抖函数的思路是通过屏蔽事件监听的过程，忽略其他阶段，只考虑执行最后一次事件处理函数。下面的方法默认最后一个事件处理的延迟执行操作时间为300毫秒，可以很好的屏蔽大部分的高频操作事件，达到提升性能的作用，且延迟执行时间可自由配置。栗子中设置了延迟时间为1000毫秒，假设用户持续操作窗口缩放的时间为2000毫秒，那么防抖函数将在2000毫秒之后+1000毫秒延迟时间，共3000毫秒之后执行处理函数。因此，该方式只适合时效性要求不是很高的事件处理上，不适合图片懒加载等要求及时的应用上面。12345678910111213141516//窗口监听事件window.onresize = function() &#123; debounce(() =&gt; &#123; doSth() &#125;, 1000)&#125;//防抖函数let debounce = (function() &#123; let timer = null return function(fn, delay = 300) &#123; timer &amp;&amp; clearTimeout(timer) timer = setTimeout(fn, delay) &#125;&#125;)()//业务处理函数function doSth() &#123; console.log('well, some action here...')&#125; 节流函数节流函数的思路是通过类似轮询的方式，根据设置的定时间隔，每隔固定时长执行一次事件处理函数，相对于防抖函数具有更高的时效性。栗子中设置了延迟时间为1000毫秒，假设用户持续操作窗口缩放的时间为3000毫秒，那么节流函数将每隔1000毫秒执行一次处理函数，整个过程总共执行3次。但假如用户持续操作窗口缩放的时间比延迟时间短，只有500毫秒，则将退回防抖函数的处理方式。123456789101112131415161718192021222324252627//窗口监听事件window.onresize = function() &#123; throttle(() =&gt; &#123; doSth() &#125;, 1000)&#125;//节流函数let throttle = (function() &#123; let timer = null, prev = null, now = null return function(fn, delay = 1000) &#123; now = new Date() if(!prev) &#123; fn() //当首次调用时立即执行 prev = new Date() return &#125; timer &amp;&amp; clearTimeout(timer) if(now - prev &lt;= delay) &#123; timer = setTimeout(fn, delay) //退回防抖方式 &#125; else &#123; fn() //当窗口缩放结束，第二次重新开启缩放时立即执行 prev = now &#125; &#125;&#125;)()//业务处理函数function doSth() &#123; console.log('well, some action here...')&#125; 一种更优化的思路这种方式与以上2种有以下几点不同： 通过一个标志位控制业务函数的执行； 事件触发立即执行业务函数，而不是延迟执行，且之后每隔所设置的延迟时间间隔后再次执行； 假设两种场景，一种是用户缩放窗口时间比所设置延迟时间小，则该方法立即执行了一次业务函数，之后延迟时间到达后标志位恢复；另外一种是用户缩放窗口时间比所设置延迟时间长，则该方法立即执行一次之后，每隔相同的延迟时间后标志位恢复循环执行。 结合以上几点，个人感觉这种方式比以上2种更优，如有不同意见，欢迎探讨。123456789101112131415161718192021222324252627//防抖节流函数class Optimistic &#123; constructor(fn, delay) &#123; this.method = this.method.bind(this) this.flag = true this.fn = fn this.delay = delay this.timer = null &#125; method() &#123; if (this.flag) &#123; this.timer &amp;&amp; clearTimeout(this.timer) this.flag = false this.fn() this.timer = setTimeout(() =&gt; &#123; this.flag = true &#125;, this.delay) &#125; &#125;&#125;const optimistic = new Optimistic(doSth, 1000).method// 窗口监听事件window.onresize = function() &#123; optimistic() &#125;//业务处理函数function doSth() &#123; console.log('well, some action here...')&#125; 方案源码这里]]></content>
       <categories>
         <category>前端开发</category>
       </categories>
@@ -118,8 +129,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Javascript</tag>
         <tag>前端</tag>
+        <tag>Javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -178,8 +189,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Javascript</tag>
         <tag>前端</tag>
+        <tag>Javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -202,8 +213,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Javascript</tag>
         <tag>前端</tag>
+        <tag>Javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -214,8 +225,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Javascript</tag>
         <tag>前端</tag>
+        <tag>Javascript</tag>
       </tags>
   </entry>
   <entry>
@@ -319,8 +330,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Javascript</tag>
         <tag>前端</tag>
+        <tag>Javascript</tag>
       </tags>
   </entry>
   <entry>
