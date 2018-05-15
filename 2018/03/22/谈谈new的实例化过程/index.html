@@ -95,7 +95,7 @@
 <meta property="og:url" content="http://zhangbinglin.cn/2018/03/22/谈谈new的实例化过程/index.html">
 <meta property="og:site_name" content="ZhangBinglin">
 <meta property="og:description" content="浏览器实现new实例化的过程我们都知道有三个步骤，分别是创建一个空的实例化对象this、将this的原型（__proto__属性）指向构造函数的prototype（实例原型）、执行构造函数并最终默认返回this。现假设业务开发中提出这么3点需求，需要代码层面进行实现，本文将尝试通过自定义一个方法模拟实现该业务的功能需求。">
-<meta property="og:updated_time" content="2018-05-13T08:41:19.068Z">
+<meta property="og:updated_time" content="2018-05-13T09:15:51.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谈谈new的实例化过程">
 <meta name="twitter:description" content="浏览器实现new实例化的过程我们都知道有三个步骤，分别是创建一个空的实例化对象this、将this的原型（__proto__属性）指向构造函数的prototype（实例原型）、执行构造函数并最终默认返回this。现假设业务开发中提出这么3点需求，需要代码层面进行实现，本文将尝试通过自定义一个方法模拟实现该业务的功能需求。">
@@ -401,7 +401,7 @@ document.getElementById('local-search-input').onkeyup = function() {
 </ol>
 <h3 id="优化版本"><a href="#优化版本" class="headerlink" title="优化版本"></a>优化版本</h3><p>以上版本整体思路是对的，但中间有几个点需要注意：</p>
 <ol>
-<li>构造函数的prototype直接等于实例对象的<strong>proto</strong>，这种实现继承方式有2个问题，一个会导致原型可被实例对象轻易修改，一个是<strong>proto</strong>不兼容；</li>
+<li>构造函数的prototype直接等于实例对象的<code>__proto__</code>，这种实现继承方式有2个问题，一个会导致原型可被实例对象轻易修改，一个是<code>__proto__</code>不兼容；</li>
 <li>直接返回实例化对象，即默认返回this，没有考虑到构造函数返回其他类型值的可能。<br>以下版本对上面2点进行优化：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">//第一步：获取构造函数</span></div><div class="line">  <span class="keyword">var</span> Constructor = [].shift.call(<span class="built_in">arguments</span>)		  </div><div class="line">  <span class="comment">//第二步：创建一个空的新对象并将原型指向构造函数的prototype属性</span></div><div class="line">  <span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(Constructor.prototype)</div><div class="line">  <span class="comment">//第三步：传入参数执行构造函数，这里要保证调用对象为上面创建的对象，确保this的指向</span></div><div class="line">  <span class="keyword">var</span> result = Constructor.apply(obj, <span class="built_in">arguments</span>)</div><div class="line">  <span class="comment">//第四步：判断构造函数的返回值决定return内容，这里需要注意返回值为null的情况</span></div><div class="line">  <span class="keyword">return</span> (result &amp;&amp; <span class="keyword">typeof</span> result === <span class="string">'object'</span>) ? result : obj</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 使用方式</span></div><div class="line"><span class="keyword">var</span> jq = myNew(JQ, <span class="built_in">document</span>.getElementById(<span class="string">'id'</span>))</div><div class="line">jq.on(<span class="string">'mouseover'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'mouseover'</span>)</div><div class="line">&#125;)</div><div class="line">.on(<span class="string">'mouseleave'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'mouseleave'</span>)</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">//关于Object.create的兼容</span></div><div class="line"><span class="built_in">Object</span>.prototype.create = <span class="built_in">Object</span>.prototype.create || <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">  F.prototype = obj</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -550,7 +550,7 @@ document.getElementById('local-search-input').onkeyup = function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count redNumber">30</span>
+                <span class="site-state-item-count redNumber">32</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
