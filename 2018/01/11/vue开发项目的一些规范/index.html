@@ -95,7 +95,7 @@
 <meta property="og:url" content="http://zhangbinglin.cn/2018/01/11/vue开发项目的一些规范/index.html">
 <meta property="og:site_name" content="ZhangBinglin">
 <meta property="og:description" content="总结利用vue开发几个项目过程中应用到的几条规范，规范对于多人团队开发极为重要，这里只针对vue框架的一个规范，js与css部分未加入，后续将继续总结维护更新。">
-<meta property="og:updated_time" content="2018-05-06T04:05:15.495Z">
+<meta property="og:updated_time" content="2018-06-02T05:02:21.636Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue开发项目的一些规范">
 <meta name="twitter:description" content="总结利用vue开发几个项目过程中应用到的几条规范，规范对于多人团队开发极为重要，这里只针对vue框架的一个规范，js与css部分未加入，后续将继续总结维护更新。">
@@ -390,7 +390,7 @@ document.getElementById('local-search-input').onkeyup = function() {
       
         <p>总结利用vue开发几个项目过程中应用到的几条规范，规范对于多人团队开发极为重要，这里只针对vue框架的一个规范，js与css部分未加入，后续将继续总结维护更新。</p>
 <a id="more"></a>
-<h3 id="vue规范"><a href="#vue规范" class="headerlink" title="vue规范"></a>vue规范</h3><p>1、所有命名必须具有语义化，不允许直接后缀加上1,2,3，js代码使用驼峰命名法，css代码使用-或者_连接符，组件首字符大写。<br>2、关键代码需要注释说明，公用组件需要说明调用方式以及入参、响应参数。<br>3、代码必须格式化，console.log以及注释之类的代码在调试完成后全部删除。<br>4、组件书写顺序按照统一结构排版：<code>&lt;template&gt;&lt;/template&gt;&lt;script&gt;&lt;/script&gt;&lt;style&gt;&lt;/style&gt;</code>。<br>5、组件template最外层标签添加唯一className，组件的name属性名于此相同，书写样式时最外层加上统一加上改className。<br>6、生命周期书写顺序一般按照name、mixins、components、props、data、computed、watch、created、mounted、methods排序。<br>7、提取公共css样式库，解耦css代码，提高className复用性。可参考<a href="https://github.com/binglinzhang/myCollects/blob/master/myCSS.less" target="_blank" rel="external">css库</a><br>8、公用组件放置components文件夹下，且对于常用的公用组件，将其注册为全局组件使用，非公用组件放置views相关模块文件夹下，所有组件必须首字母大写。<br>9、一个组件逻辑代码部分总行数尽量不超过400行，如果超过考虑进行组件拆分，拆分有2种方式，一种是通过vue提供的mixins功能，一种是直接引入js文件方式，但需要注意作用域问题。同理methods里面尽量编写纯函数，函数解耦，函数功能单一化等。<br>10、所有api的url路径统一提取到一个文件进行维护，可写为常量的形式。<br>11、views文件目录按照功能模块的router层级设置，且最好每个功能模块有个index入口文件，方便快捷根据路由地址找到相关代码。<br>12、vue项目文件目录中不允许存在中文字符，否则热加载失败。<br>13、assets文件夹中尽量按照css、font、images、js文件夹进行区分，非静态资源尽量不要放置在static文件夹。</p>
+<h3 id="vue规范"><a href="#vue规范" class="headerlink" title="vue规范"></a>vue规范</h3><p>1、所有命名必须具有语义化，不允许直接后缀加上1,2,3，js代码使用驼峰命名法，css代码使用-或者_连接符，组件首字符大写。<br>2、关键代码需要注释说明，公用组件需要说明调用方式以及入参、响应参数。<br>3、代码必须格式化，console.log以及注释之类的代码在调试完成后全部删除。<br>4、组件书写顺序按照统一结构排版：<code>&lt;template&gt;&lt;/template&gt;&lt;script&gt;&lt;/script&gt;&lt;style&gt;&lt;/style&gt;</code>。<br>5、组件template最外层标签添加唯一className，组件的name属性名于此相同，书写样式时最外层加上统一加上改className。<br>6、生命周期书写顺序一般按照name、mixins、components、props、data、computed、watch、created、mounted、methods排序。<br>7、提取公共css样式库，解耦css代码，提高className复用性。可参考<a href="https://github.com/binglinzhang/myCollects/blob/master/myCSS.less" target="_blank" rel="external">css库</a><br>8、公用组件放置components文件夹下，且对于常用的公用组件，将其注册为全局组件使用，非公用组件放置views相关模块文件夹下，所有组件必须首字母大写。<br>9、一个组件逻辑代码部分总行数尽量不超过400行，如果超过考虑进行组件拆分，拆分有2种方式，一种是通过vue提供的mixins功能，一种是直接引入js文件方式，但需要注意作用域问题。同理methods里面尽量编写纯函数，函数解耦，函数功能单一化等。<br>10、所有api的url路径统一提取到一个文件进行维护，可写为常量的形式。<br>11、views文件目录按照功能模块的router层级设置，且最好每个功能模块有个index入口文件，方便快捷根据路由地址找到相关代码。<br>12、vue项目文件目录中不允许存在中文字符，否则热加载失败。<br>13、assets文件夹中尽量按照css、font、images、js文件夹进行区分，非静态资源尽量不要放置在static文件夹。<br>14、所有路由采用按需懒加载方式，ES7的写法是: <code>const ladyLoading = ulr =&gt; () =&gt; import(url)</code>。<br>15、若项目在main.js中引入第三方UI库，需要确保引入的UI库顺序在import App.vue之前，且样式覆盖表也在此之后，这样才能在webpack将css打包成一个文件的时候按序打包，否则可能出现样式错乱。</p>
 
       
     </div>
@@ -535,7 +535,7 @@ document.getElementById('local-search-input').onkeyup = function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count redNumber">33</span>
+                <span class="site-state-item-count redNumber">34</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
