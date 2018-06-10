@@ -23,6 +23,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[再回原点]]></title>
+    <url>%2F2018%2F06%2F07%2F%E5%86%8D%E5%9B%9E%E5%8E%9F%E7%82%B9%2F</url>
+    <content type="text"><![CDATA[致敬曾经那个上知天文下知地理… 回历史流，仿佛一瞬间眼前轻云蔽日般的空间似曾梦识。东汉末年，三马同槽，开创魏晋风骨，不攻成便成人。马云最大的遗憾就是创立阿里巴巴，回到出发点，继任一名普通而伟大的布教者，或许在某个偏远山区发光发热，或许为此刻在考场外急不可耐。马化腾缺失高交会那场绝地邂逅，或许还是个憨厚程序猿，正为打通某程序二脉而喜色无形，也就没有如今友圈的孤僻焦虑症。马明哲讲自己是一名推销员，回到蛇口当头，踏实兢业当好国企一把手，也就不会有平安三十载不忘初心。马云的蚂蚁金服，马化腾的微信红包，马明哲的金融全套，都是干爹。 回空虚处，百无聊赖当书生，自许书中颜如玉。今夕，智障界两泰斗，南抖音北快手，当愉快的双手快速的在不及七寸的砖头上翻屏时候，是否有那么一刻身体突然瑟瑟发抖，对的，已经凌晨三四点了。 回来时路，难忘离别深情眼眸，荡徜千叮咛万嘱咐，押上青春作赌注。走出半生，归来依旧识家路。 回童真时，回归大雁穿行晚霞，漫山遍野依旧童时草莽。瞧，赤身与裸脚，夏蝉与知了。 回学无涯，为中华复兴，为后世谋福，为己观世相。奋斗的青春最美，唯学的韶华不老。 回晌午后，阳光西斜，光棱透析间洒入杯半茶中，不知是茶黄还是光的影色。半掩的窗台外，涟漪澜波穿棱几条木桅帆船，岸边停留着一辆120救护车，炫彩的警灯闪烁着晕光飞绪……廉颇老矣，尚能饭否。 叶子的飘去，是因为树的尽头，还是风的追求？外婆的去世，不是终点的尽头，而是另一个世界的开头。 林龙儿2018/06/07•深圳]]></content>
+      <categories>
+        <category>日志</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[web页面不可见状态下的性能优化]]></title>
     <url>%2F2018%2F06%2F03%2Fweb%E9%A1%B5%E9%9D%A2%E4%B8%8D%E5%8F%AF%E8%A7%81%E7%8A%B6%E6%80%81%E4%B8%8B%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%2F</url>
     <content type="text"><![CDATA[最近开发过程遇到一个需求，web浏览器tab切换的过程需要对即将显示以及隐藏的页面分别进行预处理，本文介绍H5新增API visibilitychange的使用，该API对提高浏览器内存利用、优化性能等有较大作用，实际开发中可尝试接入使用。 实现代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152~function() &#123; var EventUtil = &#123; addEventHandler: function(element, type, handler) &#123; if (element.addEventListener) &#123; element.addEventListener(type, handler) &#125; else if (element.attachEvent) &#123; element.attachEvent("on" + type, handler) &#125; else &#123; element["on" + type] = handler &#125; &#125;, removeEventHandler: function(element, type, handler) &#123; if (element.addEventListener) &#123; element.removeEventListener(type, handler) &#125; else if (element.detachEvent) &#123; element.detachEvent("on" + type, handler) &#125; else &#123; element["on"+type] = null &#125; &#125; &#125; var vcConfig = &#123; hidden: '', visibilityChange: '', handler: function() &#123; if (!document[this.hidden]) &#123; console.log('handle sth here...') &#125; else &#123; console.log('stop some action here...') &#125; &#125; &#125; if (typeof document.hidden !== 'undefined') &#123; vcConfig.hidden = 'hidden' vcConfig.visibilityChange = 'visibilitychange' &#125; else if (typeof document.msHidden !== 'undefined') &#123; vcConfig.hidden = 'msHidden' vcConfig.visibilityChange = 'msvisibilitychange' &#125; else if (typeof document.webkitHidden !== 'undefined') &#123; vcConfig.hidden = 'webkitHidden' vcConfig.visibilityChange = 'webkitvisibilitychange' &#125; EventUtil.addEventHandler(window, 'load', function() &#123; EventUtil.addEventHandler(document, vcConfig.visibilityChange, vcConfig.handler) &#125;) EventUtil.addEventHandler(window, 'unload', function() &#123; EventUtil.removeEventHandler(document, vcConfig.visibilityChange, vcConfig.handler) &#125;)&#125;() 1、handler执行的条件包括tab页切换以及窗口最小化后打开。2、针对定时轮询的页面特别有优势，在页面不可见时停止轮询动作，可极大的减少服务端不必要的开销。3、对于音视频的缓冲、循环播放等，在页面隐藏状态下停止操作，减少不必要带宽支出。4、页面中涉及到图片轮播、动画特效、定时操作等，页面不可见时减少浏览器内存开销，这一点有点类似requestAnimationFrame，在处于不可见状态时将停止定时动作。]]></content>
@@ -196,8 +208,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -256,8 +268,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -280,8 +292,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -292,8 +304,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -397,8 +409,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
