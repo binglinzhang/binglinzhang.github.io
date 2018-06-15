@@ -95,7 +95,7 @@
 <meta property="og:url" content="http://zhangbinglin.cn/2018/06/18/支持可拖动模态框的vue组件/index.html">
 <meta property="og:site_name" content="ZhangBinglin">
 <meta property="og:description" content="实际项目开发中大多时候会引用第三方ui库如bootstrap、elementui，第三方库基本都封装有模态框，也基本满足大部分场景需求。但不支持想桌面应用那样的可拖动效果，而实际大屏场景中可能需要移动模态框查看参考其他信息，因此有了拖动模态框的需求。本篇基于vue简单模拟写一个支持可拖动模态框组件，比较粗糙，后期实际应用中再不断完善。">
-<meta property="og:updated_time" content="2018-06-15T02:42:30.841Z">
+<meta property="og:updated_time" content="2018-06-15T03:15:33.676Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="支持可拖动模态框的vue组件">
 <meta name="twitter:description" content="实际项目开发中大多时候会引用第三方ui库如bootstrap、elementui，第三方库基本都封装有模态框，也基本满足大部分场景需求。但不支持想桌面应用那样的可拖动效果，而实际大屏场景中可能需要移动模态框查看参考其他信息，因此有了拖动模态框的需求。本篇基于vue简单模拟写一个支持可拖动模态框组件，比较粗糙，后期实际应用中再不断完善。">
@@ -405,14 +405,13 @@ document.getElementById('local-search-input').onkeyup = function() {
 <ol>
 <li>容器最外层增加一层基于fixed设置的背景层，同时作为容器层设置相对位置的参考，容器层的z-index层级需要比背景层高。</li>
 <li>点击背景层可隐藏模态框，但由于背景层包裹容器层，因此需要通过判断e.target属性决定是否执行隐藏，vue中通过self修饰符封装。</li>
-<li>vue的双向数据绑定修饰符sync是一个<code>props down event up</code>的语法糖： <dialog :visible.sync="dialogVisible"> ==&gt; <dialog :visible="dialogVisible" @update:visible="newVisible => dialogVisible = newVisible">，事件的触发通过this.$emit(‘update:visible’, false)改变。</dialog></dialog></li>
+<li>vue的双向数据绑定修饰符sync是一个<code>props down event up</code>的语法糖： <code>&lt;dialog :visible.sync=&quot;dialogVisible&quot; /&gt; ==&gt; &lt;dialog :visible=&quot;dialogVisible&quot; @update:visible=&quot;newVisible =&gt; dialogVisible = newVisible&quot; /&gt;</code>，事件的触发通过<code>this.$emit(&#39;update:visible&#39;, false)</code>改变。</li>
 <li>slot插槽默认插入body，指定插入footer需要加上响应的name值，有需要也可以定制header。</li>
 <li>watch中监听属性并执行相关业务，如果涉及到针对dom的操作，最好放在$nextTick里面去执行，否则可能获取不到想要的结果。</li>
 <li>组件内所有监听的事件在组件隐藏或者注销之后一定要解绑，否则一旦组件多绑定的事件多，可能会造成冲突并影响性能。</li>
 <li>监听窗口事件，一旦窗口改变需要重新获取窗口尺寸及模态框尺寸(如果模态框尺寸进行适配的话)，保证模态框不会移出窗口视野。</li>
 <li>mousemove监听事件需要判断是否在header上已经发生点击事件，否则会出现误操作。</li>
 </ol>
-<p>end</p>
 
       
     </div>
