@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="生活,日志," />
+  <meta name="keywords" content="前端," />
 
 
 
@@ -88,17 +88,23 @@
 
 
 
-<meta name="description" content="致敬曾经那个上知天文下知地理，廉颇老矣，尚能饭否…">
-<meta name="keywords" content="生活,日志">
+<meta name="description" content="本文主要介绍了Fiddler工具常用的基本的抓包功能、修改请求参数、修改响应数据、重定向替换本地文件、重定向解决跨域、模拟请求等功能。">
+<meta name="keywords" content="前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="再回原点">
-<meta property="og:url" content="http://zhangbinglin.cn/2018/06/07/再回原点/index.html">
+<meta property="og:title" content="简单介绍fiddler工具的几种用法">
+<meta property="og:url" content="http://zhangbinglin.cn/2018/06/24/简单介绍fiddler工具的几种用法/index.html">
 <meta property="og:site_name" content="ZhangBinglin">
-<meta property="og:description" content="致敬曾经那个上知天文下知地理，廉颇老矣，尚能饭否…">
-<meta property="og:updated_time" content="2018-06-01T09:28:36.607Z">
+<meta property="og:description" content="本文主要介绍了Fiddler工具常用的基本的抓包功能、修改请求参数、修改响应数据、重定向替换本地文件、重定向解决跨域、模拟请求等功能。">
+<meta property="og:image" content="https://t1.picb.cc/uploads/2018/06/22/2snX01.png">
+<meta property="og:image" content="https://t1.picb.cc/uploads/2018/06/22/2snPCa.png">
+<meta property="og:image" content="https://t1.picb.cc/uploads/2018/06/22/2snRNu.png">
+<meta property="og:image" content="https://t1.picb.cc/uploads/2018/06/22/2snxsD.png">
+<meta property="og:image" content="https://t1.picb.cc/uploads/2018/06/22/2sn9Iv.png">
+<meta property="og:updated_time" content="2018-06-22T07:47:02.109Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="再回原点">
-<meta name="twitter:description" content="致敬曾经那个上知天文下知地理，廉颇老矣，尚能饭否…">
+<meta name="twitter:title" content="简单介绍fiddler工具的几种用法">
+<meta name="twitter:description" content="本文主要介绍了Fiddler工具常用的基本的抓包功能、修改请求参数、修改响应数据、重定向替换本地文件、重定向解决跨域、模拟请求等功能。">
+<meta name="twitter:image" content="https://t1.picb.cc/uploads/2018/06/22/2snX01.png">
 
 
 
@@ -126,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://zhangbinglin.cn/2018/06/07/再回原点/"/>
+  <link rel="canonical" href="http://zhangbinglin.cn/2018/06/24/简单介绍fiddler工具的几种用法/"/>
 
 
 
 
 
-  <title>再回原点 | ZhangBinglin</title>
+  <title>简单介绍fiddler工具的几种用法 | ZhangBinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -295,7 +301,7 @@ document.getElementById('local-search-input').onkeyup = function() {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/06/07/再回原点/">
+    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/06/24/简单介绍fiddler工具的几种用法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZhangBinglin">
@@ -316,7 +322,7 @@ document.getElementById('local-search-input').onkeyup = function() {
             
             
               
-                再回原点
+                简单介绍fiddler工具的几种用法
               
             
           </h1>
@@ -331,8 +337,8 @@ document.getElementById('local-search-input').onkeyup = function() {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T10:30:59+08:00">
-                2018-06-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-24T12:21:31+08:00">
+                2018-06-24
               </time>
             
 
@@ -354,8 +360,8 @@ document.getElementById('local-search-input').onkeyup = function() {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/日志/" itemprop="url" rel="index">
-                    <span itemprop="name">日志</span>
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
                   </a>
                 </span>
 
@@ -388,16 +394,41 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
-        <p>致敬曾经那个上知天文下知地理，廉颇老矣，尚能饭否…</p>
+        <p>本文主要介绍了Fiddler工具常用的基本的抓包功能、修改请求参数、修改响应数据、重定向替换本地文件、重定向解决跨域、模拟请求等功能。</p>
 <a id="more"></a>
-<p>回历史流，仿佛一瞬间眼前轻云蔽日般的空间似曾梦识。东汉末年，三马同槽，开创魏晋风骨，不攻成便成人。<br>马云最大的遗憾就是创立阿里巴巴，回到出发点，继任一名普通而伟大的布教者，或许在某个偏远山区发光发热，或许为此刻在考场外急不可耐。<br>马化腾缺失高交会那场绝地邂逅，或许还是个憨厚程序猿，正为打通某程序二脉而喜色无形，也就没有如今友圈的孤僻焦虑症。<br>马明哲讲自己是一名推销员，回到蛇口当头，踏实兢业当好国企一把手，也就不会有平安三十载不忘初心。<br>马云的蚂蚁金服，马化腾的微信红包，马明哲的金融全套，都是干爹。</p>
-<p>回空虚处，百无聊赖当书生，自许书中颜如玉。今夕，智障界两泰斗，南抖音北快手，当愉快的双手快速的在不及七寸的砖头上翻屏时候，是否有那么一刻身体突然瑟瑟发抖，对的，已经凌晨三四点了。</p>
-<p>回来时路，难忘离别深情眼眸，荡徜千叮咛万嘱咐，押上青春作赌注。走出半生，归来依旧识家路。</p>
-<p>回童真时，回归大雁穿行晚霞，漫山遍野依旧童时草莽。瞧，赤身与裸脚，夏蝉与知了。</p>
-<p>回学无涯，为中华复兴，为后世谋福，为己观世相。奋斗的青春最美，唯学的韶华不老。</p>
-<p>回晌午后，阳光西斜，光棱透析间洒入杯半茶中，不知是茶黄还是光的影色。半掩的窗台外，涟漪澜波穿棱几条木桅帆船，岸边停留着一辆120救护车，炫彩的警灯闪烁着晕光飞绪……廉颇老矣，尚能饭否。</p>
-<p>叶子的飘去，是因为树的尽头，还是风的追求？<br>外婆的去世，不是终点的尽头，而是另一个世界的开头。</p>
-<div style="text-align:right;color:#f59b80;">林龙儿</div><div style="text-align:right;color:#f59b80;">2018/06/07•深圳</div>
+<h3 id="基本的抓包功能"><a href="#基本的抓包功能" class="headerlink" title="基本的抓包功能"></a>基本的抓包功能</h3><p>PC端浏览器走的请求会直接被抓取，这里说明移动端的数据抓包设置。</p>
+<ol>
+<li>首先保证电脑与手机连接在同一个WiFi网络中(即构建局域网)，并且保证二者在同一个ip网段内。</li>
+<li>打开电脑上的Fiddler，分别选中菜单栏<code>Tools - Options - Connections</code>，在该tab下的<code>Fiddler listens on port</code>填入 6666 端口，并将<code>Allow remote computers to connect</code>选中打钩，该步骤允许远程设备使用本机联网。</li>
+<li>重启Fiddler并在右上角Online中的找到无线局域网内分配到本机的ip，记住该ip。</li>
+<li>掏出手机连接同一wifi，对该wifi设置代理，代理ip就是上面记住的ip，端口就是上面写的6666。</li>
+</ol>
+<p>完成以上步骤之后，手机上访问任一网页产生http请求的接口、数据都将被Fiddler拦截，如果没有拦截到可能IP设置有误，或没处同一局域网下，或开启Fiddler上允许远程接入6666端口访问网络。</p>
+<p><img src="https://t1.picb.cc/uploads/2018/06/22/2snX01.png" alt=""></p>
+<h3 id="修改请求参数"><a href="#修改请求参数" class="headerlink" title="修改请求参数"></a>修改请求参数</h3><p>开发时可以通过拦截修改入参的方式调试接口，并且验证接口的安全性能。前端一切皆可修改，前端一切皆不安全。</p>
+<ol>
+<li>单击Fiddler底部控制台下第三个tab按钮，对，就是那个白色看不清的button，单击一次切换到拦截请求功能，再次单击切换到拦截响应功能，再次单击关闭拦截。也可以通过选中菜单<code>Rules - Automatic Breakpoints - Before Requests/After Responses/Disabled</code>，3种状态分别对应上面三种按钮点击。还可通过控制台输入<code>bpu + 拦截的url地址</code>针对性的对该url进行拦截，其他的url可以正常访问，消除断点直接在控制台输入bpu。</li>
+<li><code>ctrl+X</code>清空请求记录，之后调用需要拦截的请求，Fiddler将会闪烁提示，选中该条拦截记录，切换到Inspectors标签下的请求参数区域即可修改入参，修改完之后点击下边绿色按钮<code>Run to Completion</code>完成请求。</li>
+<li>查询数据库或调用相关接口，保存成功的参数结果将与浏览器直接发送的参数不同。</li>
+</ol>
+<p><img src="https://t1.picb.cc/uploads/2018/06/22/2snPCa.png" alt=""></p>
+<h3 id="修改响应数据"><a href="#修改响应数据" class="headerlink" title="修改响应数据"></a>修改响应数据</h3><p>开发联调接口时可能后台返回的数据为空或者结构想变动，前端可以通过修改响应数据进行按需调整，方便快捷有效。</p>
+<ol>
+<li>第一步与上面修改请求参数一致，只是切换的状态为拦截响应功能。</li>
+<li><code>ctrl+X</code>清空请求记录，之后调用需要拦截的请求，Fiddler将会闪烁提示，选中该条拦截记录，切换到Inspectors标签下的响应参数区域即可修改响应参数，修改完之后点击下边绿色按钮<code>Run to Completion</code>完成响应。注意，这里其实也可以选择本地文件替换响应体内容，与下面介绍的重定向替换本地文件类似。</li>
+<li>浏览器打开F12查看请求响应body体已经替换为修改之后的内容。</li>
+</ol>
+<p><img src="https://t1.picb.cc/uploads/2018/06/22/2snRNu.png" alt=""></p>
+<h3 id="重定向替换本地文件"><a href="#重定向替换本地文件" class="headerlink" title="重定向替换本地文件"></a>重定向替换本地文件</h3><p>开发测试环境下一切功能正常，但上线之后就出问题了，这时候如何定位bug问题，比较方便的方式就是找到可能出现问题的脚本或样式文件进行修改或替换。当然，直接通过谷歌浏览器的sources模块也可找到源文件进行修改，但只允许修改js、css等文件。</p>
+<ol>
+<li><code>ctrl+X</code>清空请求记录，之后调用需要重定向的请求。</li>
+<li>切换至AutoResponder标签页，将上面的请求记录拖至该标签页区域内，并分别打钩<code>Enable rules</code>及<code>Unmatched requests passthrough</code>，表示遵循默认规则，且如果请求与规则匹配不上，继续完成该请求过程。</li>
+<li>AutoResponder标签页的区域中选中该条请求，在下边的Rule Editor选择需要替换的文件，可以选将线上的文件保存到本地做修改后替换，也可以直接重定向到新的url路径，点击save保存，再次调用请求即生效。</li>
+</ol>
+<p><img src="https://t1.picb.cc/uploads/2018/06/22/2snxsD.png" alt=""></p>
+<h3 id="重定向解决跨域"><a href="#重定向解决跨域" class="headerlink" title="重定向解决跨域"></a>重定向解决跨域</h3><p>该功能与重定向替换本地文件类似，只是自动响应的时候不是替换新文件，而且重新定向到新的路径，相当于代理转发，且可以通过正则匹配需要代理转发的请求，功能与nginx类似。</p>
+<h3 id="模拟请求"><a href="#模拟请求" class="headerlink" title="模拟请求"></a>模拟请求</h3><p>右侧切换至Composer标签，选择需要的请求方式及url，选择http协议版本，分别填入请求头部信息与请求参数，或者选择上传文件流，之后点击发送即可模拟一次请求。该功能与postman一样。</p>
+<p><img src="https://t1.picb.cc/uploads/2018/06/22/2sn9Iv.png" alt=""></p>
 
       
     </div>
@@ -427,9 +458,7 @@ document.getElementById('local-search-input').onkeyup = function() {
       
         <div class="post-tags">
           
-            <a href="/tags/生活/" rel="tag"># 生活</a>
-          
-            <a href="/tags/日志/" rel="tag"># 日志</a>
+            <a href="/tags/前端/" rel="tag"># 前端</a>
           
         </div>
       
@@ -442,8 +471,8 @@ document.getElementById('local-search-input').onkeyup = function() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/03/web页面不可见状态下的性能优化/" rel="next" title="web页面不可见状态下的性能优化">
-                <i class="fa fa-chevron-left"></i> web页面不可见状态下的性能优化
+              <a href="/2018/06/18/支持可拖动模态框的vue组件/" rel="next" title="支持可拖动模态框的vue组件">
+                <i class="fa fa-chevron-left"></i> 支持可拖动模态框的vue组件
               </a>
             
           </div>
@@ -451,10 +480,6 @@ document.getElementById('local-search-input').onkeyup = function() {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/08/web视频上传的若干问题/" rel="prev" title="web视频上传的若干问题">
-                web视频上传的若干问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -519,8 +544,17 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -605,6 +639,22 @@ document.getElementById('local-search-input').onkeyup = function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本的抓包功能"><span class="nav-number">1.</span> <span class="nav-text">基本的抓包功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改请求参数"><span class="nav-number">2.</span> <span class="nav-text">修改请求参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改响应数据"><span class="nav-number">3.</span> <span class="nav-text">修改响应数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向替换本地文件"><span class="nav-number">4.</span> <span class="nav-text">重定向替换本地文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向解决跨域"><span class="nav-number">5.</span> <span class="nav-text">重定向解决跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟请求"><span class="nav-number">6.</span> <span class="nav-text">模拟请求</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
