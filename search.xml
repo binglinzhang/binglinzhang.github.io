@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[window.open这件小事儿]]></title>
+    <url>%2F2018%2F06%2F30%2Fwindow.open%E8%BF%99%E4%BB%B6%E5%B0%8F%E4%BA%8B%E5%84%BF%2F</url>
+    <content type="text"><![CDATA[开发中遇到的一个需求，实现用户点击按钮后等待2s下载资源，项目中通过动态创建a标签，利用download属性进行当前页下载实现了该需求，封装方法如下： 123456789function aDownload(url, name) &#123; let a = document.createElement('a') a.setAttribute('href', url) a.setAttribute('download', name || '') a.setAttribute('display', 'none') document.body.appendChild(a) a.click() document.body.removeChild(a)&#125; 但继续追究下去的时候，如果想实现不再当前页下载，而是打开新的窗口进行下载，或者考虑到a标签的download属性有兼容性问题，是否有其他的替代方案？ 现假设有如下代码，预期结果是点击按钮之后跳转到新的页面，或者直接下载资源，但结果是第一个按钮可以如期打开新页面，第二个打开新页面被浏览器拦截。查找资料得知是因为window.open频繁被广告商滥用，严重影响用户体验，大部分现代的浏览器默认开启智能阻止弹窗策略。该策略会根据用户行为判断是否如期执行window.open操作，还是判定为流氓操作予以拦截。 下面代码当延迟1000毫秒执行时，Chrome允许窗口弹出，但是当延迟2000毫秒(或者弹窗的代码在异步ajax内部)执行时被拦截。经多次测试，Chrome浏览器在1000毫秒及之内执行时将允许弹窗，大于等于1001毫秒时候将拦截，其他浏览器拦截策略可能略微不同。 1234567891011&lt;body&gt; &lt;button onclick='handleClick(1)'&gt;1s后打开新标签页&lt;/button&gt; &lt;button onclick='handleClick(2)'&gt;2s后打开新标签页&lt;/button&gt; &lt;script&gt; function handleClick(s) &#123; setTimeout(() =&gt; &#123; window.open('./b.html', 'winName') &#125;, s * 1000) &#125; &lt;/script&gt;&lt;/body&gt; 尝试了以下这么几种方式，通过a标签href属性、通过form标签submit方法、通过location重定向，其中前两种实际使用过程中如果结合了target=_blank与上面栗子中2s延迟的setTimeout，浏览器还是会拦截新窗口的打开，这点没办法突破，但可以应对浏览器莫名的拦截。第三种方式无论是否延迟都可以越过浏览器拦截，但牺牲了一定的用户体验，需要权衡。 123456789101112131415161718192021222324252627282930313233//第一种：通过a标签href属性function aOpen(url, isDownload, name) &#123; let a = document.createElement('a') a.setAttribute('href', url) a.setAttribute('target', '_blank') isDownload &amp;&amp; a.setAttribute('download', name || '') a.setAttribute('display', 'none') document.body.appendChild(a) a.click() document.body.removeChild(a)&#125;//第二种：通过form标签submit方法function formOpen(url) &#123; let form = document.createElement('form') form.setAttribute('action', url) form.setAttribute('target', '_blank') form.setAttribute('method', 'POST') form.setAttribute('display', 'none') document.body.appendChild(form) form.submit() document.body.removeChild(form)&#125;// 以上2种调用方式setTimeout(() =&gt; &#123; aOpen('./b.html') &#125;, 1000) //这种方式可以顺利打开新窗口setTimeout(() =&gt; &#123; aOpen('./b.html') &#125;, 2000) //超过1s的延迟这种方式还是会被拦截//第三种：通过location重定向document.addEventListener('click', function() &#123; let newWin = window.open('./loadingPage.html') ajax().done(function() &#123; newWin.location.href = './targetPage.html' //重定向到目标页面 &#125;)&#125;)]]></content>
+      <categories>
+        <category>前端开发</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[简单介绍fiddler工具的几种用法]]></title>
     <url>%2F2018%2F06%2F25%2F%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8Dfiddler%E5%B7%A5%E5%85%B7%E7%9A%84%E5%87%A0%E7%A7%8D%E7%94%A8%E6%B3%95%2F</url>
     <content type="text"><![CDATA[本文主要介绍了Fiddler工具常用的基本的抓包功能、修改请求参数、修改响应数据、重定向替换本地文件、重定向解决跨域、模拟请求等功能。 基本的抓包功能PC端浏览器走的请求会直接被抓取，这里说明移动端的数据抓包设置。 首先保证电脑与手机连接在同一个WiFi网络中(即构建局域网)，并且保证二者在同一个ip网段内。 打开电脑上的Fiddler，分别选中菜单栏Tools - Options - Connections，在该tab下的Fiddler listens on port填入 6666 端口，并将Allow remote computers to connect选中打钩，该步骤允许远程设备使用本机联网。 重启Fiddler并在右上角Online中的找到无线局域网内分配到本机的ip，记住该ip。 掏出手机连接同一wifi，对该wifi设置代理，代理ip就是上面记住的ip，端口就是上面写的6666。 完成以上步骤之后，手机上访问任一网页产生http请求的接口、数据都将被Fiddler拦截，如果没有拦截到可能IP设置有误，或没处同一局域网下，或开启Fiddler上允许远程接入6666端口访问网络。 修改请求参数开发时可以通过拦截修改入参的方式调试接口，并且验证接口的安全性能。前端一切皆可修改，前端一切皆不安全。 单击Fiddler底部控制台下第三个tab按钮，对，就是那个白色看不清的button，单击一次切换到拦截请求功能，再次单击切换到拦截响应功能，再次单击关闭拦截。也可以通过选中菜单Rules - Automatic Breakpoints - Before Requests/After Responses/Disabled，3种状态分别对应上面三种按钮点击。还可通过控制台输入bpu + 拦截的url地址针对性的对该url进行拦截，其他的url可以正常访问，消除断点直接在控制台输入bpu。 ctrl+X清空请求记录，之后调用需要拦截的请求，Fiddler将会闪烁提示，选中该条拦截记录，切换到Inspectors标签下的请求参数区域即可修改入参，修改完之后点击下边绿色按钮Run to Completion完成请求。 查询数据库或调用相关接口，保存成功的参数结果将与浏览器直接发送的参数不同。 修改响应数据开发联调接口时可能后台返回的数据为空或者结构想变动，前端可以通过修改响应数据进行按需调整，方便快捷有效。 第一步与上面修改请求参数一致，只是切换的状态为拦截响应功能。 ctrl+X清空请求记录，之后调用需要拦截的请求，Fiddler将会闪烁提示，选中该条拦截记录，切换到Inspectors标签下的响应参数区域即可修改响应参数，修改完之后点击下边绿色按钮Run to Completion完成响应。注意，这里其实也可以选择本地文件替换响应体内容，与下面介绍的重定向替换本地文件类似。 浏览器打开F12查看请求响应body体已经替换为修改之后的内容。 重定向替换本地文件开发测试环境下一切功能正常，但上线之后就出问题了，这时候如何定位bug问题，比较方便的方式就是找到可能出现问题的脚本或样式文件进行修改或替换。当然，直接通过谷歌浏览器的sources模块也可找到源文件进行修改，但只允许修改js、css等文件。 ctrl+X清空请求记录，之后调用需要重定向的请求。 切换至AutoResponder标签页，将上面的请求记录拖至该标签页区域内，并分别打钩Enable rules及Unmatched requests passthrough，表示遵循默认规则，且如果请求与规则匹配不上，继续完成该请求过程。 AutoResponder标签页的区域中选中该条请求，在下边的Rule Editor选择需要替换的文件，可以选将线上的文件保存到本地做修改后替换，也可以直接重定向到新的url路径，点击save保存，再次调用请求即生效。 重定向解决跨域该功能与重定向替换本地文件类似，只是自动响应的时候不是替换新文件，而且重新定向到新的路径，相当于代理转发，且可以通过正则匹配需要代理转发的请求，功能与nginx类似。 模拟请求右侧切换至Composer标签，选择需要的请求方式及url，选择http协议版本，分别填入请求头部信息与请求参数，或者选择上传文件流，之后点击发送即可模拟一次请求。该功能与postman一样。]]></content>
@@ -254,8 +265,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Express</tag>
         <tag>Vue</tag>
+        <tag>Express</tag>
         <tag>MongoDB</tag>
       </tags>
   </entry>
@@ -302,8 +313,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Express</tag>
         <tag>Vue</tag>
+        <tag>Express</tag>
       </tags>
   </entry>
   <entry>
