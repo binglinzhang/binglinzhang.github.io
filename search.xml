@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>%2F2018%2F07%2F10%2F%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%80%9D%E8%B7%AF%E7%9A%84%E8%AF%84%E6%98%9F%E7%BB%84%E4%BB%B6%2F</url>
-    <content type="text"><![CDATA[主要介绍一种同时支持字体与图标样式的评星方案，且支持带小数点分数的相应显示。基本思路是给背景添加默认灰度星星，之后通过相对位置将点亮星星覆盖灰度星星，并设置点亮星星overflow: hidden使宽度可控，最后对浮层宽度进行动态计算并赋值即可实现按分显示的效果。 针对入参的单位没有做过多的校验，诸如width入参带不带单位的校验问题，目前需要入参提供带单位数值。这里就需要针对入参字符串获取数值单位，单位可能是px，可能是rem，也可能是%，此处使用正则replace(/^\d+/g, &#39;&#39;)替换的方式获取。另外需要注意针对图标icon的背景图片background-size需要设置为cover模式，这样才能实现剪裁的效果，而不被拉伸变形。 支持的入参字段如下： isIcon // 是否使用iconiconConfig // 使用icon的配置，只有在isIcon为true生效score // 得分，入参需转换为5分标准形式bgColor // 使用字体图标时设置的底色coverColor // 使用字体图标时设置的覆盖色fontSize // 使用字体图标时设置的字体大小fontFamily // 使用字体图标时设置的字体类型，不同字体类型显示的星星样式有差异，默认是serif 使用方式：npm install zrate –save 关键代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112&lt;template&gt;&lt;div class="z-rate" :style="rootStyle"&gt; &lt;template v-if='!isIcon'&gt; &lt;span :style='&#123; color: bgColor &#125;'&gt;☆☆☆☆☆&lt;/span&gt; &lt;span class="cover" :style="&#123; width: parseFloat(score) + 'em', color: coverColor &#125;"&gt;★★★★★&lt;/span&gt; &lt;/template&gt; &lt;template v-else&gt; &lt;div class="bg-group"&gt; &lt;div v-for='i in 5' class="img-bg" :key='i' :style="&#123; backgroundImage: 'url(' + iconConfig.offIcon + ')', width: iconConfig.width, height: iconConfig.height &#125;"&gt; &lt;/div&gt; &lt;/div&gt; &lt;div class="cover-group" :style="percentStyle"&gt; &lt;div v-for='i in 5' class="img-cover" :key='i' :style="&#123; backgroundImage: 'url(' + iconConfig.onIcon + ')', width: iconConfig.width, height: iconConfig.height &#125;"&gt; &lt;/div&gt; &lt;/div&gt; &lt;/template&gt;&lt;/div&gt;&lt;/template&gt;&lt;script&gt;export default &#123; name: 'z-rate', props: &#123; // 是否使用icon isIcon: &#123; type: Boolean, default: false &#125;, // 使用icon的配置 iconConfig: &#123; type: Object &#125;, // 得分，入参需转换为5分标准形式 score: &#123; type: [String, Number], default: '2.55' &#125;, // 使用字体图标时设置的底色 bgColor: &#123; type: String, default: '#ccc' &#125;, // 使用字体图标时设置的覆盖色 coverColor: &#123; type: String, default: 'red' &#125;, // 使用字体图标时设置的字体大小 fontSize: &#123; type: String, default: '16px' &#125;, // 使用字体图标时设置的字体类型，不同字体类型显示的星星样式有差异，默认是serif fontFamily: &#123; type: String, default: 'serif' &#125; &#125;, computed: &#123; rootStyle() &#123; return this.isIcon ? '' : &#123; fontSize: this.fontSize, fontFamily: this.fontFamily &#125; &#125;, percentStyle() &#123; // 通过replace正则获取用户设置宽度的单位，可能是px，可能是rem，也可能是% return this.isIcon ? &#123; width: parseFloat(this.score) * parseFloat(this.iconConfig.width) + this.iconConfig.width.replace(/^\d+/g, '') &#125; : '' &#125; &#125;&#125;&lt;/script&gt;&lt;style lang='css' scoped&gt;.z-rate &#123; position: relative;&#125;.z-rate .cover, .z-rate .cover-group &#123; position: absolute; top: 0; left: 0; overflow: hidden; width: 0;&#125;.z-rate .bg-group &#123; display: inline-block;&#125;.z-rate .bg-group .img-bg &#123; display: inline-block; background-size: cover;&#125;.z-rate .cover-group &#123; white-space: nowrap;&#125;.z-rate .cover-group .img-cover &#123; display: inline-block; background-size: cover;&#125;&lt;/style&gt; 引用示例12345678910111213&lt;zRate :isIcon='false' :iconConfig="&#123; // 该配置只有在isIcon为true时生效 offIcon: require('@/assets/images/star-off.png'), onIcon: require('@/assets/images/star-on.png'), // 需要通过require引用 width: '5rem', // 需要带单位 height: '5rem' &#125;" :score='3.7' bgColor='#ddd' coverColor='red' fontSize='50px' fontFamily='Arial' /&gt; 效果 END]]></content>
+    <title><![CDATA[另一种思路的评星组件]]></title>
+    <url>%2F2018%2F07%2F15%2F%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%80%9D%E8%B7%AF%E7%9A%84%E8%AF%84%E6%98%9F%E7%BB%84%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[主要介绍一种同时支持字体与图标样式的评星方案，且支持带小数点分数的相应显示。基本思路是给背景添加默认灰度星星，之后通过相对位置将点亮星星覆盖灰度星星，并设置点亮星星overflow: hidden使宽度可控，最后对浮层宽度进行动态计算并赋值即可实现按分显示的效果。 针对入参的单位没有做过多的校验，诸如width入参带不带单位的校验问题，目前需要入参提供带单位数值。这里就需要针对入参字符串获取数值单位，单位可能是px，可能是rem，也可能是%，此处使用正则replace(/^\d+/g, &#39;&#39;)替换的方式获取。 另外需要注意针对图标icon的背景图片background-size需要设置为cover模式，这样才能实现剪裁的效果，而不被拉伸变形。 支持的入参字段如下： isIcon // 是否使用iconiconConfig // 使用icon的配置，只有在isIcon为true生效score // 得分，入参需转换为5分标准形式bgColor // 使用字体图标时设置的底色coverColor // 使用字体图标时设置的覆盖色fontSize // 使用字体图标时设置的字体大小fontFamily // 使用字体图标时设置的字体类型，不同字体类型显示的星星样式有差异，默认是serif 使用方式：npm install zrate –save 关键代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112&lt;template&gt;&lt;div class="z-rate" :style="rootStyle"&gt; &lt;template v-if='!isIcon'&gt; &lt;span :style='&#123; color: bgColor &#125;'&gt;☆☆☆☆☆&lt;/span&gt; &lt;span class="cover" :style="&#123; width: parseFloat(score) + 'em', color: coverColor &#125;"&gt;★★★★★&lt;/span&gt; &lt;/template&gt; &lt;template v-else&gt; &lt;div class="bg-group"&gt; &lt;div v-for='i in 5' class="img-bg" :key='i' :style="&#123; backgroundImage: 'url(' + iconConfig.offIcon + ')', width: iconConfig.width, height: iconConfig.height &#125;"&gt; &lt;/div&gt; &lt;/div&gt; &lt;div class="cover-group" :style="percentStyle"&gt; &lt;div v-for='i in 5' class="img-cover" :key='i' :style="&#123; backgroundImage: 'url(' + iconConfig.onIcon + ')', width: iconConfig.width, height: iconConfig.height &#125;"&gt; &lt;/div&gt; &lt;/div&gt; &lt;/template&gt;&lt;/div&gt;&lt;/template&gt;&lt;script&gt;export default &#123; name: 'z-rate', props: &#123; // 是否使用icon isIcon: &#123; type: Boolean, default: false &#125;, // 使用icon的配置 iconConfig: &#123; type: Object &#125;, // 得分，入参需转换为5分标准形式 score: &#123; type: [String, Number], default: '2.55' &#125;, // 使用字体图标时设置的底色 bgColor: &#123; type: String, default: '#ccc' &#125;, // 使用字体图标时设置的覆盖色 coverColor: &#123; type: String, default: 'red' &#125;, // 使用字体图标时设置的字体大小 fontSize: &#123; type: String, default: '16px' &#125;, // 使用字体图标时设置的字体类型，不同字体类型显示的星星样式有差异，默认是serif fontFamily: &#123; type: String, default: 'serif' &#125; &#125;, computed: &#123; rootStyle() &#123; return this.isIcon ? '' : &#123; fontSize: this.fontSize, fontFamily: this.fontFamily &#125; &#125;, percentStyle() &#123; // 通过replace正则获取用户设置宽度的单位，可能是px，可能是rem，也可能是% return this.isIcon ? &#123; width: parseFloat(this.score) * parseFloat(this.iconConfig.width) + this.iconConfig.width.replace(/^\d+/g, '') &#125; : '' &#125; &#125;&#125;&lt;/script&gt;&lt;style lang='css' scoped&gt;.z-rate &#123; position: relative;&#125;.z-rate .cover, .z-rate .cover-group &#123; position: absolute; top: 0; left: 0; overflow: hidden; width: 0;&#125;.z-rate .bg-group &#123; display: inline-block;&#125;.z-rate .bg-group .img-bg &#123; display: inline-block; background-size: cover;&#125;.z-rate .cover-group &#123; white-space: nowrap;&#125;.z-rate .cover-group .img-cover &#123; display: inline-block; background-size: cover;&#125;&lt;/style&gt; 引用示例12345678910111213&lt;zRate :isIcon='false' :iconConfig="&#123; // 该配置只有在isIcon为true时生效 offIcon: require('@/assets/images/star-off.png'), onIcon: require('@/assets/images/star-on.png'), // 需要通过require引用 width: '5rem', // 需要带单位 height: '5rem' &#125;" :score='3.7' bgColor='#ddd' coverColor='red' fontSize='50px' fontFamily='Arial' /&gt; 效果 END]]></content>
+      <categories>
+        <category>前端开发</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[window.open这件小事儿]]></title>
@@ -246,8 +252,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -306,8 +312,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -330,8 +336,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -342,8 +348,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
@@ -447,8 +453,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>前端</tag>
         <tag>Javascript</tag>
+        <tag>前端</tag>
       </tags>
   </entry>
   <entry>
