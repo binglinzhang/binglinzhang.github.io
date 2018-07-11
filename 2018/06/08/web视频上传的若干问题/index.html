@@ -93,7 +93,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="web视频上传的若干问题">
 <meta property="og:url" content="http://zhangbinglin.cn/2018/06/08/web视频上传的若干问题/index.html">
-<meta property="og:site_name" content="ZhangBinglin">
+<meta property="og:site_name" content="zhangbinglin">
 <meta property="og:description" content="针对视频时长以及首帧缩略图大部分情况下需要后台文件系统进行处理，考虑特殊情况下，web端能否处理拿到上传视频的相关参数，以下简单封装一个较为完整的视频上传方法。">
 <meta property="og:updated_time" content="2018-06-10T07:22:36.887Z">
 <meta name="twitter:card" content="summary">
@@ -132,7 +132,7 @@
 
 
 
-  <title>web视频上传的若干问题 | ZhangBinglin</title>
+  <title>web视频上传的若干问题 | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -168,7 +168,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">ZhangBinglin</span>
+        <span class="site-title">zhangbinglin</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -298,13 +298,13 @@ document.getElementById('local-search-input').onkeyup = function() {
     <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/06/08/web视频上传的若干问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="name" content="zhangbinglin">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="name" content="zhangbinglin">
     </span>
 
     
@@ -522,8 +522,8 @@ document.getElementById('local-search-input').onkeyup = function() {
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
-               alt="ZhangBinglin" />
-          <p class="site-author-name" itemprop="name">ZhangBinglin</p>
+               alt="zhangbinglin" />
+          <p class="site-author-name" itemprop="name">zhangbinglin</p>
            
               <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
           
@@ -625,7 +625,7 @@ document.getElementById('local-search-input').onkeyup = function() {
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ZhangBinglin</span>
+  <span class="author" itemprop="copyrightHolder">zhangbinglin</span>
 </div>
 
 
@@ -1102,5 +1102,21 @@ document.getElementById('local-search-input').onkeyup = function() {
 
   
 
+
+  <script>
+  window.onload = function() {
+    var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+    $.ajax({
+      url: '120.79.89.189:12306/addVisitedCount?key=' + key,
+      type: 'get',
+      success: function () {
+        console.log('add addVisited Count success')
+      }，
+      error: function () {
+        console.warn('sth wrong')
+      }
+    })
+  }
+  </script>
 </body>
 </html>

@@ -93,7 +93,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS3-Flex 弹性响应式布局的栗子">
 <meta property="og:url" content="http://zhangbinglin.cn/2017/05/21/CSS3 Flex弹性响应式布局的栗子/index.html">
-<meta property="og:site_name" content="ZhangBinglin">
+<meta property="og:site_name" content="zhangbinglin">
 <meta property="og:description" content="本栗子主要记录如何运用CSS3的flex新特性进行快速的响应式布局，以及区别于以往DIV+CSS繁琐的垂直居中定位方法，通过flex方法方便快捷的实现子元素的垂直居中。">
 <meta property="og:image" content="http://i4.buimg.com/588926/a5ee73280720cc52.png">
 <meta property="og:image" content="http://i1.piimg.com/588926/ead7c4b0df4a17f3.png">
@@ -136,7 +136,7 @@
 
 
 
-  <title>CSS3-Flex 弹性响应式布局的栗子 | ZhangBinglin</title>
+  <title>CSS3-Flex 弹性响应式布局的栗子 | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -172,7 +172,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">ZhangBinglin</span>
+        <span class="site-title">zhangbinglin</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -302,13 +302,13 @@ document.getElementById('local-search-input').onkeyup = function() {
     <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2017/05/21/CSS3 Flex弹性响应式布局的栗子/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="name" content="zhangbinglin">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="name" content="zhangbinglin">
     </span>
 
     
@@ -536,8 +536,8 @@ document.getElementById('local-search-input').onkeyup = function() {
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
-               alt="ZhangBinglin" />
-          <p class="site-author-name" itemprop="name">ZhangBinglin</p>
+               alt="zhangbinglin" />
+          <p class="site-author-name" itemprop="name">zhangbinglin</p>
            
               <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
           
@@ -639,7 +639,7 @@ document.getElementById('local-search-input').onkeyup = function() {
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ZhangBinglin</span>
+  <span class="author" itemprop="copyrightHolder">zhangbinglin</span>
 </div>
 
 
@@ -1116,5 +1116,21 @@ document.getElementById('local-search-input').onkeyup = function() {
 
   
 
+
+  <script>
+  window.onload = function() {
+    var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+    $.ajax({
+      url: '120.79.89.189:12306/addVisitedCount?key=' + key,
+      type: 'get',
+      success: function () {
+        console.log('add addVisited Count success')
+      }，
+      error: function () {
+        console.warn('sth wrong')
+      }
+    })
+  }
+  </script>
 </body>
 </html>

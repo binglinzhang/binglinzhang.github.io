@@ -93,7 +93,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="GitHub + Hexo +Markdown 搭建个人博客关键步骤">
 <meta property="og:url" content="http://zhangbinglin.cn/2017/04/15/GitHub + Hexo +Markdown 搭建个人博客关键步骤/index.html">
-<meta property="og:site_name" content="ZhangBinglin">
+<meta property="og:site_name" content="zhangbinglin">
 <meta property="og:description" content="前人摘树，后人乘凉。小的我喝了茶乘了凉，总不能一下就人走茶凉吧，因此也记录下自己在搭建本blog过程中认为比较重要的几点，如果能助人一二，那敢情甚好，不若自己遗忘时回望回望也是极好的，O(∩_∩)O …环境要求：本文基于win7编写，电脑上需安装node.js及git.">
 <meta property="og:image" content="http://i1.piimg.com/567571/51f450cc132609a1.png">
 <meta property="og:image" content="http://i4.buimg.com/567571/6fa5bd889ce099e6.png">
@@ -140,7 +140,7 @@
 
 
 
-  <title>GitHub + Hexo +Markdown 搭建个人博客关键步骤 | ZhangBinglin</title>
+  <title>GitHub + Hexo +Markdown 搭建个人博客关键步骤 | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -176,7 +176,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">ZhangBinglin</span>
+        <span class="site-title">zhangbinglin</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -306,13 +306,13 @@ document.getElementById('local-search-input').onkeyup = function() {
     <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2017/04/15/GitHub + Hexo +Markdown 搭建个人博客关键步骤/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="name" content="zhangbinglin">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="name" content="zhangbinglin">
     </span>
 
     
@@ -561,8 +561,8 @@ hexo deploy
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
-               alt="ZhangBinglin" />
-          <p class="site-author-name" itemprop="name">ZhangBinglin</p>
+               alt="zhangbinglin" />
+          <p class="site-author-name" itemprop="name">zhangbinglin</p>
            
               <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
           
@@ -680,7 +680,7 @@ hexo deploy
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ZhangBinglin</span>
+  <span class="author" itemprop="copyrightHolder">zhangbinglin</span>
 </div>
 
 
@@ -1157,5 +1157,21 @@ hexo deploy
 
   
 
+
+  <script>
+  window.onload = function() {
+    var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+    $.ajax({
+      url: '120.79.89.189:12306/addVisitedCount?key=' + key,
+      type: 'get',
+      success: function () {
+        console.log('add addVisited Count success')
+      }，
+      error: function () {
+        console.warn('sth wrong')
+      }
+    })
+  }
+  </script>
 </body>
 </html>

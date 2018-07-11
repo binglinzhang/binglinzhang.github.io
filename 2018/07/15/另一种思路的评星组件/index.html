@@ -93,7 +93,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="另一种思路的评星组件">
 <meta property="og:url" content="http://zhangbinglin.cn/2018/07/15/另一种思路的评星组件/index.html">
-<meta property="og:site_name" content="ZhangBinglin">
+<meta property="og:site_name" content="zhangbinglin">
 <meta property="og:description" content="主要介绍一种同时支持字体与图标样式的评星方案，且支持带小数点分数的相应显示。基本思路是给背景添加默认灰度星星，之后通过相对位置将点亮星星覆盖灰度星星，并设置点亮星星overflow: hidden使宽度可控，最后对浮层宽度进行动态计算并赋值即可实现按分显示的效果。">
 <meta property="og:image" content="https://t1.picb.cc/uploads/2018/07/10/JJoTHW.png">
 <meta property="og:updated_time" content="2018-07-10T09:10:13.010Z">
@@ -134,7 +134,7 @@
 
 
 
-  <title>另一种思路的评星组件 | ZhangBinglin</title>
+  <title>另一种思路的评星组件 | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -170,7 +170,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">ZhangBinglin</span>
+        <span class="site-title">zhangbinglin</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -300,13 +300,13 @@ document.getElementById('local-search-input').onkeyup = function() {
     <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/07/15/另一种思路的评星组件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="name" content="zhangbinglin">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="name" content="zhangbinglin">
     </span>
 
     
@@ -521,8 +521,8 @@ document.getElementById('local-search-input').onkeyup = function() {
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
-               alt="ZhangBinglin" />
-          <p class="site-author-name" itemprop="name">ZhangBinglin</p>
+               alt="zhangbinglin" />
+          <p class="site-author-name" itemprop="name">zhangbinglin</p>
            
               <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
           
@@ -624,7 +624,7 @@ document.getElementById('local-search-input').onkeyup = function() {
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ZhangBinglin</span>
+  <span class="author" itemprop="copyrightHolder">zhangbinglin</span>
 </div>
 
 
@@ -1101,5 +1101,21 @@ document.getElementById('local-search-input').onkeyup = function() {
 
   
 
+
+  <script>
+  window.onload = function() {
+    var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+    $.ajax({
+      url: '120.79.89.189:12306/addVisitedCount?key=' + key,
+      type: 'get',
+      success: function () {
+        console.log('add addVisited Count success')
+      }，
+      error: function () {
+        console.warn('sth wrong')
+      }
+    })
+  }
+  </script>
 </body>
 </html>

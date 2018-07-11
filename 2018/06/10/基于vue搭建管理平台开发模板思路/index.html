@@ -93,7 +93,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于vue搭建管理平台开发模板思路">
 <meta property="og:url" content="http://zhangbinglin.cn/2018/06/10/基于vue搭建管理平台开发模板思路/index.html">
-<meta property="og:site_name" content="ZhangBinglin">
+<meta property="og:site_name" content="zhangbinglin">
 <meta property="og:description" content="整体分析搭建一个完善管理平台的步骤以及需要注意的要点，主要技术栈为vue + axios + elementUI，目的是高效开发一个通用性及维护性较好的平台。">
 <meta property="og:updated_time" content="2018-06-13T08:18:47.716Z">
 <meta name="twitter:card" content="summary">
@@ -132,7 +132,7 @@
 
 
 
-  <title>基于vue搭建管理平台开发模板思路 | ZhangBinglin</title>
+  <title>基于vue搭建管理平台开发模板思路 | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -168,7 +168,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">ZhangBinglin</span>
+        <span class="site-title">zhangbinglin</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -298,13 +298,13 @@ document.getElementById('local-search-input').onkeyup = function() {
     <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/06/10/基于vue搭建管理平台开发模板思路/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="name" content="zhangbinglin">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="name" content="zhangbinglin">
     </span>
 
     
@@ -548,8 +548,8 @@ document.getElementById('local-search-input').onkeyup = function() {
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
-               alt="ZhangBinglin" />
-          <p class="site-author-name" itemprop="name">ZhangBinglin</p>
+               alt="zhangbinglin" />
+          <p class="site-author-name" itemprop="name">zhangbinglin</p>
            
               <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
           
@@ -667,7 +667,7 @@ document.getElementById('local-search-input').onkeyup = function() {
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ZhangBinglin</span>
+  <span class="author" itemprop="copyrightHolder">zhangbinglin</span>
 </div>
 
 
@@ -1144,5 +1144,21 @@ document.getElementById('local-search-input').onkeyup = function() {
 
   
 
+
+  <script>
+  window.onload = function() {
+    var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+    $.ajax({
+      url: '120.79.89.189:12306/addVisitedCount?key=' + key,
+      type: 'get',
+      success: function () {
+        console.log('add addVisited Count success')
+      }，
+      error: function () {
+        console.warn('sth wrong')
+      }
+    })
+  }
+  </script>
 </body>
 </html>

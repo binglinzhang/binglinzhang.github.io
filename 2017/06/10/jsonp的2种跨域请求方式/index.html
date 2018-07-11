@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Javascript,前端," />
+  <meta name="keywords" content="前端,Javascript," />
 
 
 
@@ -89,11 +89,11 @@
 
 
 <meta name="description" content="JSON和JSONP虽然只有一个字母的差别，但其实两者根本不是一回事：JSON是一种数据交换格式，而JSONP是一种依靠开发人员的聪明才智创造出的一种非官方跨域数据交互协议。本文主要介绍下常用的jsonp跨域请求方式传输JSON格式数据以及jsonp与ajax的区别。">
-<meta name="keywords" content="Javascript,前端">
+<meta name="keywords" content="前端,Javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jsonp的2种跨域请求方式">
 <meta property="og:url" content="http://zhangbinglin.cn/2017/06/10/jsonp的2种跨域请求方式/index.html">
-<meta property="og:site_name" content="ZhangBinglin">
+<meta property="og:site_name" content="zhangbinglin">
 <meta property="og:description" content="JSON和JSONP虽然只有一个字母的差别，但其实两者根本不是一回事：JSON是一种数据交换格式，而JSONP是一种依靠开发人员的聪明才智创造出的一种非官方跨域数据交互协议。本文主要介绍下常用的jsonp跨域请求方式传输JSON格式数据以及jsonp与ajax的区别。">
 <meta property="og:updated_time" content="2017-06-11T02:53:29.099Z">
 <meta name="twitter:card" content="summary">
@@ -132,7 +132,7 @@
 
 
 
-  <title>jsonp的2种跨域请求方式 | ZhangBinglin</title>
+  <title>jsonp的2种跨域请求方式 | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -168,7 +168,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">ZhangBinglin</span>
+        <span class="site-title">zhangbinglin</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -298,13 +298,13 @@ document.getElementById('local-search-input').onkeyup = function() {
     <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2017/06/10/jsonp的2种跨域请求方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="name" content="zhangbinglin">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ZhangBinglin">
+      <meta itemprop="name" content="zhangbinglin">
     </span>
 
     
@@ -431,9 +431,9 @@ document.getElementById('local-search-input').onkeyup = function() {
       
         <div class="post-tags">
           
-            <a href="/tags/Javascript/" rel="tag"># Javascript</a>
-          
             <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/Javascript/" rel="tag"># Javascript</a>
           
         </div>
       
@@ -528,8 +528,8 @@ document.getElementById('local-search-input').onkeyup = function() {
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
-               alt="ZhangBinglin" />
-          <p class="site-author-name" itemprop="name">ZhangBinglin</p>
+               alt="zhangbinglin" />
+          <p class="site-author-name" itemprop="name">zhangbinglin</p>
            
               <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
           
@@ -631,7 +631,7 @@ document.getElementById('local-search-input').onkeyup = function() {
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ZhangBinglin</span>
+  <span class="author" itemprop="copyrightHolder">zhangbinglin</span>
 </div>
 
 
@@ -1108,5 +1108,21 @@ document.getElementById('local-search-input').onkeyup = function() {
 
   
 
+
+  <script>
+  window.onload = function() {
+    var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+    $.ajax({
+      url: '120.79.89.189:12306/addVisitedCount?key=' + key,
+      type: 'get',
+      success: function () {
+        console.log('add addVisited Count success')
+      }，
+      error: function () {
+        console.warn('sth wrong')
+      }
+    })
+  }
+  </script>
 </body>
 </html>

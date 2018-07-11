@@ -90,14 +90,14 @@
 
 <meta name="description" content="个人作品 Demo ZhangBinglin教育背景广东工业大学　　　 英语六级 | 省级创新项目负责人 | 本科 | 材料成型及控制工程 | 2015年毕业TCL大学通识培训　　时间管理 | 职业规划发展 | 人际关系 | 产品需求分析 | 产品创意 | 思维导图获奖经历　　　　　 一等奖学金3次 | 国家励志奖学金3次 | 全国大学生数学竞赛省赛三等 工作经历2017/06-2017/10">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ZhangBinglin">
+<meta property="og:title" content="zhangbinglin">
 <meta property="og:url" content="http://zhangbinglin.cn/about/index.html">
-<meta property="og:site_name" content="ZhangBinglin">
+<meta property="og:site_name" content="zhangbinglin">
 <meta property="og:description" content="个人作品 Demo ZhangBinglin教育背景广东工业大学　　　 英语六级 | 省级创新项目负责人 | 本科 | 材料成型及控制工程 | 2015年毕业TCL大学通识培训　　时间管理 | 职业规划发展 | 人际关系 | 产品需求分析 | 产品创意 | 思维导图获奖经历　　　　　 一等奖学金3次 | 国家励志奖学金3次 | 全国大学生数学竞赛省赛三等 工作经历2017/06-2017/10">
 <meta property="og:image" content="http://zhangbinglin.cn/about/wechat.jpg">
 <meta property="og:updated_time" content="2017-10-24T04:08:21.282Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ZhangBinglin">
+<meta name="twitter:title" content="zhangbinglin">
 <meta name="twitter:description" content="个人作品 Demo ZhangBinglin教育背景广东工业大学　　　 英语六级 | 省级创新项目负责人 | 本科 | 材料成型及控制工程 | 2015年毕业TCL大学通识培训　　时间管理 | 职业规划发展 | 人际关系 | 产品需求分析 | 产品创意 | 思维导图获奖经历　　　　　 一等奖学金3次 | 国家励志奖学金3次 | 全国大学生数学竞赛省赛三等 工作经历2017/06-2017/10">
 <meta name="twitter:image" content="http://zhangbinglin.cn/about/wechat.jpg">
 
@@ -133,7 +133,7 @@
 
 
 
-  <title> | ZhangBinglin</title>
+  <title> | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -169,7 +169,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">ZhangBinglin</span>
+        <span class="site-title">zhangbinglin</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -367,8 +367,8 @@ function myPrint(obj) {
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
-               alt="ZhangBinglin" />
-          <p class="site-author-name" itemprop="name">ZhangBinglin</p>
+               alt="zhangbinglin" />
+          <p class="site-author-name" itemprop="name">zhangbinglin</p>
            
               <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
           
@@ -470,7 +470,7 @@ function myPrint(obj) {
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ZhangBinglin</span>
+  <span class="author" itemprop="copyrightHolder">zhangbinglin</span>
 </div>
 
 
@@ -943,5 +943,21 @@ function myPrint(obj) {
 
   
 
+
+  <script>
+  window.onload = function() {
+    var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+    $.ajax({
+      url: '120.79.89.189:12306/addVisitedCount?key=' + key,
+      type: 'get',
+      success: function () {
+        console.log('add addVisited Count success')
+      }，
+      error: function () {
+        console.warn('sth wrong')
+      }
+    })
+  }
+  </script>
 </body>
 </html>
