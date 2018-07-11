@@ -485,6 +485,16 @@ document.getElementById('local-search-input').onkeyup = function() {
 
       
     </div>
+
+    <script>
+    ~function() {
+      var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+      var xml = new XMLHttpRequest()
+      xml.open('GET', 'http://120.79.89.189:10088/addVisitedCount?key=' + key)
+      xml.onreadystatechange = function() {}
+      xml.send(null)
+    }()
+    </script>
   </div>
 
 
@@ -1126,21 +1136,5 @@ document.getElementById('local-search-input').onkeyup = function() {
 
   
 
-
-  <script>
-  window.onload = function() {
-    var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
-    $.ajax({
-      url: '120.79.89.189:12306/addVisitedCount?key=' + key,
-      type: 'get',
-      success: function () {
-        console.log('add addVisited Count success')
-      }，
-      error: function () {
-        console.warn('sth wrong')
-      }
-    })
-  }
-  </script>
 </body>
 </html>
