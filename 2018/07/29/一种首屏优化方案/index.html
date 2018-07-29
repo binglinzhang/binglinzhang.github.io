@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="前端," />
 
 
 
@@ -88,15 +88,17 @@
 
 
 
-<meta name="description" content="You deserve IT Do More Do Better">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zhangbinglin">
-<meta property="og:url" content="http://zhangbinglin.cn/categories/前端开发/page/2/index.html">
+<meta name="description" content="随着前端spa单页应用越来越复杂化，页面上往往存在多个tab切换，需求要求首屏渲染显示速度快，同时保障tab切换过程顺畅的用户体验，因此需要在完成首屏渲染之后将其他隐藏的tab页在合适时机也提前完成渲染。本文基于vue父子组件的生命周期，配合v-if控制不同tab组件的渲染顺序实现该需求。">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一种首屏优化方案">
+<meta property="og:url" content="http://zhangbinglin.cn/2018/07/29/一种首屏优化方案/index.html">
 <meta property="og:site_name" content="zhangbinglin">
-<meta property="og:description" content="You deserve IT Do More Do Better">
+<meta property="og:description" content="随着前端spa单页应用越来越复杂化，页面上往往存在多个tab切换，需求要求首屏渲染显示速度快，同时保障tab切换过程顺畅的用户体验，因此需要在完成首屏渲染之后将其他隐藏的tab页在合适时机也提前完成渲染。本文基于vue父子组件的生命周期，配合v-if控制不同tab组件的渲染顺序实现该需求。">
+<meta property="og:updated_time" content="2018-07-29T14:35:18.062Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zhangbinglin">
-<meta name="twitter:description" content="You deserve IT Do More Do Better">
+<meta name="twitter:title" content="一种首屏优化方案">
+<meta name="twitter:description" content="随着前端spa单页应用越来越复杂化，页面上往往存在多个tab切换，需求要求首屏渲染显示速度快，同时保障tab切换过程顺畅的用户体验，因此需要在完成首屏渲染之后将其他隐藏的tab页在合适时机也提前完成渲染。本文基于vue父子组件的生命周期，配合v-if控制不同tab组件的渲染顺序实现该需求。">
 
 
 
@@ -124,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://zhangbinglin.cn/categories/前端开发/page/2/"/>
+  <link rel="canonical" href="http://zhangbinglin.cn/2018/07/29/一种首屏优化方案/"/>
 
 
 
 
 
-  <title>分类: 前端开发 | zhangbinglin</title>
+  <title>一种首屏优化方案 | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -155,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-right  ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -283,402 +285,220 @@ document.getElementById('local-search-input').onkeyup = function() {
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        前端开发
-        <small>分类</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/20/一些js方法的人工babel/" itemprop="url">
-              
-                <span itemprop="name">一些js方法的人工babel</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-20T19:00:00+08:00"
-              content="2018-05-20" >
-          05-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/15/探究函数执行过程/" itemprop="url">
-              
-                <span itemprop="name">探究函数执行过程</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-15T12:34:49+08:00"
-              content="2018-05-15" >
-          05-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/25/canvas创建水印背景的思路/" itemprop="url">
-              
-                <span itemprop="name">canvas创建水印背景的思路</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-25T19:57:10+08:00"
-              content="2018-04-25" >
-          04-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/22/谈谈new的实例化过程/" itemprop="url">
-              
-                <span itemprop="name">谈谈new的实例化过程</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-22T22:14:47+08:00"
-              content="2018-03-22" >
-          03-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/27/关于防抖节流函数的实现与优化/" itemprop="url">
-              
-                <span itemprop="name">关于防抖节流函数的实现与优化</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-27T13:55:57+08:00"
-              content="2018-02-27" >
-          02-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2018/01/11/vue开发项目的一些规范/" itemprop="url">
-              
-                <span itemprop="name">vue开发项目的一些规范</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-01-11T11:11:11+08:00"
-              content="2018-01-11" >
-          01-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/14/vue递归组件的使用/" itemprop="url">
-              
-                <span itemprop="name">vue递归组件的使用</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-14T23:01:13+08:00"
-              content="2017-12-14" >
-          12-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/11/21/一道js基础算法题引发的/" itemprop="url">
-              
-                <span itemprop="name">一道js基础算法题引发的</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-11-21T15:24:23+08:00"
-              content="2017-11-21" >
-          11-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/11/11/git的一些常用指令/" itemprop="url">
-              
-                <span itemprop="name">git的一些常用指令</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-11-11T11:11:11+08:00"
-              content="2017-11-11" >
-          11-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/10/函数封装库/" itemprop="url">
-              
-                <span itemprop="name">函数封装库</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-10T10:10:59+08:00"
-              content="2017-10-10" >
-          10-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </section>
 
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/categories/前端开发/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/categories/前端开发/">1</a><span class="page-number current">2</span><a class="page-number" href="/categories/前端开发/page/3/">3</a><a class="page-number" href="/categories/前端开发/page/4/">4</a><a class="extend next" rel="next" href="/categories/前端开发/page/3/"><i class="fa fa-angle-right"></i></a>
-  </nav>
 
-  <aside id="sidebar2" class="sidebar myDefine" style="display:none">
-    <div class="sidebar-inner">
+  
+  
+  
 
-      
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/07/29/一种首屏优化方案/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangbinglin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.png"
-               alt="zhangbinglin" />
-          <p class="site-author-name" itemprop="name">zhangbinglin</p>
-           
-              <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
-          
-        </div>
-        <nav class="site-state motion-element">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangbinglin">
+    </span>
 
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count redNumber">44</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
+    
+      <header class="post-header">
 
         
-
-        <div class="links-of-author motion-element">
-          
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <span class="links-of-author-item">
-                <a href="https://github.com/binglinzhang/binglinzhang.github.io" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
+            
+              
+                一种首屏优化方案
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-29T22:33:44+08:00">
+                2018-07-29
+              </time>
             
-              <span class="links-of-author-item">
-                <a href="http://i2.muimg.com/588926/46f22becb5fe0573.jpg" target="_blank" title="微信公众号">
-                  
-                    <i class="fa fa-fw fa-wechat"></i>
-                  
-                  微信公众号
-                </a>
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
             
           
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
+      </header>
+    
 
-        
-        
+    <div class="post-body" itemprop="articleBody">
 
-        
-        
-
-        
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=308 height=52 src="//music.163.com/outchain/player?type=2&id=857896&auto=0&height=32" class="musicIN"></iframe>
-
-        
-
-
-      </section>
-
+      
       
 
       
+        <p>随着前端spa单页应用越来越复杂化，页面上往往存在多个tab切换，需求要求首屏渲染显示速度快，同时保障tab切换过程顺畅的用户体验，因此需要在完成首屏渲染之后将其他隐藏的tab页在合适时机也提前完成渲染。本文基于vue父子组件的生命周期，配合v-if控制不同tab组件的渲染顺序实现该需求。</p>
+<a id="more"></a>
+<h3 id="父组件的基本页面结构"><a href="#父组件的基本页面结构" class="headerlink" title="父组件的基本页面结构"></a>父组件的基本页面结构</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"body-wrapper"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">'fade'</span> <span class="attr">mode</span>=<span class="string">"out-in"</span></span></div><div class="line">              <span class="attr">:duration</span>=<span class="string">"&#123; enter: 1000, leave: 500 &#125;"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">compA</span> <span class="attr">v-show</span>=<span class="string">"tab === 1"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">'fade'</span> <span class="attr">mode</span>=<span class="string">"out-in"</span></span></div><div class="line">              <span class="attr">:duration</span>=<span class="string">"&#123; enter: 800, leave: 300 &#125;"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">compB</span> <span class="attr">v-show</span>=<span class="string">"tab === 2"</span> <span class="attr">v-if</span>=<span class="string">'showIdx.show1'</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">'fade'</span> <span class="attr">mode</span>=<span class="string">"out-in"</span></span></div><div class="line">              <span class="attr">:duration</span>=<span class="string">"&#123; enter: 800, leave: 300 &#125;"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">compC</span> <span class="attr">v-show</span>=<span class="string">"tab === 3"</span> <span class="attr">v-if</span>=<span class="string">'showIdx.show2'</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">...</div><div class="line">mounted() &#123;</div><div class="line">  <span class="comment">// 首屏渲染完成之后触发执行隐藏页面的渲染,子组件mounted完成之后才会执行父组件mounted,当然也可以使用定时器</span></div><div class="line">  <span class="keyword">this</span>.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">this</span>.showIdx.show1 = <span class="literal">true</span></div><div class="line">    <span class="keyword">this</span>.showIdx.show2 = <span class="literal">true</span></div><div class="line">  &#125;)</div><div class="line">&#125;,  </div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="几点说明"><a href="#几点说明" class="headerlink" title="几点说明"></a>几点说明</h3><ol>
+<li>根据以上页面结构知道，首屏compA在tab1下将渲染完成并展示，tab2与tab3在v-if的控制下暂不渲染，只有当组件compA渲染完成之后才开始渲染另外两屏，因此我们只要在compA渲染完成之后改变showIdx的状态即可。</li>
+<li>而根据父子组件之间的生命周期执行顺序，我们知道顺序是先执行父组件的created完成所有属性挂载，之后进入各个子组件执行created与mounted周期，但根据vue官网说明，各子组件间的created与mounted周期顺序无法保证，只能确保在各子组件执行完mounted周期之后再执行父组件的mounted周期，因此可以利用这个特点在compA子组件完成mounted挂载并进入父组件的mounted周期中将showIdx的状态进行改变，分别渲染另外两个组件并暂时通过v-show隐藏。</li>
+<li>执行周期：父组件的created -&gt; compA的created -&gt; compA的mounted -&gt; 父组件的mounted(控制子组件的v-if) -&gt; 另外两个子组件的created与mounted(2子组件哪个先完成mounted无法保证)。</li>
+<li>针对首屏compA的渲染也可以通过v-if动态控制各个孙组件的渲染顺序，优先渲染重点突出的内容。</li>
+<li>在各组件切换之间添加动画既可以展示切换效果提高用户体验，又可以在该动画周期内完成一些如地图高度、图表高度等依赖元素高度的重渲染操作，因为元素高度隐藏时为0，切换到显示状态下高度发生变动，需要重新resize才能正常显示。</li>
+<li>针对一些用户的预行为也可以做一些预渲染，如可以监听切换按钮的鼠标悬停事件，当用户将鼠标移动至切换按钮时，触发该tab下的页面渲染，当用户点击之后可以直接呈现渲染后的页面，从而提高性能与有较好的用户体验。</li>
+</ol>
+<p>end</p>
 
+      
     </div>
-  </aside>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/22/聊点http相关的/" rel="next" title="聊点http相关的">
+                <i class="fa fa-chevron-left"></i> 聊点http相关的
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/02/网页高度方向上的自适应问题/" rel="prev" title="网页高度方向上的自适应问题">
+                网页高度方向上的自适应问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+<ul class="-mob-share-list">
+    <li class="-mob-share-weixin"><p class="describeP">微信</p></li>
+    <li class="-mob-share-weibo"><p class="describeP">新浪微博</p></li>
+    <li class="-mob-share-qq"><p class="describeP">QQ好友</p></li>
+    <li class="-mob-share-qzone"><p class="describeP">QQ空间</p></li>
+    <li class="-mob-share-facebook"><p class="describeP">Facebook</p></li>
+    <li class="-mob-share-twitter"><p class="describeP">Twitter</p></li>
+</ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1db2155cc54e0"></script>
+<!--MOB SHARE END-->
+
+      
+    </div>
+
+    <script>
+    ~function() {
+      var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+      var xml = new XMLHttpRequest()
+      xml.open('GET', 'http://120.79.89.189:10088/addVisitedCount?key=' + key)
+      xml.onreadystatechange = function() {}
+      xml.send(null)
+    }()
+    </script>
+  </div>
 
 
           </div>
@@ -686,6 +506,10 @@ document.getElementById('local-search-input').onkeyup = function() {
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -705,8 +529,17 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -791,6 +624,22 @@ document.getElementById('local-search-input').onkeyup = function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#父组件的基本页面结构"><span class="nav-number">1.</span> <span class="nav-text">父组件的基本页面结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几点说明"><span class="nav-number">2.</span> <span class="nav-text">几点说明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -912,6 +761,10 @@ document.getElementById('local-search-input').onkeyup = function() {
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
