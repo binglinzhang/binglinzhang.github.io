@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="随着前端spa单页应用越来越复杂化，页面上往往存在多个tab切换，需求要求首屏渲染显示速度快，同时保障tab切换过程顺畅的用户体验，因此需要在完成首屏渲染之后将其他隐藏的tab页在合适时机也提前完成渲染。本文基于vue父子组件的生命周期，配合v-if控制不同tab组件的渲染顺序实现该需求。">
+<meta name="description" content="最近主要写数据可视化项目，特点是数据查询接口多，前端开发需要依赖后台接口服务比较被动，因此写了个脚本，一键爬取线上接口并输出本地模拟的mock接口。好处是摆脱内网开发环境的限制，只需切换不同代理，即可何时何地任性开发，mock数据还可根据需要任意修改调整。">
 <meta name="keywords" content="前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一种首屏优化方案">
-<meta property="og:url" content="http://zhangbinglin.cn/2018/07/29/一种首屏优化方案/index.html">
+<meta property="og:title" content="一段mock线上接口脚本">
+<meta property="og:url" content="http://zhangbinglin.cn/2018/08/10/一段mock线上接口脚本/index.html">
 <meta property="og:site_name" content="zhangbinglin">
-<meta property="og:description" content="随着前端spa单页应用越来越复杂化，页面上往往存在多个tab切换，需求要求首屏渲染显示速度快，同时保障tab切换过程顺畅的用户体验，因此需要在完成首屏渲染之后将其他隐藏的tab页在合适时机也提前完成渲染。本文基于vue父子组件的生命周期，配合v-if控制不同tab组件的渲染顺序实现该需求。">
-<meta property="og:updated_time" content="2018-07-29T14:35:18.062Z">
+<meta property="og:description" content="最近主要写数据可视化项目，特点是数据查询接口多，前端开发需要依赖后台接口服务比较被动，因此写了个脚本，一键爬取线上接口并输出本地模拟的mock接口。好处是摆脱内网开发环境的限制，只需切换不同代理，即可何时何地任性开发，mock数据还可根据需要任意修改调整。">
+<meta property="og:updated_time" content="2018-08-09T11:53:51.841Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一种首屏优化方案">
-<meta name="twitter:description" content="随着前端spa单页应用越来越复杂化，页面上往往存在多个tab切换，需求要求首屏渲染显示速度快，同时保障tab切换过程顺畅的用户体验，因此需要在完成首屏渲染之后将其他隐藏的tab页在合适时机也提前完成渲染。本文基于vue父子组件的生命周期，配合v-if控制不同tab组件的渲染顺序实现该需求。">
+<meta name="twitter:title" content="一段mock线上接口脚本">
+<meta name="twitter:description" content="最近主要写数据可视化项目，特点是数据查询接口多，前端开发需要依赖后台接口服务比较被动，因此写了个脚本，一键爬取线上接口并输出本地模拟的mock接口。好处是摆脱内网开发环境的限制，只需切换不同代理，即可何时何地任性开发，mock数据还可根据需要任意修改调整。">
 
 
 
@@ -126,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://zhangbinglin.cn/2018/07/29/一种首屏优化方案/"/>
+  <link rel="canonical" href="http://zhangbinglin.cn/2018/08/10/一段mock线上接口脚本/"/>
 
 
 
 
 
-  <title>一种首屏优化方案 | zhangbinglin</title>
+  <title>一段mock线上接口脚本 | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -295,7 +295,7 @@ document.getElementById('local-search-input').onkeyup = function() {
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/07/29/一种首屏优化方案/">
+    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/08/10/一段mock线上接口脚本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhangbinglin">
@@ -316,7 +316,7 @@ document.getElementById('local-search-input').onkeyup = function() {
             
             
               
-                一种首屏优化方案
+                一段mock线上接口脚本
               
             
           </h1>
@@ -331,8 +331,8 @@ document.getElementById('local-search-input').onkeyup = function() {
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-29T22:33:44+08:00">
-                2018-07-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-10T19:52:55+08:00">
+                2018-08-10
               </time>
             
 
@@ -388,17 +388,15 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
-        <p>随着前端spa单页应用越来越复杂化，页面上往往存在多个tab切换，需求要求首屏渲染显示速度快，同时保障tab切换过程顺畅的用户体验，因此需要在完成首屏渲染之后将其他隐藏的tab页在合适时机也提前完成渲染。本文基于vue父子组件的生命周期，配合v-if控制不同tab组件的渲染顺序实现该需求。</p>
+        <p>最近主要写数据可视化项目，特点是数据查询接口多，前端开发需要依赖后台接口服务比较被动，因此写了个脚本，一键爬取线上接口并输出本地模拟的mock接口。好处是摆脱内网开发环境的限制，只需切换不同代理，即可何时何地任性开发，mock数据还可根据需要任意修改调整。</p>
 <a id="more"></a>
-<h3 id="父组件的基本页面结构"><a href="#父组件的基本页面结构" class="headerlink" title="父组件的基本页面结构"></a>父组件的基本页面结构</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"body-wrapper"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">'fade'</span> <span class="attr">mode</span>=<span class="string">"out-in"</span></span></div><div class="line">              <span class="attr">:duration</span>=<span class="string">"&#123; enter: 1000, leave: 500 &#125;"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">compA</span> <span class="attr">v-show</span>=<span class="string">"tab === 1"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">'fade'</span> <span class="attr">mode</span>=<span class="string">"out-in"</span></span></div><div class="line">              <span class="attr">:duration</span>=<span class="string">"&#123; enter: 800, leave: 300 &#125;"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">compB</span> <span class="attr">v-show</span>=<span class="string">"tab === 2"</span> <span class="attr">v-if</span>=<span class="string">'showIdx.show1'</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">'fade'</span> <span class="attr">mode</span>=<span class="string">"out-in"</span></span></div><div class="line">              <span class="attr">:duration</span>=<span class="string">"&#123; enter: 800, leave: 300 &#125;"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">compC</span> <span class="attr">v-show</span>=<span class="string">"tab === 3"</span> <span class="attr">v-if</span>=<span class="string">'showIdx.show2'</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">...</div><div class="line">mounted() &#123;</div><div class="line">  <span class="comment">// 首屏渲染完成之后触发执行隐藏页面的渲染,子组件mounted完成之后才会执行父组件mounted,当然也可以使用定时器</span></div><div class="line">  <span class="keyword">this</span>.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">this</span>.showIdx.show1 = <span class="literal">true</span></div><div class="line">    <span class="keyword">this</span>.showIdx.show2 = <span class="literal">true</span></div><div class="line">  &#125;)</div><div class="line">&#125;,  </div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="几点说明"><a href="#几点说明" class="headerlink" title="几点说明"></a>几点说明</h3><ol>
-<li>根据以上页面结构知道，首屏compA在tab1下将渲染完成并展示，tab2与tab3在v-if的控制下暂不渲染，只有当组件compA渲染完成之后才开始渲染另外两屏，因此我们只要在compA渲染完成之后改变showIdx的状态即可。</li>
-<li>而根据父子组件之间的生命周期执行顺序，我们知道顺序是先执行父组件的created完成所有属性挂载，之后进入各个子组件执行created与mounted周期，但根据vue官网说明，各子组件间的created与mounted周期顺序无法保证，只能确保在各子组件执行完mounted周期之后再执行父组件的mounted周期，因此可以利用这个特点在compA子组件完成mounted挂载并进入父组件的mounted周期中将showIdx的状态进行改变，分别渲染另外两个组件并暂时通过v-show隐藏。</li>
-<li>执行周期：父组件的created -&gt; compA的created -&gt; compA的mounted -&gt; 父组件的mounted(控制子组件的v-if) -&gt; 另外两个子组件的created与mounted(2子组件哪个先完成mounted无法保证)。</li>
-<li>针对首屏compA的渲染也可以通过v-if动态控制各个孙组件的渲染顺序，优先渲染重点突出的内容。</li>
-<li>在各组件切换之间添加动画既可以展示切换效果提高用户体验，又可以在该动画周期内完成一些如地图高度、图表高度等依赖元素高度的重渲染操作，因为元素高度隐藏时为0，切换到显示状态下高度发生变动，需要重新resize才能正常显示。</li>
-<li>针对一些用户的预行为也可以做一些预渲染，如可以监听切换按钮的鼠标悬停事件，当用户将鼠标移动至切换按钮时，触发该tab下的页面渲染，当用户点击之后可以直接呈现渲染后的页面，从而提高性能与有较好的用户体验。</li>
+<p>特点：</p>
+<ol>
+<li>第三方依赖express、axios库，其中express在vue-cli中默认安装，axios也为前端常用库，因此不需要安装多余依赖。</li>
+<li>只支持不带参的get请求，或者将参数通过queryString方式拼接到url后面，post等带参请求不支持。</li>
 </ol>
+<p>使用：<br>给出请求接口数组集，配置好接口ip、输出文件名、mock监听端口、以及涉及需要验证的参数，配置完之后node控制台执行代码即可在当前目录下生成mock文件，默认输出server.js文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</div><div class="line"><span class="keyword">const</span> app = express()</div><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</div><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</div><div class="line"><span class="keyword">const</span> axios = <span class="built_in">require</span>(<span class="string">'axios'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 请求的地址格式转为数组集</span></div><div class="line"><span class="keyword">let</span> urls = <span class="built_in">require</span>(<span class="string">'../http/paths'</span>)</div><div class="line">urls = <span class="built_in">Object</span>.values(urls)</div><div class="line"></div><div class="line"><span class="comment">// 配置项</span></div><div class="line"><span class="keyword">const</span> config = &#123;</div><div class="line">  <span class="attr">base</span>: <span class="string">'http://10.118.141.216:8080'</span>,  <span class="comment">// 接口的ip与端口</span></div><div class="line">  outputFilename: <span class="string">'server.js'</span>,         <span class="comment">// 输出的文件名</span></div><div class="line">  serverPort: <span class="string">'10086'</span>,                 <span class="comment">// 输出的mock文件监听的端口</span></div><div class="line">  authKey: <span class="string">'Cookie'</span>,                   <span class="comment">// 接口如果需要验证的字段</span></div><div class="line">  authValue: <span class="string">'JSESSIONID=aaa666'</span>       <span class="comment">// 验证值</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 请求配置项</span></div><div class="line"><span class="keyword">const</span> reqConfig = &#123;</div><div class="line">  <span class="attr">timeout</span>: <span class="number">10000</span>,</div><div class="line">  <span class="attr">responseType</span>: <span class="string">'json'</span>,</div><div class="line">  <span class="attr">headers</span>: &#123; <span class="string">'Content-Type'</span>: <span class="string">'application/json; charset=utf-8'</span> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(urls) &amp;&amp; !urls.length) &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'request urls are required'</span>)</div><div class="line">  <span class="keyword">return</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(!config.base) &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'you have to give a request base url first'</span>)</div><div class="line">  <span class="keyword">return</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">if</span>(config.authKey) &#123;</div><div class="line">  reqConfig.headers[config.authKey] = config.authValue || <span class="string">''</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> request = axios.create(reqConfig)</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getApiData</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> len = urls.length</div><div class="line">  <span class="keyword">let</span> i = <span class="number">0</span>, str = <span class="string">''</span></div><div class="line">  <span class="keyword">while</span>(i &lt; len) &#123;</div><div class="line">    <span class="keyword">const</span> result = <span class="keyword">await</span> request.get(config.base + urls[i]).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</div><div class="line">      <span class="keyword">if</span>(res.status == <span class="number">200</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(res.data)</div><div class="line">      &#125;</div><div class="line">    &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">`'<span class="subst">$&#123;urls[i]&#125;</span>' 404 -&gt; Not Found`</span>)</div><div class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="literal">false</span>)</div><div class="line">    &#125;)</div><div class="line">    <span class="keyword">if</span>(result) &#123;</div><div class="line">      str += <span class="string">`app.get('<span class="subst">$&#123;urls[i]&#125;</span>', (req, res) =&gt; &#123;</span></div><div class="line">        res.send(<span class="subst">$&#123;<span class="built_in">JSON</span>.stringify(result)&#125;</span>)</div><div class="line">  &#125;)\n  `</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(i === len - <span class="number">1</span>) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(str)</div><div class="line">    &#125;</div><div class="line">    i++</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">getApiData().then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> exportText = <span class="string">`﻿</span></div><div class="line">  const express = require('express')</div><div class="line">  const app = express()</div><div class="line"></div><div class="line">  app.all('*', (req, res, next) =&gt; &#123;</div><div class="line">    res.header('Access-Control-Allow-Origin', '*')</div><div class="line">    res.header('Access-Control-Allow-Headers', 'X-Requested-With')</div><div class="line">    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS')</div><div class="line">    res.header('Content-Type', 'application/json')</div><div class="line">    next()</div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  <span class="subst">$&#123;res&#125;</span></div><div class="line"></div><div class="line">  app.listen(<span class="subst">$&#123;config.serverPort || <span class="number">3000</span>&#125;</span>, () =&gt; &#123;</div><div class="line">    console.log('local server started @<span class="subst">$&#123;config.serverPort || <span class="number">3000</span>&#125;</span>')</div><div class="line">  &#125;)</div><div class="line">  `</div><div class="line"></div><div class="line">  fs.writeFile(<span class="string">`./<span class="subst">$&#123;config.outputFilename&#125;</span>`</span>, exportText, <span class="string">'utf8'</span>, err =&gt; &#123;</div><div class="line">    err &amp;&amp; <span class="built_in">console</span>.log(err)</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"data saved to "</span> + config.outputFilename)</div><div class="line">  &#125;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p>end</p>
 
       
@@ -442,8 +440,8 @@ document.getElementById('local-search-input').onkeyup = function() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/22/聊点http相关的/" rel="next" title="聊点http相关的">
-                <i class="fa fa-chevron-left"></i> 聊点http相关的
+              <a href="/2018/08/02/网页高度方向上的自适应问题/" rel="next" title="网页高度方向上的自适应问题">
+                <i class="fa fa-chevron-left"></i> 网页高度方向上的自适应问题
               </a>
             
           </div>
@@ -451,10 +449,6 @@ document.getElementById('local-search-input').onkeyup = function() {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/02/网页高度方向上的自适应问题/" rel="prev" title="网页高度方向上的自适应问题">
-                网页高度方向上的自适应问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -529,17 +523,8 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -624,22 +609,6 @@ document.getElementById('local-search-input').onkeyup = function() {
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#父组件的基本页面结构"><span class="nav-number">1.</span> <span class="nav-text">父组件的基本页面结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几点说明"><span class="nav-number">2.</span> <span class="nav-text">几点说明</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
