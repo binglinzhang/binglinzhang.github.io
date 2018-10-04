@@ -488,7 +488,7 @@ document.getElementById('local-search-input').onkeyup = function() {
     ~function() {
       var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
       var xml = new XMLHttpRequest()
-      xml.open('GET', 'http://120.79.89.189:10088/addVisitedCount?key=' + key)
+      xml.open('GET', 'https://zhangbinglin.cn:10088/addVisitedCount?key=' + key)
       xml.onreadystatechange = function() {}
       xml.send(null)
     }()
