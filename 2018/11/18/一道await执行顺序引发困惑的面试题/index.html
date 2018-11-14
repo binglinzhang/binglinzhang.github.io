@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="一篇关于宏任务、微任务，Promise与await较量的浅文。。。">
+<meta name="description" content="一篇关于宏任务、微任务，Promise与await/async较量的浅文，题目还可以有各种变样。。。">
 <meta name="keywords" content="前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一道await执行顺序引发困惑的面试题">
 <meta property="og:url" content="http://zhangbinglin.cn/2018/11/18/一道await执行顺序引发困惑的面试题/index.html">
 <meta property="og:site_name" content="zhangbinglin">
-<meta property="og:description" content="一篇关于宏任务、微任务，Promise与await较量的浅文。。。">
-<meta property="og:updated_time" content="2018-11-14T13:15:07.671Z">
+<meta property="og:description" content="一篇关于宏任务、微任务，Promise与await/async较量的浅文，题目还可以有各种变样。。。">
+<meta property="og:updated_time" content="2018-11-14T13:35:41.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一道await执行顺序引发困惑的面试题">
-<meta name="twitter:description" content="一篇关于宏任务、微任务，Promise与await较量的浅文。。。">
+<meta name="twitter:description" content="一篇关于宏任务、微任务，Promise与await/async较量的浅文，题目还可以有各种变样。。。">
 
 
 
@@ -388,7 +388,7 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
-        <p>一篇关于宏任务、微任务，Promise与await较量的浅文。。。</p>
+        <p>一篇关于宏任务、微任务，Promise与await/async较量的浅文，题目还可以有各种变样。。。</p>
 <a id="more"></a>
 <h2 id="首先来个简单的栗子"><a href="#首先来个简单的栗子" class="headerlink" title="首先来个简单的栗子"></a>首先来个简单的栗子</h2><p>可以心心念念一下然后打开chrome(以下内容皆只针对chrome，其他浏览器不管不听不信)控制台，比对下心算结果，不管对与不对，坚持不懈往后再看。<br>简单题目如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</div><div class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve2</span>) =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">1.5</span>)</div><div class="line">    <span class="built_in">Promise</span>.resolve(<span class="number">2</span>).then(resolve2)</div><div class="line">  &#125;).then(resolve)</div><div class="line">&#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">3</span>, res)</div><div class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">4</span>)</div><div class="line">&#125;)</div><div class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">  resolve()</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">11</span>)</div><div class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">33</span>)</div><div class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">44</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
@@ -398,19 +398,33 @@ document.getElementById('local-search-input').onkeyup = function() {
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">  resolve(<span class="built_in">Promise</span>.resolve(fn2()))</div><div class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="comment">// await之后所有代码放在该then里</span></div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'b'</span>)</div><div class="line">&#125;)</div><div class="line"><span class="comment">// =&gt; 再等价于以下：(基于Typescript中对Promise的定义)</span></div><div class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve2</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">Promise</span>.resolve(fn2()).then(resolve2)</div><div class="line">  &#125;).then(resolve)</div><div class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'b'</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p><strong><em> await一个<code>非</code>async函数，则<code>await fn2()</code>等价于以下: </em></strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">  resolve(fn2())</div><div class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="comment">// await之后所有代码放在该then里</span></div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'b'</span>)</div><div class="line">&#125;)</div><div class="line"><span class="comment">// =&gt; 再等价于以下：</span></div><div class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">Promise</span>.resolve(fn2()).then(resolve)</div><div class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'b'</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h2 id="接下来总结下第二道题的解析过程："><a href="#接下来总结下第二道题的解析过程：" class="headerlink" title="接下来总结下第二道题的解析过程："></a>接下来总结下第二道题的解析过程：</h2><pre><code>* script宏任务遇到`console.log(&quot;g&quot;)`直接打印&apos;g&apos;;
-* 遇到`setTimeout(() =&gt; console.log(&apos;h&apos;), 0)`加入宏任务队列;
-* 遇到`fn1()`立即打印&apos;a&apos;;
-* 遇到`Promise.resolve(fn2())`先进入执行`fn2()`，打印&apos;c&apos;并将&apos;then1&apos;将入微任务队列，将&apos;then3&apos;加入微任务队列，&apos;fn2&apos;执行完毕，返回值默认为&apos;undefined&apos;;
-* 接上面`Promise.resolve(undefined)`之后将&apos;then9&apos;将入微任务队列;
-* 之后继续执行本轮任务中的同步代码，进入另一个&apos;Promise&apos;打印&apos;i&apos;并将&apos;then8&apos;加入微任务队列，打印&apos;k&apos;;
-* 至此本轮宏任务同步代码全部执行完毕;
-* 查询微任务队列，按加入顺序取出执行，因此依次打印&apos;e&apos;并将&apos;then2&apos;加入微任务队尾，打印&apos;s1&apos;并将&apos;then4&apos;加入微任务队尾，打印&apos;a1&apos;并将&apos;then10&apos;加入微任务队尾，打印&apos;j&apos;;
-* 继续查询微任务队列，依次打印&apos;f&apos;，打印&apos;s2&apos;并将&apos;then5&apos;加入微任务队尾，打印&apos;a2&apos;并将&apos;then11&apos;加入微任务队尾;
-* 继续查询微任务队列，依次打印&apos;s3&apos;并将&apos;then6&apos;加入微任务队尾，打印&apos;b&apos;;
-* 继续查询微任务队列，打印&apos;s4&apos;，微任务队列清空;
-* 查询宏任务队列，取出上面的定时器执行打印&apos;h&apos;，队列清空，程序结束。
-</code></pre><p>第一题输出顺序：1 =&gt; 1.5 =&gt; 11 =&gt; 33 =&gt; 44 =&gt; 3 2 =&gt; 4<br>第二题输出顺序：g =&gt; a =&gt; c =&gt; i =&gt; k =&gt; e =&gt; s1 =&gt; j =&gt; f =&gt; s2 =&gt; s3 =&gt; b =&gt; s4 =&gt; h<br>第三题输出顺序：g =&gt; a =&gt; c =&gt; i =&gt; k =&gt; e =&gt; s1 =&gt; b =&gt; j =&gt; f =&gt; s2 =&gt; s3 =&gt; s4 =&gt; h</p>
+<h2 id="接下来总结下第二道题的解析过程："><a href="#接下来总结下第二道题的解析过程：" class="headerlink" title="接下来总结下第二道题的解析过程："></a>接下来总结下第二道题的解析过程：</h2><ul>
+<li><p>script宏任务遇到<code>console.log(&quot;g&quot;)</code>直接打印’g’;</p>
+</li>
+<li><p>遇到<code>setTimeout(() =&gt; console.log(&#39;h&#39;), 0)</code>加入宏任务队列;</p>
+</li>
+<li><p>遇到<code>fn1()</code>立即打印’a’;</p>
+</li>
+<li><p>遇到<code>Promise.resolve(fn2())</code>先进入执行<code>fn2()</code>，打印’c’并将’then1’将入微任务队列，将’then3’加入微任务队列，’fn2’执行完毕，返回值默认为’undefined’;</p>
+</li>
+<li><p>接上面<code>Promise.resolve(undefined)</code>之后将’then9’将入微任务队列;</p>
+</li>
+<li><p>之后继续执行本轮任务中的同步代码，进入另一个’Promise’打印’i’并将’then8’加入微任务队列，打印’k’;</p>
+</li>
+<li><p>至此本轮宏任务同步代码全部执行完毕;</p>
+</li>
+<li><p>查询微任务队列，按加入顺序取出执行，因此依次打印’e’并将’then2’加入微任务队尾，打印’s1’并将’then4’加入微任务队尾，打印’a1’并将’then10’加入微任务队尾，打印’j’;</p>
+</li>
+<li><p>继续查询微任务队列，依次打印’f’，打印’s2’并将’then5’加入微任务队尾，打印’a2’并将’then11’加入微任务队尾;</p>
+</li>
+<li><p>继续查询微任务队列，依次打印’s3’并将’then6’加入微任务队尾，打印’b’;</p>
+</li>
+<li><p>继续查询微任务队列，打印’s4’，微任务队列清空;</p>
+</li>
+<li><p>查询宏任务队列，取出上面的定时器执行打印’h’，队列清空，程序结束。</p>
+</li>
+</ul>
+<p>第一题输出顺序：1 =&gt; 1.5 =&gt; 11 =&gt; 33 =&gt; 44 =&gt; 3 2 =&gt; 4<br>第二题输出顺序：g =&gt; a =&gt; c =&gt; i =&gt; k =&gt; e =&gt; s1 =&gt; j =&gt; f =&gt; s2 =&gt; s3 =&gt; b =&gt; s4 =&gt; h<br>第三题输出顺序：g =&gt; a =&gt; c =&gt; i =&gt; k =&gt; e =&gt; s1 =&gt; b =&gt; j =&gt; f =&gt; s2 =&gt; s3 =&gt; s4 =&gt; h</p>
 <p>end</p>
 
       
