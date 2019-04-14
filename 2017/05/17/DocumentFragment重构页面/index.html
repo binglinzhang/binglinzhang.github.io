@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="前端,Javascript," />
+  <meta name="keywords" content="Javascript,前端," />
 
 
 
@@ -89,7 +89,7 @@
 
 
 <meta name="description" content="Javascript里面有这样一个东西: DocumentFragment (中文翻译大概就叫”文档片段”)，很多前端攻城狮可以并不怎么常用或者了解它，它本身并不属于主DOM树的一部分，但它可以将一批子元素附加到自身，然后再将自身附加的所有子元素一次性添加到主DOM树中。这种方式不需要对一个真正的根节点进行操作，DocumentFragment附加子元素的所有操作都在浏览器内存中进行，不影响DOM">
-<meta name="keywords" content="前端,Javascript">
+<meta name="keywords" content="Javascript,前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DocumentFragment重构页面">
 <meta property="og:url" content="http://zhangbinglin.cn/2017/05/17/DocumentFragment重构页面/index.html">
@@ -394,11 +394,11 @@ document.getElementById('local-search-input').onkeyup = function() {
 <a id="more"></a>
 <p>下面举个简单的栗子：</p>
 <p><strong>以往的写法：</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">'ul'</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">const</span> fruit = [<span class="string">'apple'</span>, <span class="string">'cherry'</span>, <span class="string">'banana'</span>]</div><div class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> fruit) &#123;</div><div class="line">  <span class="keyword">let</span> liEle = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>)</div><div class="line">  liEle.innerHTML = fruit[i]</div><div class="line">  <span class="built_in">document</span>.querySelector(<span class="string">'#ul'</span>).appendChild(liEle)</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">'ul'</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line">const fruit = ['apple', 'cherry', 'banana']</div><div class="line">for (let i in fruit) &#123;</div><div class="line">  let liEle = document.createElement('li')</div><div class="line">  liEle.innerHTML = fruit[i]</div><div class="line">  document.querySelector('#ul').appendChild(liEle)</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <p><strong>运行结果：</strong></p>
 <p><img src="http://i1.piimg.com/588926/387bc3a38d213eb8.png" alt=""></p>
 <p><strong>DocumentFragment的写法：</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">'ul'</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">let</span> docFragment = <span class="built_in">document</span>.createDocumentFragment()    <span class="comment">//创建一个新的DocumentFragment对象</span></div><div class="line"><span class="keyword">const</span> fruit = [<span class="string">'apple'</span>, <span class="string">'cherry'</span>, <span class="string">'banana'</span>]</div><div class="line">fruit.forEach(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">let</span> liEle = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>)</div><div class="line">  liEle.innerHTML = value</div><div class="line">  docFragment.appendChild(liEle)</div><div class="line">&#125;)</div><div class="line"><span class="built_in">document</span>.querySelector(<span class="string">'#ul'</span>).appendChild(docFragment)  <span class="comment">//一次性插入DOM树</span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">'ul'</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">let docFragment = document.createDocumentFragment()    //创建一个新的DocumentFragment对象</div><div class="line">const fruit = ['apple', 'cherry', 'banana']</div><div class="line">fruit.forEach(value =&gt; &#123;</div><div class="line">  let liEle = document.createElement('li')</div><div class="line">  liEle.innerHTML = value</div><div class="line">  docFragment.appendChild(liEle)</div><div class="line">&#125;)</div><div class="line">document.querySelector('#ul').appendChild(docFragment)  //一次性插入DOM树</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>第一种方法中每进行一次遍历，appendChild操作会向DOM树请求一次回流，注意是回流不是重绘(回流比重绘耗时更多)，因为append操作改变了ul元素之后的整体结构。第二种方法中DocumentFragment实际上像一个伪DOM父节点，在这个例子中可以把它当成虚拟的UL元素。这种方法代码量虽然稍微多了点，但只在最后进行一次appendChild操作改变DOM模型树，浏览器只进行一次性回流，因此能很好的优化加载性能。</p>
 <p>Vue框架中就是大量运用了该方法，不直接针对DOM对象进行操作，而是将需要增删改的对象都先挂载在DocumentFragment这个虚拟的DOM对象上进行操作，最后完成数据处理之后再一次性提交给浏览器进行回流、重绘呈现新的页面。</p>
 <p><strong>关于页面的回流与重绘，简单的理解就是：</strong></p>
@@ -434,9 +434,9 @@ document.getElementById('local-search-input').onkeyup = function() {
       
         <div class="post-tags">
           
-            <a href="/tags/前端/" rel="tag"># 前端</a>
-          
             <a href="/tags/Javascript/" rel="tag"># Javascript</a>
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
           
         </div>
       
@@ -552,7 +552,7 @@ document.getElementById('local-search-input').onkeyup = function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count redNumber">52</span>
+                <span class="site-state-item-count redNumber">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
