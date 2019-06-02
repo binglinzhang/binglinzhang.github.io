@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast2.jpg">
 <meta property="og:image" content="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast3.png">
 <meta property="og:image" content="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast4.png">
-<meta property="og:updated_time" content="2019-05-23T13:26:12.904Z">
+<meta property="og:updated_time" content="2019-05-23T14:42:36.160Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack之ast抽象语法树">
 <meta name="twitter:description" content="抽象语法树(abstract syntax tree简写AST)，是一种将源代码抽象为一种树状结构的表现形式。js为开发者能更好的完成编程工作设计响应的语法，但这些语法并不适合程序理解，因此实际对语法进行程序分析时需要转化为AST进行应用，浏览器编译器一般会把源码转化为AST完成进一步分析操作应用等。">
@@ -399,9 +399,8 @@ document.getElementById('local-search-input').onkeyup = function() {
 <li>通过解析器将源码抽象为一种树状结构的表现形式。</li>
 <li>这颗树定义了代码的结构，可以精准的定位到声明语句、赋值语句、运算语句等。</li>
 <li>可视化分析平台  <a href="https://astexplorer.net/" target="_blank" rel="external">https://astexplorer.net/</a></li>
-<li>babel官方文档   <a href="https://babeljs.io/docs/en/babel-core" target="_blank" rel="external">https://babeljs.io/docs/en/babel-core</a></li>
+<li>babel官方文档   <a href="https://babeljs.io/docs/en/babel-core" target="_blank" rel="external">https://babeljs.io/docs/en/babel-core</a><br><img src="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast1.png" alt=""></li>
 </ul>
-<p><img src="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast1.png" alt=""></p>
 <h3 id="有啥用"><a href="#有啥用" class="headerlink" title="有啥用"></a>有啥用</h3><ul>
 <li>代码语法检查、错误提示、自动补全<ul>
 <li>如esLint对代码错误检测</li>
@@ -410,11 +409,10 @@ document.getElementById('local-search-input').onkeyup = function() {
 <li>转换代码格式或结构<ul>
 <li>如babeljs将es6代码转换为es5</li>
 <li>webpack替换引用路径<br>代码混淆压缩</li>
-<li>UglifyJS2等</li>
+<li>UglifyJS2等<br><img src="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast2.jpg" alt=""></li>
 </ul>
 </li>
 </ul>
-<p><img src="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast2.jpg" alt=""></p>
 <h3 id="常用的JavaScript-Parser"><a href="#常用的JavaScript-Parser" class="headerlink" title="常用的JavaScript Parser"></a>常用的JavaScript Parser</h3><p>JavaScript Parser，把js源码转化为抽象语法树的解析器。<br>浏览器会把js源码通过解析器转为抽象语法树，再进一步转化为字节码或直接生成机器码。<br>一般来说每个js引擎都会有自己的抽象语法树格式，Chrome的v8引擎，firefox的SpiderMonkey引擎等等，MDN提供了详细SpiderMonkey AST format的详细说明，算是业界的标准。</p>
 <ul>
 <li>babylon</li>
@@ -582,7 +580,7 @@ document.getElementById('local-search-input').onkeyup = function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count redNumber">56</span>
+                <span class="site-state-item-count redNumber">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
