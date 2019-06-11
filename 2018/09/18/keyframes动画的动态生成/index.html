@@ -4,18 +4,18 @@
 
 
 <html class="theme-next pisces" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -33,7 +33,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -67,35 +67,42 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="前端,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="zhangbinglin">
-<meta property="og:url" content="http://zhangbinglin.cn/404.html">
+<meta name="description" content="本文就最近开发的一个婚礼现场弹幕互动小程序中遇到的一个动画需求进行总结，其要点是解决css3中animation涉及到的keyframes字段如何根据不同屏幕宽度进行动态适配设置。">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="keyframes动画的动态生成">
+<meta property="og:url" content="http://zhangbinglin.cn/2018/09/18/keyframes动画的动态生成/index.html">
 <meta property="og:site_name" content="zhangbinglin">
+<meta property="og:description" content="本文就最近开发的一个婚礼现场弹幕互动小程序中遇到的一个动画需求进行总结，其要点是解决css3中animation涉及到的keyframes字段如何根据不同屏幕宽度进行动态适配设置。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-05-03T13:04:50.000Z">
+<meta property="og:image" content="https://zhangbinglin.github.io/pubpic/web.png">
+<meta property="og:image" content="https://zhangbinglin.github.io/pubpic/wechat.jpeg">
+<meta property="og:updated_time" content="2018-10-07T12:48:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zhangbinglin">
+<meta name="twitter:title" content="keyframes动画的动态生成">
+<meta name="twitter:description" content="本文就最近开发的一个婚礼现场弹幕互动小程序中遇到的一个动画需求进行总结，其要点是解决css3中animation涉及到的keyframes字段如何根据不同屏幕宽度进行动态适配设置。">
+<meta name="twitter:image" content="https://zhangbinglin.github.io/pubpic/web.png">
 
 
 
@@ -123,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://zhangbinglin.cn/404.html"/>
+  <link rel="canonical" href="http://zhangbinglin.cn/2018/09/18/keyframes动画的动态生成/">
 
 
 
 
 
-  <title> | zhangbinglin</title>
+  <title>keyframes动画的动态生成 | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,7 +161,7 @@
     
   
 
-  <div class="container sidebar-position-right  ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -163,7 +170,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">zhangbinglin</span>
         <span class="logo-line-after"><i></i></span>
@@ -193,7 +200,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -203,7 +210,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-clock-o"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-clock-o"></i> <br>
             
             时光轴
           </a>
@@ -213,7 +220,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -226,7 +233,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             站内搜索
           </a>
@@ -248,9 +255,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result" style="display:none;background:#fff;"></div>
@@ -283,34 +288,218 @@ document.getElementById('local-search-input').onkeyup = function() {
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline"></h1>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/09/18/keyframes动画的动态生成/">
 
-</header>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangbinglin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangbinglin">
+    </span>
 
     
-    
-      <!DOCTYPE HTML>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta http-equiv="content-type" content="text/html;charset=utf-8;">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="robots" content="all">
-  <meta name="robots" content="index,follow">
-  <link rel="stylesheet" type="text/css" href="https://qzone.qq.com/gy/404/style/404style.css">
-</head>
-<body>
-  <script type="text/plain" src="http://www.qq.com/404/search_children.js" charset="utf-8" homepageurl="/" homepagename="回到我的主页">
-  </script>
-  <script src="https://qzone.qq.com/gy/404/data.js" charset="utf-8"></script>
-  <script src="https://qzone.qq.com/gy/404/page.js" charset="utf-8"></script>
-</body>
-</html>
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                keyframes动画的动态生成
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-18T23:01:13+08:00">
+                2018-09-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文就最近开发的一个婚礼现场弹幕互动小程序中遇到的一个动画需求进行总结，其要点是解决css3中animation涉及到的keyframes字段如何根据不同屏幕宽度进行动态适配设置。</p>
+<a id="more"></a>
+<p>贴两张图看看先效果<br><img src="https://zhangbinglin.github.io/pubpic/web.png" alt="web大屏展示弹幕"><br><img src="https://zhangbinglin.github.io/pubpic/wechat.jpeg" alt="小程序发射弹幕"></p>
+<p><strong> 第一个问题，弹幕的移动采用js操作dom元素的方案还是使用css3动画控制的方案。 </strong></p>
+<p>采用定时器动态设置dom元素的transform或者left相对定位属性相对来讲比较灵活，还可以更好的控制速度等，但代价是性能的开销增大，特别是当同时存在较多弹幕的情况下，一者可能由于定时器的机制问题导致卡顿(这个是可以采用requestAnimationFrame去改善)，一者可能由于同时多个高频的dom操作导致卡顿无可避免。<br>采用css3原生动画的方式对于浏览器来讲就顺畅多了，而且不需要有太多的代码操控，但也因此对于速度等的控制就不够灵活。<br>最后考虑到发射弹幕条数较多的情况，实际应用中采用了css3动画的方式进行弹幕的循环移动。</p>
+<p><strong> 第二个问题，如何根据屏幕适配移动距离的问题。 </strong></p>
+<p>由于keyframes是针对animation提供一个定义动画帧的入口，只能以显性声明的方式声明需要动画的属性特性。但由于不同客户端屏幕宽度不确定，弹幕从右到左移动屏幕宽度的距离需要根据屏幕宽度设定，因此需要在keyframes中设置的translateX属性值需要动态设置。此时想到了是否可以根据屏幕宽度先动态计算生成keyframes，然后再通过style标签赋值的方式动态插入并生效。于是身体力行的写了如下代码，发现成功生效，内心喜滋滋一般。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">~<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> clientWidth = <span class="built_in">document</span>.documentElement.clientWidth</span><br><span class="line">  <span class="keyword">const</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>)</span><br><span class="line">  <span class="keyword">let</span> str = <span class="string">''</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, len = <span class="number">4</span>; i &lt; len; i++) &#123;</span><br><span class="line">    str += <span class="string">`</span></span><br><span class="line"><span class="string">    @keyframes move<span class="subst">$&#123;i&#125;</span> &#123;</span></span><br><span class="line"><span class="string">      from &#123;</span></span><br><span class="line"><span class="string">        transform: translateX(100%);</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      to &#123;</span></span><br><span class="line"><span class="string">        transform: translateX(-<span class="subst">$&#123;clientWidth&#125;</span>px);</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">  &#125;</span><br><span class="line">  style.innerHTML = str</span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(style)</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure></p>
+<p><strong> 第三个问题，切换到小程序大坑，由于小程序无法操作dom元素，以上方案无缚鸡之力，如何救？ </strong></p>
+<p>最开始没有好的方案，无奈只想到了通过media query媒介查询的方式进行多个机型宽度的适配，如下样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (max-width: <span class="number">320</span>rpx) &#123;</span><br><span class="line">  @<span class="keyword">keyframes</span> move1 &#123;</span><br><span class="line">    <span class="selector-tag">from</span> &#123;</span><br><span class="line">      <span class="attribute">transform</span>: <span class="built_in">translateX</span>(100%);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">to</span> &#123;</span><br><span class="line">      <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-320rpx);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (max-width: <span class="number">440</span>rpx) &#123;</span><br><span class="line">  @<span class="keyword">keyframes</span> move1 &#123;</span><br><span class="line">    <span class="selector-tag">from</span> &#123;</span><br><span class="line">      <span class="attribute">transform</span>: <span class="built_in">translateX</span>(100%);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">to</span> &#123;</span><br><span class="line">      <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-440rpx);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>后面偶然看到一种css变量的东西，可以在css属性值中引入变量，amizing！于是尝试了如下写法，其中”–client-width”属性的属性值由<code>wx.getSystemInfoSync().windowWidth</code>api获取并设置为根元素的一对属性与属性值，小程序的兼容性还是很好的，刷新小程序后简值的生效了。当然这种方案也可以应用在pc端上。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">keyframes</span> move1 &#123;</span><br><span class="line">  <span class="selector-tag">from</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(100%);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">to</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(- var(--client-width));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong> 最后一个问题，关于轮询弹幕并展示的逻辑 </strong><br>项目中的实际做法是假设页面从上至下展示4行弹幕，那么维护一个二维数组存储每一行的弹幕数据，然后通过循环渲染到页面，并应用上面所列的css3动画。项目中同时也维持了两类定时器，一个是后台数据的轮询(每次轮询的时候带上当前已获得的弹幕条数后台接口即可判断该从哪里继续返回数据，当然也是可以采用websocket的server push)，一个是控制弹幕出现速度的定时器。每次接口获取到的数据将放入一个固定的数组进行维护，另外控制弹幕出现的定时器则每次从该数组中shift一条数据往循环渲染的数组中push，从而页面上响应该条新数据渲染出来。关键代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pushList</span>(<span class="params">idx</span>) </span>&#123;</span><br><span class="line">  resList.length &amp;&amp; danList[idx].push(resList.shift())</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_setInterval</span>(<span class="params">timerName, fn, delay</span>) </span>&#123;</span><br><span class="line">  fn()</span><br><span class="line">  timer[timerName] &amp;&amp; clearTimeout(timer[timerName])</span><br><span class="line">  timer[timerName] = setTimeout(_setInterval.bind(<span class="keyword">this</span>, timerName, fn, delay), delay)</span><br><span class="line">&#125;</span><br><span class="line">_setInterval(<span class="string">`danmuTimer<span class="subst">$&#123;i&#125;</span>`</span>, pushList.bind(<span class="literal">null</span>, i), delay)</span><br></pre></td></tr></table></figure></p>
+<p>end</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/12/介绍并演示几种常见的设计模式/" rel="next" title="介绍并演示几种常见的设计模式">
+                <i class="fa fa-chevron-left"></i> 介绍并演示几种常见的设计模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/01/浅谈项目中首屏渲染的几点优化/" rel="prev" title="浅谈项目中首屏渲染的几点优化">
+                浅谈项目中首屏渲染的几点优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+<ul class="-mob-share-list">
+    <li class="-mob-share-weixin"><p class="describeP">微信</p></li>
+    <li class="-mob-share-weibo"><p class="describeP">新浪微博</p></li>
+    <li class="-mob-share-qq"><p class="describeP">QQ好友</p></li>
+    <li class="-mob-share-qzone"><p class="describeP">QQ空间</p></li>
+    <li class="-mob-share-facebook"><p class="describeP">Facebook</p></li>
+    <li class="-mob-share-twitter"><p class="describeP">Twitter</p></li>
+</ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1db2155cc54e0"></script>
+<!--MOB SHARE END-->
+
+      
+    </div>
+
+    <script>
+    ~function() {
+      var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+      var xml = new XMLHttpRequest()
+      xml.open('GET', 'https://zhangbinglin.cn:10088/addVisitedCount?key=' + key)
+      xml.onreadystatechange = function() {}
+      xml.send(null)
+    }()
+    </script>
   </div>
 
 
@@ -345,9 +534,7 @@ document.getElementById('local-search-input').onkeyup = function() {
 
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.png"
-               alt="zhangbinglin" />
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="zhangbinglin">
           <p class="site-author-name" itemprop="name">zhangbinglin</p>
            
               <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
@@ -421,7 +608,7 @@ document.getElementById('local-search-input').onkeyup = function() {
         
 
         
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=308 height=52 src="//music.163.com/outchain/player?type=2&id=857896&auto=0&height=32" class="musicIN"></iframe>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="308" height="52" src="//music.163.com/outchain/player?type=2&id=857896&auto=0&height=32" class="musicIN"></iframe>
 
         
 
@@ -443,7 +630,7 @@ document.getElementById('local-search-input').onkeyup = function() {
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2019</span>
@@ -549,6 +736,10 @@ document.getElementById('local-search-input').onkeyup = function() {
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 

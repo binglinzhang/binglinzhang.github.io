@@ -4,18 +4,18 @@
 
 
 <html class="theme-next pisces" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -33,7 +33,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -67,35 +67,39 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="前端,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="zhangbinglin">
-<meta property="og:url" content="http://zhangbinglin.cn/404.html">
+<meta name="description" content="开发中遇到的一个需求，实现用户点击按钮后等待2s下载资源，项目中通过动态创建a标签，利用download属性进行当前页下载实现了该需求，封装方法如下：">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="window.open这件小事儿">
+<meta property="og:url" content="http://zhangbinglin.cn/2018/06/30/window.open这件小事儿/index.html">
 <meta property="og:site_name" content="zhangbinglin">
+<meta property="og:description" content="开发中遇到的一个需求，实现用户点击按钮后等待2s下载资源，项目中通过动态创建a标签，利用download属性进行当前页下载实现了该需求，封装方法如下：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-05-03T13:04:50.000Z">
+<meta property="og:updated_time" content="2018-06-25T09:36:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zhangbinglin">
+<meta name="twitter:title" content="window.open这件小事儿">
+<meta name="twitter:description" content="开发中遇到的一个需求，实现用户点击按钮后等待2s下载资源，项目中通过动态创建a标签，利用download属性进行当前页下载实现了该需求，封装方法如下：">
 
 
 
@@ -123,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://zhangbinglin.cn/404.html"/>
+  <link rel="canonical" href="http://zhangbinglin.cn/2018/06/30/window.open这件小事儿/">
 
 
 
 
 
-  <title> | zhangbinglin</title>
+  <title>window.open这件小事儿 | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,7 +158,7 @@
     
   
 
-  <div class="container sidebar-position-right  ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -163,7 +167,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">zhangbinglin</span>
         <span class="logo-line-after"><i></i></span>
@@ -193,7 +197,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -203,7 +207,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-clock-o"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-clock-o"></i> <br>
             
             时光轴
           </a>
@@ -213,7 +217,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -226,7 +230,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             站内搜索
           </a>
@@ -248,9 +252,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result" style="display:none;background:#fff;"></div>
@@ -283,34 +285,215 @@ document.getElementById('local-search-input').onkeyup = function() {
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline"></h1>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/06/30/window.open这件小事儿/">
 
-</header>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangbinglin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangbinglin">
+    </span>
 
     
-    
-      <!DOCTYPE HTML>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta http-equiv="content-type" content="text/html;charset=utf-8;">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="robots" content="all">
-  <meta name="robots" content="index,follow">
-  <link rel="stylesheet" type="text/css" href="https://qzone.qq.com/gy/404/style/404style.css">
-</head>
-<body>
-  <script type="text/plain" src="http://www.qq.com/404/search_children.js" charset="utf-8" homepageurl="/" homepagename="回到我的主页">
-  </script>
-  <script src="https://qzone.qq.com/gy/404/data.js" charset="utf-8"></script>
-  <script src="https://qzone.qq.com/gy/404/page.js" charset="utf-8"></script>
-</body>
-</html>
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                window.open这件小事儿
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-30T22:12:22+08:00">
+                2018-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>开发中遇到的一个需求，实现用户点击按钮后等待2s下载资源，项目中通过动态创建a标签，利用download属性进行当前页下载实现了该需求，封装方法如下：</p>
+<a id="more"></a>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">aDownload</span>(<span class="params">url, name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>)</span><br><span class="line">  a.setAttribute(<span class="string">'href'</span>, url)</span><br><span class="line">  a.setAttribute(<span class="string">'download'</span>, name || <span class="string">''</span>)</span><br><span class="line">  a.setAttribute(<span class="string">'display'</span>, <span class="string">'none'</span>)</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(a)</span><br><span class="line">  a.click()</span><br><span class="line">  <span class="built_in">document</span>.body.removeChild(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但继续追究下去的时候，如果想实现不再当前页下载，而是打开新的窗口进行下载，或者考虑到a标签的download属性有兼容性问题，是否有其他的替代方案？</p>
+<p>现假设有如下代码，预期结果是点击按钮之后跳转到新的页面，或者直接下载资源，但结果是第一个按钮可以如期打开新页面，第二个打开新页面被浏览器拦截。查找资料得知是因为window.open频繁被广告商滥用，严重影响用户体验，大部分现代的浏览器默认开启智能阻止弹窗策略。该策略会根据用户行为判断是否如期执行window.open操作，还是判定为流氓操作予以拦截。</p>
+<p>下面代码当延迟1000毫秒执行时，Chrome允许窗口弹出，但是当延迟2000毫秒(或者弹窗的代码在异步ajax内部)执行时被拦截。经多次测试，Chrome浏览器在1000毫秒及之内执行时将允许弹窗，大于等于1001毫秒时候将拦截，其他浏览器拦截策略可能略微不同。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">'handleClick(1)'</span>&gt;</span>1s后打开新标签页<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">'handleClick(2)'</span>&gt;</span>2s后打开新标签页<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">handleClick</span>(<span class="params">s</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.open(<span class="string">'./b.html'</span>, <span class="string">'winName'</span>)</span></span><br><span class="line">      &#125;, s * 1000)</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>尝试了以下这么几种方式，通过a标签href属性、通过form标签submit方法、通过location重定向，其中前两种实际使用过程中如果结合了<code>target=_blank</code>与上面栗子中2s延迟的setTimeout，浏览器还是会拦截新窗口的打开，这点没办法突破，但可以应对浏览器莫名的拦截。第三种方式无论是否延迟都可以越过浏览器拦截，但牺牲了一定的用户体验，需要权衡。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一种：通过a标签href属性</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">aOpen</span>(<span class="params">url, isDownload, name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>)</span><br><span class="line">  a.setAttribute(<span class="string">'href'</span>, url)</span><br><span class="line">  a.setAttribute(<span class="string">'target'</span>, <span class="string">'_blank'</span>)</span><br><span class="line">  isDownload &amp;&amp; a.setAttribute(<span class="string">'download'</span>, name || <span class="string">''</span>)</span><br><span class="line">  a.setAttribute(<span class="string">'display'</span>, <span class="string">'none'</span>)</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(a)</span><br><span class="line">  a.click()</span><br><span class="line">  <span class="built_in">document</span>.body.removeChild(a)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//第二种：通过form标签submit方法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formOpen</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> form = <span class="built_in">document</span>.createElement(<span class="string">'form'</span>)</span><br><span class="line">  form.setAttribute(<span class="string">'action'</span>, url)</span><br><span class="line">  form.setAttribute(<span class="string">'target'</span>, <span class="string">'_blank'</span>)</span><br><span class="line">  form.setAttribute(<span class="string">'method'</span>, <span class="string">'POST'</span>)</span><br><span class="line">  form.setAttribute(<span class="string">'display'</span>, <span class="string">'none'</span>)</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(form)</span><br><span class="line">  form.submit()</span><br><span class="line">  <span class="built_in">document</span>.body.removeChild(form)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 以上2种调用方式</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; aOpen(<span class="string">'./b.html'</span>) &#125;, <span class="number">1000</span>) <span class="comment">//这种方式可以顺利打开新窗口</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; aOpen(<span class="string">'./b.html'</span>) &#125;, <span class="number">2000</span>) <span class="comment">//超过1s的延迟这种方式还是会被拦截</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//第三种：通过location重定向</span></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> newWin = <span class="built_in">window</span>.open(<span class="string">'./loadingPage.html'</span>)</span><br><span class="line">  ajax().done(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    newWin.location.href = <span class="string">'./targetPage.html'</span> <span class="comment">//重定向到目标页面</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/25/简单介绍fiddler工具的几种用法/" rel="next" title="简单介绍fiddler工具的几种用法">
+                <i class="fa fa-chevron-left"></i> 简单介绍fiddler工具的几种用法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/15/另一种思路的评星组件/" rel="prev" title="另一种思路的评星组件">
+                另一种思路的评星组件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+<ul class="-mob-share-list">
+    <li class="-mob-share-weixin"><p class="describeP">微信</p></li>
+    <li class="-mob-share-weibo"><p class="describeP">新浪微博</p></li>
+    <li class="-mob-share-qq"><p class="describeP">QQ好友</p></li>
+    <li class="-mob-share-qzone"><p class="describeP">QQ空间</p></li>
+    <li class="-mob-share-facebook"><p class="describeP">Facebook</p></li>
+    <li class="-mob-share-twitter"><p class="describeP">Twitter</p></li>
+</ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1db2155cc54e0"></script>
+<!--MOB SHARE END-->
+
+      
+    </div>
+
+    <script>
+    ~function() {
+      var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+      var xml = new XMLHttpRequest()
+      xml.open('GET', 'https://zhangbinglin.cn:10088/addVisitedCount?key=' + key)
+      xml.onreadystatechange = function() {}
+      xml.send(null)
+    }()
+    </script>
   </div>
 
 
@@ -345,9 +528,7 @@ document.getElementById('local-search-input').onkeyup = function() {
 
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.png"
-               alt="zhangbinglin" />
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="zhangbinglin">
           <p class="site-author-name" itemprop="name">zhangbinglin</p>
            
               <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
@@ -421,7 +602,7 @@ document.getElementById('local-search-input').onkeyup = function() {
         
 
         
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=308 height=52 src="//music.163.com/outchain/player?type=2&id=857896&auto=0&height=32" class="musicIN"></iframe>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="308" height="52" src="//music.163.com/outchain/player?type=2&id=857896&auto=0&height=32" class="musicIN"></iframe>
 
         
 
@@ -443,7 +624,7 @@ document.getElementById('local-search-input').onkeyup = function() {
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2019</span>
@@ -549,6 +730,10 @@ document.getElementById('local-search-input').onkeyup = function() {
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 

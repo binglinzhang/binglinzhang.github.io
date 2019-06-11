@@ -1,0 +1,1149 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="前端,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="收集整理日常开发中的雷区以及可汲取之处，以期日后回望，并不定期更新。">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日常开发笔记">
+<meta property="og:url" content="http://zhangbinglin.cn/2017/07/14/日常开发笔记/index.html">
+<meta property="og:site_name" content="zhangbinglin">
+<meta property="og:description" content="收集整理日常开发中的雷区以及可汲取之处，以期日后回望，并不定期更新。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://t1.picb.cc/uploads/2017/10/24/WdyVs.jpg">
+<meta property="og:image" content="https://t1.picb.cc/uploads/2017/10/24/WYdPe.png">
+<meta property="og:updated_time" content="2017-10-25T13:11:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="日常开发笔记">
+<meta name="twitter:description" content="收集整理日常开发中的雷区以及可汲取之处，以期日后回望，并不定期更新。">
+<meta name="twitter:image" content="https://t1.picb.cc/uploads/2017/10/24/WdyVs.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangbinglin.cn/2017/07/14/日常开发笔记/">
+
+
+
+
+
+  <title>日常开发笔记 | zhangbinglin</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangbinglin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活不止非黑即白，<br>还有笔下的五彩 ...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-clock-o"></i> <br>
+            
+            时光轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            站内搜索
+          </a>
+        </li>
+
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup" style="background:none">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result" style="display:none;background:#fff;"></div>
+</div>
+<script>
+document.getElementById('local-search-input').onkeyup = function() {
+  document.getElementById('local-search-result').style.display = 'none'
+  if (document.getElementById('local-search-input').value) {
+      document.getElementById('local-search-result').style.display = 'block'
+      document.getElementsByClassName('local-search-popup')[0].focus()
+  }
+}
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2017/07/14/日常开发笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangbinglin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangbinglin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                日常开发笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-14T21:14:17+08:00">
+                2017-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>收集整理日常开发中的雷区以及可汲取之处，以期日后回望，并不定期更新。</p>
+<a id="more"></a>
+<p><strong>1.</strong> npm build的时候需在配置路由中添加”/“根路由，这样在打开index.html的时候默认才是在根路由下。</p>
+<p><strong>2.</strong> 通过绝对位置进行定位的元素设置垂直居中的方法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">position</span>: <span class="selector-tag">absolute</span>;</span><br><span class="line"><span class="selector-tag">left</span>: 50%;</span><br><span class="line"><span class="selector-tag">top</span>: 50%;</span><br><span class="line"><span class="selector-tag">transform</span>: <span class="selector-tag">translate</span>(<span class="selector-tag">-50</span>%, <span class="selector-tag">-50</span>%);</span><br></pre></td></tr></table></figure>
+<p><strong>3.</strong> arrow小箭头纯css代码：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">position</span>: <span class="selector-tag">absolute</span>;</span><br><span class="line">   <span class="selector-tag">border</span>: 2<span class="selector-class">.5px</span> <span class="selector-tag">solid</span> <span class="selector-id">#fff</span>;</span><br><span class="line">   <span class="selector-tag">border-top</span>: 0;</span><br><span class="line">   <span class="selector-tag">border-left</span>: 0;</span><br><span class="line">   <span class="selector-tag">content</span>: " ";</span><br><span class="line">   <span class="selector-tag">top</span>: 50%;</span><br><span class="line">   <span class="selector-tag">right</span>: <span class="selector-tag">-15px</span>;</span><br><span class="line">   <span class="selector-tag">width</span>: <span class="selector-class">.1rem</span>;</span><br><span class="line">   <span class="selector-tag">height</span>: <span class="selector-class">.1rem</span>;</span><br><span class="line">   <span class="selector-tag">-webkit-transform</span>: <span class="selector-tag">translateY</span>(<span class="selector-tag">-50</span>%) <span class="selector-tag">rotate</span>(45<span class="selector-tag">deg</span>);</span><br><span class="line">   <span class="selector-tag">transform</span>: <span class="selector-tag">translateY</span>(<span class="selector-tag">-50</span>%) <span class="selector-tag">rotate</span>(45<span class="selector-tag">deg</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>4.</strong> index.html页面中引入html/body两个元素的media query样式，用于适配不同屏幕下元素大小，之后在以其为根元素在其页面内使用rem单位进行样式设置,或者可以通过动态在mounted钩子中设置html元素的font-size。</p>
+<p><strong>5.</strong> vue组件中可定制图片体积大小上限，从而决定是否将其转换为base64格式文件直接保存在js代码中，从而减少网络请求。</p>
+<p><strong>6.</strong> 对于v-for渲染出来的列表，可以对其id属性绑定传值，通过e.target.id或者e.currentTarget.id(两个区别在于前者识别的是点击元素，后者识别的是绑定点击事件的元素)获取到该值。</p>
+<p><strong>7.</strong> 常见的图标类可以通过icomoon在线转换为字体图标，通过引入css及font字体即可在相关标签中加入className，对className设置font-size属性及color属性可对改变其大小与颜色。</p>
+<p><strong>8.</strong> mint-ui引入之后，在组件中如果设置了scoped，则在该组件的局部样式中无法对UI组件进行修改，解决方案可以通过对vue组件最外层div设置class或者id，然后通过该唯一class或者id包裹组件内部元素的样式。</p>
+<p><strong>9.</strong> v-show与v-if区别在v-show不满足条件的情况下还会渲染相应的内容但不显示，而v-if如果不满足条件即不渲染且隐藏。</p>
+<p><strong>10.</strong> vue文件夹不允许使用中文命名，否则无法进行热重载。</p>
+<p><strong>11.</strong> css写点击选中打钩样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.icon</span> &#123;</span><br><span class="line">	<span class="attribute">display</span>: inline-block;</span><br><span class="line">	<span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">	<span class="attribute">border-radius</span>: <span class="number">100%</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;</span><br><span class="line">	<span class="attribute">position</span>: relative;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">20px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">20px</span>;</span><br><span class="line">	<span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.icon</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">2px</span> solid transparent;</span><br><span class="line">	<span class="attribute">border-left</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">border-top</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">content</span>: <span class="string">" "</span>;</span><br><span class="line">	<span class="attribute">top</span>: <span class="number">3px</span>;</span><br><span class="line">	<span class="attribute">left</span>: <span class="number">6px</span>;</span><br><span class="line">	<span class="attribute">position</span>: absolute;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">4px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">8px</span>;</span><br><span class="line">	<span class="attribute">-webkit-transform</span>: <span class="built_in">rotate</span>(45deg) <span class="built_in">scale</span>(0);</span><br><span class="line">	<span class="attribute">transform</span>: <span class="built_in">rotate</span>(45deg) <span class="built_in">scale</span>(0);</span><br><span class="line">	<span class="attribute">-webkit-transition</span>: -webkit-transform .<span class="number">2s</span>;</span><br><span class="line">	<span class="attribute">transition</span>: -webkit-transform .<span class="number">2s</span>;</span><br><span class="line">	<span class="attribute">transition</span>: transform .<span class="number">2s</span>;</span><br><span class="line">	<span class="attribute">transition</span>: transform .<span class="number">2s</span>,-webkit-transform .<span class="number">2s</span>;</span><br><span class="line">	<span class="attribute">border-color</span>: <span class="number">#fff</span>;</span><br><span class="line">	<span class="attribute">-webkit-transform</span>: <span class="built_in">rotate</span>(45deg) <span class="built_in">scale</span>(1);</span><br><span class="line">	<span class="attribute">transform</span>: <span class="built_in">rotate</span>(45deg) <span class="built_in">scale</span>(1);</span><br><span class="line">&#125;</span><br><span class="line">   .icon.checked &#123;  //点击之后添加上checked类名即可</span><br><span class="line">	<span class="selector-tag">background-color</span>: <span class="selector-id">#26a2ff</span>;</span><br><span class="line">	<span class="selector-tag">border-color</span>: <span class="selector-id">#26a2ff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>12.</strong> 空对象（包括数组）无法直接判断是否为假值！可通过Object.keys(obj).length或者JSON.stringify(obj) === ‘{}’进行判断。</p>
+<p><strong>13.</strong> 当ref在标准标签中时代表获取该DOM元素，当ref在子组件时，则代表获取该组件，包括了该组件的id、class以及方法等。可以通过this.$refs.refName.method调用子组件的方法。但是当ref与v-for结合使用时，this.$refs.refName获取到的是一个数组，此时可通过制定数组元素调用指定子组件的方法。</p>
+<p><strong>14.</strong> nextTick方法主要是针对vue的虚拟DOM异步执行更新的方式创造的，虚拟DOM具有缓冲作用，不会时时更新，只有当一个函数执行完毕之后再统一进行DOM更新。因此，在数据更新之后使用nextTick回调函数可以在DOM统一更新之后调用执行。</p>
+<p><strong>15.</strong> 背景图全撑开样式设置：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.bg</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">'../../assets/img/zbl_ceshibg.png'</span>) no-repeat;</span><br><span class="line">    <span class="attribute">background-size</span>: <span class="number">100%</span> <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">4.7rem</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>16.</strong> input元素的focus、blur事件无法进行代理执行，只能在目标元素上进行响应。(委托代理无法实现)</p>
+<p><strong>17.</strong> 小程序中bindtap与catchtap两种点击事件的区别:<br>bindtap事件发生过程通过捕获阶段进入到目标阶段获取目标target元素，之后执行从里往外冒泡，从而有机会在冒泡阶段执行到父节点绑定的事件，绑定事件的元素可通过currentTarget获得。<br>catchtap事件发生过程只经历了捕获阶段到目标阶段target元素，阻止了冒泡行为。</p>
+<p><strong>18.</strong> 小程序中navigateTo方法缓存当前页面（不关闭）并打开新的页面，redirectTo方法关闭当前页面并打开新的页面，navigateBack方法直接跳转回未关闭的页面，可多级进行跳转，但该方法没办法进行路由传参。</p>
+<p><strong>19.</strong> 字符串的slice、substring、substr三个方法区别：<br>slice(a,b)截取两个参数从小到大之间的字段，可传负数(负数加上字符串长度即为截取的索引，也可以直接从尾倒数回来，-1代表最后一位，以此类推)；<br><br>substring(a,b)截取两个参数从小到大之间的字段，但传入的负数将被强行转换为0；<br><br>substr(a,n)第一位参数表示截取开始的索引(可为负数)，第二位参数表示截取的字符串长度(负数将转换为0)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stringValue = “hello world”;</span><br><span class="line">alert(stringValue.slice(<span class="number">-3</span>));          	<span class="comment">//"rld"</span></span><br><span class="line">alert(stringValue.substring(<span class="number">-3</span>));      	<span class="comment">//"hello world"</span></span><br><span class="line">alert(stringValue.substr(<span class="number">-3</span>));        	<span class="comment">//"rld"</span></span><br><span class="line">alert(stringValue.slice(<span class="number">3</span>,<span class="number">-4</span>));         <span class="comment">//"lo w"</span></span><br><span class="line">alert(stringValue.substring(<span class="number">3</span>,<span class="number">-4</span>));    	<span class="comment">//"hel"</span></span><br><span class="line">alert(stringValue.substr(<span class="number">3</span>,<span class="number">-4</span>));       	<span class="comment">//""(空字符串)</span></span><br></pre></td></tr></table></figure>
+<p><strong>20.</strong> 区别：双飞翼布局比圣杯布局多创建了一个div，但不用相对布局了,多了1个div，少用大致4个css属性（圣杯布局中间div的padding-left和padding-right这2个属性，加上左右两个div用相对布局position: relative及对应的right和left共4个属性，一共6个；而双飞翼布局子div里用margin-left和margin-right共2个属性，6-2=4），双飞翼由此相对简洁一些。现在主要以flex进行布局。</p>
+<p><strong>21.</strong> 项目可优化部分有：下拉刷新、页面切换过渡效果、禁用微信浏览器访问页面存在下拉漏出黑色区域、多请求并发优化问题。</p>
+<p><strong>22.</strong> vue组件传值的几种方式：<br>1.props down event up的父子组件通信<br>2.路由传参(关键参数需要加密)<br>3.vuex状态管理<br>4.event bus注册全局事件<br>5.sessionStorage存储</p>
+<p><strong>23.</strong> 产生随机长度字符串：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种方式</span></span><br><span class="line"><span class="keyword">let</span> randomStr = <span class="function">(<span class="params">length</span>) =&gt;</span> &#123;</span><br><span class="line">    length = <span class="built_in">parseInt</span>(length, <span class="number">10</span>) || <span class="number">6</span></span><br><span class="line">    <span class="keyword">if</span> (length &lt;= <span class="number">6</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Math</span>.random().toString(<span class="number">36</span>).slice(<span class="number">2</span>, length + <span class="number">2</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> str = <span class="string">''</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="built_in">Math</span>.ceil(length / <span class="number">6</span>); i++) &#123;</span><br><span class="line">        str += <span class="built_in">Math</span>.random().toString(<span class="number">36</span>).slice(<span class="number">2</span>, <span class="number">8</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> str.slice(<span class="number">0</span>, length)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> len = <span class="built_in">Math</span>.random() * <span class="number">100</span></span><br><span class="line">  randomStr(len)</span><br><span class="line"><span class="comment">// 第二种常规方式</span></span><br><span class="line"><span class="keyword">let</span> randomStr2 = <span class="function">(<span class="params">len</span>) =&gt;</span> &#123;</span><br><span class="line">    len = <span class="built_in">parseInt</span>(len, <span class="number">10</span>) || <span class="number">32</span>　　</span><br><span class="line">    <span class="keyword">let</span> chars = <span class="string">'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'</span> <span class="comment">/****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/</span> 　　</span><br><span class="line">    <span class="keyword">let</span> str = <span class="string">''</span>　　</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++) &#123;　　　　</span><br><span class="line">      str += chars[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * chars.length])</span><br><span class="line">    &#125;　　</span><br><span class="line">    <span class="keyword">return</span> str</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>24.</strong> 清空一个数组的方式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、<span class="keyword">let</span> one = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>]</span><br><span class="line">one.length = <span class="number">0</span>  <span class="comment">//one =&gt; []</span></span><br><span class="line"><span class="number">2</span>、<span class="keyword">let</span> two = [<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>]</span><br><span class="line">two.splice(<span class="number">0</span>)  <span class="comment">//two =&gt; []，利用了splice会改变原数组的方法，splice方法返回被删除元素组成的一个新数组</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>25.</strong> ES6中的let关键字本质上是对闭包的一个封装，从而影响其作用域。</p>
+<p><strong>26.</strong> 产生当前毫秒的时间戳的方法：<br>new Date().getTime() === new Date().valueOf()  //true</p>
+<p><strong>27.</strong> babel-runtime: es语法做转义； fastclick: 解决移动端点击300毫秒延时问题； babel-polyfill：主要针对es6的promise等补丁。</p>
+<p><strong>28.</strong> 父元素清除浮动坍塌<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">﻿<span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">' '</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">visibility</span>: hidden;</span><br><span class="line">    <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br><span class="line">=&gt;等价于 (BFC的原理)</span><br><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">' '</span>;</span><br><span class="line">    <span class="attribute">display</span>: table;</span><br><span class="line">    <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>29.</strong> 多个li元素设置为inline-block之后，元素之间会存在几个px的间隙，通过在其ul元素上设置font-size: 0可以解决这个问题。</p>
+<p><strong>30.</strong> box-sizing: border-box的作用是将padding的值往设定好的元素高度内部挤，而不会往外延伸影响到元素整体高度的计算。</p>
+<p><strong>31.</strong> rem不兼容IE8及以下浏览器，flex不兼容IE9及以下浏览器。</p>
+<p><strong>32.</strong> 一个原型及原型链的栗子<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>原型链栗子<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"aaa"</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'bbb'</span>&gt;</span>bbb<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">$</span>(<span class="params">classOrId</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">this</span>.Ele = <span class="built_in">document</span>.querySelector(classOrId)</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    $.prototype.html = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> ele = <span class="keyword">this</span>.Ele</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (!value) &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> ele.innerHTML</span></span><br><span class="line"><span class="javascript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">            ele.innerHTML = value</span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="keyword">this</span></span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    $.prototype.on = <span class="function"><span class="keyword">function</span>(<span class="params">type, fn</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> ele = <span class="keyword">this</span>.Ele</span></span><br><span class="line">        ele.addEventListener(type, fn)</span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="keyword">this</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> elementa = <span class="keyword">new</span> $(<span class="string">'.aaa'</span>)</span></span><br><span class="line"><span class="javascript">    elementa.on(<span class="string">'click'</span>, () =&gt; &#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="keyword">this</span>) <span class="comment">//window</span></span></span><br><span class="line">    &#125;)</span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> elementb = <span class="keyword">new</span> $(<span class="string">'#bbb'</span>)</span></span><br><span class="line"><span class="javascript">    elementb.on(<span class="string">'mouseover'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">'mouseover'</span>)</span></span><br><span class="line"><span class="javascript">    &#125;).html(<span class="string">'666'</span>)</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>33.</strong> https<br><img src="https://t1.picb.cc/uploads/2017/10/24/WdyVs.jpg" alt></p>
+<p><strong>34.</strong> vue路由跳转间的登录态判断<br><img src="https://t1.picb.cc/uploads/2017/10/24/WYdPe.png" alt></p>
+<p><strong>35.</strong> 预设式的响应式设置<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">'img/480.png'</span></span></span><br><span class="line"><span class="tag">     <span class="attr">srcset</span>=<span class="string">'img/480.png 480w, img/800.png 800w, img/1200.png, 1200w'</span></span></span><br><span class="line"><span class="tag">     <span class="attr">size</span>=<span class="string">'(min-width:800px) calc(100vw - 2rem), 100vw'</span></span></span><br><span class="line"><span class="tag">/&gt;</span>  //size默认值是不带查询条件的100vw，如果存在多个查询条件，可以通过逗号隔开</span><br></pre></td></tr></table></figure></p>
+<p>//浏览器从小尺寸变为大尺寸时会依据带宽、dpi值、像素比等综合因素自动切换图片大小，当浏览器从大尺寸变回小尺寸时图片将仍然保留大尺寸时的图片，因为此时该图片已缓存。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//多组条件响应图片，目前IE浏览器均不支持，高级浏览器才支持，可通过引入picturefill第三方补丁库进行打补支持。</span><br><span class="line"><span class="tag">&lt;<span class="name">picture</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">media</span>=<span class="string">'(max-width: 800px)'</span> <span class="attr">srcset</span>=<span class="string">'img/a.png 600w'</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">srcset</span>=<span class="string">'img/a-default.png 1200w'</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">type</span>=<span class="string">'image/svg+xml'</span> <span class="attr">srcset</span>=<span class="string">'logo.svg 480w'</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">type</span>=<span class="string">'image/webp'</span> <span class="attr">srcset</span>=<span class="string">'logo.webp 480w, logo-m.webp 800w, logo-l.webp 1200w'</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">'img/a.png'</span> /&gt;</span> //默认显示</span><br><span class="line"><span class="tag">&lt;/<span class="name">picture</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/10/jsonp的2种跨域请求方式/" rel="next" title="jsonp的2种跨域请求方式">
+                <i class="fa fa-chevron-left"></i> jsonp的2种跨域请求方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/11/前端安全/" rel="prev" title="前端安全">
+                前端安全 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+<ul class="-mob-share-list">
+    <li class="-mob-share-weixin"><p class="describeP">微信</p></li>
+    <li class="-mob-share-weibo"><p class="describeP">新浪微博</p></li>
+    <li class="-mob-share-qq"><p class="describeP">QQ好友</p></li>
+    <li class="-mob-share-qzone"><p class="describeP">QQ空间</p></li>
+    <li class="-mob-share-facebook"><p class="describeP">Facebook</p></li>
+    <li class="-mob-share-twitter"><p class="describeP">Twitter</p></li>
+</ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1db2155cc54e0"></script>
+<!--MOB SHARE END-->
+
+      
+    </div>
+
+    <script>
+    ~function() {
+      var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+      var xml = new XMLHttpRequest()
+      xml.open('GET', 'https://zhangbinglin.cn:10088/addVisitedCount?key=' + key)
+      xml.onreadystatechange = function() {}
+      xml.send(null)
+    }()
+    </script>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="zhangbinglin">
+          <p class="site-author-name" itemprop="name">zhangbinglin</p>
+           
+              <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count redNumber">58</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/binglinzhang/binglinzhang.github.io" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://i2.muimg.com/588926/46f22becb5fe0573.jpg" target="_blank" title="微信公众号">
+                  
+                    <i class="fa fa-fw fa-wechat"></i>
+                  
+                  微信公众号
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="308" height="52" src="//music.163.com/outchain/player?type=2&id=857896&auto=0&height=32" class="musicIN"></iframe>
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangbinglin</span>
+</div>
+
+
+<div class="powered-by">
+  由 <span class="theme-link" href="https://hexo.io">Hexo</span> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <span class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

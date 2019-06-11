@@ -1,0 +1,1171 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="前端,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="前端性能是一大重点模块，本文整理总结实际项目开发中使用到的几种针对首屏加载速度的优化方案，并将不断迭代更新。">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈项目中首屏渲染的几点优化">
+<meta property="og:url" content="http://zhangbinglin.cn/2018/10/01/浅谈项目中首屏渲染的几点优化/index.html">
+<meta property="og:site_name" content="zhangbinglin">
+<meta property="og:description" content="前端性能是一大重点模块，本文整理总结实际项目开发中使用到的几种针对首屏加载速度的优化方案，并将不断迭代更新。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/zhangbinglin/zhangbinglin.github.io/master/pubpic/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205202639.jpg">
+<meta property="og:updated_time" content="2018-12-05T12:37:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈项目中首屏渲染的几点优化">
+<meta name="twitter:description" content="前端性能是一大重点模块，本文整理总结实际项目开发中使用到的几种针对首屏加载速度的优化方案，并将不断迭代更新。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/zhangbinglin/zhangbinglin.github.io/master/pubpic/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205202639.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangbinglin.cn/2018/10/01/浅谈项目中首屏渲染的几点优化/">
+
+
+
+
+
+  <title>浅谈项目中首屏渲染的几点优化 | zhangbinglin</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zhangbinglin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活不止非黑即白，<br>还有笔下的五彩 ...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-clock-o"></i> <br>
+            
+            时光轴
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            站内搜索
+          </a>
+        </li>
+
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup" style="background:none">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result" style="display:none;background:#fff;"></div>
+</div>
+<script>
+document.getElementById('local-search-input').onkeyup = function() {
+  document.getElementById('local-search-result').style.display = 'none'
+  if (document.getElementById('local-search-input').value) {
+      document.getElementById('local-search-result').style.display = 'block'
+      document.getElementsByClassName('local-search-popup')[0].focus()
+  }
+}
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2018/10/01/浅谈项目中首屏渲染的几点优化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangbinglin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangbinglin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                浅谈项目中首屏渲染的几点优化
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-01T10:10:10+08:00">
+                2018-10-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前端性能是一大重点模块，本文整理总结实际项目开发中使用到的几种针对首屏加载速度的优化方案，并将不断迭代更新。</p>
+<a id="more"></a>
+<h3 id="v-if结合定时器按需渲染"><a href="#v-if结合定时器按需渲染" class="headerlink" title="v-if结合定时器按需渲染"></a>v-if结合定时器按需渲染</h3><p>首先页面上存在多个tab切换的功能，且各tab之间相互独立，最开始做法是直接一个路由下通过v-if控制组件的渲染显示与隐藏，但这种方式会导致将所有组件一并打包到app.js文件中，导致包体积太大。后面采用根据业务功能划分层级路由的方式，达到组件按需加载目的，减少app.js文件大小，提升首屏加载与解析性能。另外，通过v-if结合定时器与动画在首屏加载组件时可以按一定顺序加载，突出重点内容并有组件进入动画效果，用户体验更好。</p>
+<h3 id="声明式预渲染"><a href="#声明式预渲染" class="headerlink" title="声明式预渲染"></a>声明式预渲染</h3><p>考虑后面未加载tab被点击访问的可能性较大，因此采用<code>&lt;link rel=&#39;prerender&#39; href=&#39;/example.html&#39;&gt;</code>的方式进行页面预加载预渲染，该技术相当于在后台打开一个隐藏的tab，会下载所有的资源并创建DOM、渲染页面、执行JS等，当用户进入指定链接时，渲染完成的页面直接显示。还可以结合按钮的鼠标悬浮、离开事件等进行预加载与卸载。注意开发模式下不会触发预渲染。另外还可以结合preload预加载指定资源。</p>
+<h3 id="客户端本地缓存第三方库"><a href="#客户端本地缓存第三方库" class="headerlink" title="客户端本地缓存第三方库"></a>客户端本地缓存第三方库</h3><p>通过import、require引入的第三方库在build打包之后会生成一个vendor.js文件，引入的库越多体积越大，每次打包时间以及页面加载时间也就越长，且第三方库修改的可能性比较低，所以会造成一定资源浪费。优化的方式有2种，一种是直接通过script标签引入cdn托管的地址，一种是直接将这些库保存到客户端本地(localStorage)，直接读取不走请求减少加载时间，且可通过版本控制按需更新本地库的版本。一个原则是vendor包的大小gzip后不超过350k。</p>
+<p>关键代码(建议在首页html入口中直接引入)：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">~<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">appendExecElem</span>(<span class="params">type, content</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> elem = <span class="built_in">document</span>.createElement(type)</span><br><span class="line">    elem.type = type === <span class="string">'style'</span> ? <span class="string">'text/css'</span> : <span class="string">'text/javascript'</span></span><br><span class="line">    elem.innerHTML = content</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(elem)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">execHandler</span>(<span class="params">url, content</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 根据不同类型处理</span></span><br><span class="line">    <span class="keyword">const</span> matchRes = url.match(<span class="regexp">/\.js/g</span>)</span><br><span class="line">    appendExecElem(matchRes &amp;&amp; matchRes.length ? <span class="string">'script'</span> : <span class="string">'style'</span>, content)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">removeStorage</span>(<span class="params">itemKey</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 删除或更新缓存</span></span><br><span class="line">    <span class="keyword">const</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(itemKey, <span class="string">'g'</span>)</span><br><span class="line">    <span class="built_in">Object</span>.keys(localStorage).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(key.match(reg) &amp;&amp; key.match(reg).length) &#123;</span><br><span class="line">        localStorage.removeItem(key)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getResource</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> url = item.url</span><br><span class="line">    <span class="comment">// 删除指定缓存接口</span></span><br><span class="line">    <span class="keyword">if</span> (!url) &#123;</span><br><span class="line">      removeStorage(item.key)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> localStorageValue = localStorage[url]</span><br><span class="line">    <span class="comment">// 存在缓存直接读取缓存</span></span><br><span class="line">    <span class="keyword">if</span>(localStorageValue) &#123;</span><br><span class="line">      execHandler(url, localStorageValue)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 不存在缓存发起请求</span></span><br><span class="line">    <span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">    xhr.timeout = <span class="number">30000</span></span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (xhr.readyState === <span class="number">4</span> &amp;&amp; xhr.status === <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> result = xhr.responseText</span><br><span class="line">        execHandler(url, result)</span><br><span class="line">        removeStorage(item.key)</span><br><span class="line">        localStorage[url] = result.toString()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.onerror = <span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(<span class="string">'资源加载失败，请刷新页面重试'</span>) &#125;</span><br><span class="line">    xhr.open(<span class="string">'GET'</span>, url)</span><br><span class="line">    xhr.send(<span class="literal">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 静态资源请求列表,每次变更版本只需在url路径中更改日期即可替换原有缓存</span></span><br><span class="line">  <span class="comment">// 其中key为查找缓存的关键字,当要删除指定缓存时，url留空，指定key值即可删除</span></span><br><span class="line">  <span class="keyword">const</span> requestArray = [</span><br><span class="line">    &#123;</span><br><span class="line">      url: <span class="string">`/static/js/echarts4.min.js?v2018082801`</span>,</span><br><span class="line">      key: <span class="string">'echarts4.min.js'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      url: <span class="string">`/static/css/reset.css?v2018082801`</span>,</span><br><span class="line">      key: <span class="string">'reset.css'</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">  requestArray.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123; getResource(item) &#125;)</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure></p>
+<h3 id="静态资源缓存与压缩"><a href="#静态资源缓存与压缩" class="headerlink" title="静态资源缓存与压缩"></a>静态资源缓存与压缩</h3><p>打包完的static静态资源包跟后台协商，访问所有静态资源的响应头部信息中加上<code>cache-control: max-age=xxx</code>和<code>last-modified</code>和<code>Etag</code>，因为静态资源一旦上线发包之后基本不再更改，因此尽量走本地强制缓存，当强制缓存过期后走304校验缓存。另外服务端开启gzip压缩，效果谁用谁知道。</p>
+<h3 id="动态加载较大体积的工具包"><a href="#动态加载较大体积的工具包" class="headerlink" title="动态加载较大体积的工具包"></a>动态加载较大体积的工具包</h3><p>对于一些工具方法常常封装在util文件中，但方法越来越多代码量越来越大时，直接打包到app.js文件中显然不合适，本项目中util文件体积达到40+k，因此采用了动态加载的方式进行，借助ES7的<code>import()</code>方法可以拆分并按需加载文件，或者借用webpack提供的<code>require.ensure</code>方法也可异步加载资源，其他相关模块也可以通过这种方式进行动态按需加载，原则就是尽量减少app.js包的大小，为首屏加载渲染压缩时间，提高性能。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES7按需加载方式,支持promise</span></span><br><span class="line"><span class="keyword">import</span>(<span class="comment">/* webpackChunkName: 'util' */</span> <span class="string">'./util'</span>).then(<span class="function">(<span class="params">modules</span>) =&gt;</span> &#123;</span><br><span class="line">  Vue.prototype.$util = modules.myUtil</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// webpack按需加载方式,支持命名</span></span><br><span class="line"><span class="built_in">require</span>.ensure([], () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> modules = <span class="built_in">require</span>(<span class="string">'./util'</span>)</span><br><span class="line">  Vue.prototype.$util = modules.myUtil</span><br><span class="line">&#125;, <span class="string">'util'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="开启GPU渲染动画"><a href="#开启GPU渲染动画" class="headerlink" title="开启GPU渲染动画"></a>开启GPU渲染动画</h3><p>代码层面，如果存在动画或者需要频繁回流重绘的DOM元素，建议单独设置为独立层，这样每次只针对该独立层范围内的回流，减少对页面其他元素的影响。设置为独立层的方式有: <code>transform: translateZ(0)</code>，<code>z-index: 666</code>，<code>will-change: transform</code>等。</p>
+<h3 id="webworker并行计算"><a href="#webworker并行计算" class="headerlink" title="webworker并行计算"></a>webworker并行计算</h3><p>利用webworker子线程处理较长时间的纯逻辑数据处理，例如项目中地图坐标的一些相关计算等，可以充分利用CPU并发进行，但要注意webworker只是一个scope作用域，无法引用到window或document对象，所以也无法进行任何DOM相关的操作，包括从主进程传DOM元素给到子线程也是不被允许的。但window上诸如setTimeout、XHR、indexedDB等方法是可以操作的。谨记主进程与子进程之间的数据传递都是一种深度拷贝，对象之间的传递需要通过<code>JSON.stringify</code>或<code>toString</code>方法处理，这样可能会导致类、函数被过滤。</p>
+<h3 id="原生封装替换第三方库"><a href="#原生封装替换第三方库" class="headerlink" title="原生封装替换第三方库"></a>原生封装替换第三方库</h3><p>对于浏览器兼容要求不高的项目，可以不必引用axios库，该库大部分功能用不到，常用的主要是get与post，因此完成可以自己用原生XHR封装一个，或者直接调用<code>window.fetch</code>方法，该方法支持Promise，去掉axios库至少打包可以减少13k，一定程度上优化首屏渲染效率。fetch方法在webworker中也支持，因此可以结合起来在子线程中发起请求。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">importScripts(<span class="string">'paths.js'</span>)   <span class="comment">// 注意作用域</span></span><br><span class="line"><span class="keyword">const</span> urls = <span class="built_in">Object</span>.values(self.paths)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> fetch(url, &#123;</span><br><span class="line">    method: <span class="string">'GET'</span>,</span><br><span class="line">    headers: &#123;</span><br><span class="line">      <span class="string">'accept'</span>: <span class="string">'application/json'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> res.json())</span><br><span class="line">  self.postMessage(res)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">urls.forEach(<span class="function"><span class="params">url</span> =&gt;</span> &#123; getData(url) &#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="组件的DOM缓存"><a href="#组件的DOM缓存" class="headerlink" title="组件的DOM缓存"></a>组件的DOM缓存</h3><p>利用官网提供的keep-alive全局组件对v-if或者路由跳转组件进行缓存，从而减少重渲染时间，提升用户体验，只在activated周期中更新接口数据以及在deactivated中销毁定时器即可。</p>
+<h3 id="客户端本地存储的利用"><a href="#客户端本地存储的利用" class="headerlink" title="客户端本地存储的利用"></a>客户端本地存储的利用</h3><p>对于SPA项目而言，最耗时的主要还是接口请求这一块，偏偏项目中查询接口数量巨多，因此就得考虑如何缓存接口数据的问题，确保首屏渲染时利用最后一次缓存数据先占位，等待请求接口返回后更新替换。这是个比较大的工程，这里暂时提供几个思路：</p>
+<ol>
+<li>一种方案是利用浏览器IndexedDB无体积限制的非关系型数据库缓存最后一次接口请求的数据，当页面再次打开时直接将数据读取到某个变量(该过程为异步过程)，最后请求接口数据返回后重新更新DB库并通知引用变量更新触发页面刷新。</li>
+<li>另一种方案是将页面中的接口单独提取出来，与页面渲染并行进行，同时借助webworker开启子进程处理所有请求，以期更快获取到数据，但需要考虑数据分传的问题。</li>
+<li>最后一种是充分利用PWA中的serviceWorker缓存技术，可以很好的缓存并自动更新指定的资源，但存在较大的兼容性问题。<br>简单代码如下：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// sw.js文件</span></span><br><span class="line"><span class="keyword">var</span> VERSION = <span class="string">'v1.0'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 缓存</span></span><br><span class="line">self.addEventListener(<span class="string">'install'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  event.waitUntil(</span><br><span class="line">    caches.open(VERSION).then(<span class="function"><span class="keyword">function</span>(<span class="params">cache</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> cache.addAll([</span><br><span class="line">        <span class="string">'./index.html'</span>,</span><br><span class="line">        <span class="string">'./static/echarts4.min.js'</span>,</span><br><span class="line">        <span class="string">'./static/mm.jpg'</span></span><br><span class="line">      ])</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 缓存更新</span></span><br><span class="line">self.addEventListener(<span class="string">'activate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  event.waitUntil(</span><br><span class="line">    caches.keys().then(<span class="function"><span class="keyword">function</span>(<span class="params">cacheNames</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.all(</span><br><span class="line">        cacheNames.map(<span class="function"><span class="keyword">function</span>(<span class="params">cacheName</span>) </span>&#123;</span><br><span class="line">          <span class="comment">// 如果当前版本和缓存版本不一致</span></span><br><span class="line">          <span class="keyword">if</span> (cacheName !== VERSION) &#123;</span><br><span class="line">            <span class="keyword">return</span> caches.delete(cacheName)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      )</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 捕获请求并返回缓存数据</span></span><br><span class="line">self.addEventListener(<span class="string">'fetch'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  event.respondWith(caches.match(event.request).catch(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">    caches.open(VERSION).then(<span class="function"><span class="keyword">function</span>(<span class="params">cache</span>) </span>&#123;</span><br><span class="line">      cache.put(event.request, response)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> response.clone()</span><br><span class="line">  &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> caches.match(<span class="string">'./static/mm.jpg'</span>)</span><br><span class="line">  &#125;))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="css样式的复用"><a href="#css样式的复用" class="headerlink" title="css样式的复用"></a>css样式的复用</h3><p>不要在每个class类里面写一遍<code>display:flex</code>，这样每次编译加上前缀后至少多出3行代码，更优做法是充分利用共用样式库，保证一个css类的样式单一化，提高css解耦性与复用性，从而减少统一打包后出现很多冗余代码。另外在保证不冲突的情况下不使用局部样式，局部样式的每个类名上都会加上一段哈希值，导致代码冗长。同理减少类的层级也是一个要考虑的问题，原则上尽量不超过3级。</p>
+<h3 id="webpack持久化缓存"><a href="#webpack持久化缓存" class="headerlink" title="webpack持久化缓存"></a>webpack持久化缓存</h3><p>采用webpack持久化缓存方案，主要出发点是通过控制文件的hash实现浏览器本地缓存的作用，可以考虑以下几点：</p>
+<ol>
+<li>output输出的文件名中使用chunkhash，根据文件内容生成唯一hash值，但当结合<code>ExtractTextPlugin</code>插件提取css样式的时候涉及到异步抽取流程，因此会出现hash异动，此时将hash的生成换成ExtractTextPlugin提供的contenthash规则即可保证只修改变动的文件hash。</li>
+<li>使用<code>HashedModuleIdsPlugin</code>插件确保moduleId固化，有点类似vue/react中循环列表时要求提供key值，从而避免重复生成。</li>
+<li>使用<code>ModuleConcatenationPlugin</code>插件提升变量作用域，减少冗余闭包使用，提升性能。</li>
+<li>单独提取每次打包导致变动的manifest文件，该文件存储了模块的映射关系，因此必须优先引入，之后webpack才知道加载顺序，但由于manifest文件体积很小，大约1k左右，因此可以考虑将其直接内联到index.html入口文件中去。这里使用了<code>ScriptExtHtmlWebpackPlugin</code>插件实现。此外该插件还提供资源的preload/prefetch，可以提前预加载之后需要使用到的资源。</li>
+<li><p>诸如页面适配脚本或者动态创建script加载其他资源的代码块也可以添加到主入口中，此时也可以借助<code>ScriptExtHtmlWebpackPlugin</code>插件将其内敛到页面特定位置，此时就需要在<code>HtmlWebpackPlugin</code>插件中配置文件的插入顺序了，可以通过下面代码按指定顺序注入页面中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">  filename: <span class="string">'index.html'</span>,</span><br><span class="line">  template: <span class="string">'index.html'</span>,</span><br><span class="line">  title: <span class="string">'/mqs-view/pages/'</span>,</span><br><span class="line">  inject: <span class="literal">true</span>,</span><br><span class="line">  minify: &#123;</span><br><span class="line">    removeComments: <span class="literal">true</span>,</span><br><span class="line">    collapseWhitespace: <span class="literal">true</span>,</span><br><span class="line">    removeAttributeQuotes: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// necessary to consistently work with multiple chunks via CommonsChunkPlugin =&gt; 'dependency'</span></span><br><span class="line">  chunksSortMode: <span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> chunksort = [<span class="string">'manifest'</span>, <span class="string">'inlineScript'</span>, <span class="string">'vendor'</span>, <span class="string">'app'</span>] <span class="comment">// 指定的注入顺序</span></span><br><span class="line">    <span class="keyword">let</span> aIndex = chunksort.indexOf(a.names[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">let</span> bIndex = chunksort.indexOf(b.names[<span class="number">0</span>])</span><br><span class="line">    aIndex = aIndex &lt; <span class="number">0</span> ? chunksort.length + <span class="number">1</span> : aIndex</span><br><span class="line">    bIndex = bIndex &lt; <span class="number">0</span> ? chunksort.length + <span class="number">1</span> : bIndex</span><br><span class="line">    <span class="keyword">return</span> aIndex - bIndex</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生产环境下在<code>UglifyJsPlugin</code>插件中的compress字段里开启<code>drop_debugger`</code>drop_console`为true将脚本中的console.log与debugger相关代码删除，减少无效代码执行。</p>
+</li>
+</ol>
+<h3 id="使用骨架屏"><a href="#使用骨架屏" class="headerlink" title="使用骨架屏"></a>使用骨架屏</h3><p>增加骨架屏提高用户体验，首屏加载时根据不同路由展示不同的骨架屏效果。原理是利用根节点元素如<code>&lt;div id=&#39;app&#39;&gt;&lt;/div&gt;</code>会被覆盖渲染，因此在初始状态时可以再其innerHTML中赋予相应的骨架屏背景图或者其他的脚本交互等。</p>
+<h3 id="服务端与预渲染"><a href="#服务端与预渲染" class="headerlink" title="服务端与预渲染"></a>服务端与预渲染</h3><p>使用预渲染<code>prerender-spa-plugin</code>或者ssr后端渲染<code>vue-server-renderer</code>的方式直接加载渲染完成的html文本，大大提高效率。</p>
+<p>预渲染所使用插件<code>prerender-spa-plugin</code>充分利用了Puppeteer页面爬取的功能。Puppeteer是Chrome官方出品的headlessChrome node库，该库提供一系列的API，可以在无UI界面的情况下模拟真实Chrome的功能，适用于爬虫、自动化处理等各种场景。</p>
+<p>SPA预渲染方案的原理就是在webpack构建阶段的最后，在本地启动一个Puppeteer的服务，访问所配置的预渲染路由，然后将然后将生成的节点输出到HTML文件中，并建立路由对应目录。改方案最大特点是配置简单，倾入性低，效果较明显，但针对时效性强的数据不太适合。此外，可尝试将生成的预渲染页面结合骨架屏进行使用，从而保证预渲染的静态页面预最后呈现的页面间的自然切换。</p>
+<p>该过程依赖的插件<code>prerender-spa-plugin</code>安装完成后会执行一段脚本下载Chromium内核，该下载需要翻墙，压缩包体积100M左右，npm install完成之后在<code>webpack.prod.conf.js</code>文件中引入，并在<code>HtmlWebpackPlugin</code>之后配置如下预渲染选项：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 插件引入部分</span></span><br><span class="line"><span class="keyword">const</span> PrerenderSPAPlugin = <span class="built_in">require</span>(<span class="string">'prerender-spa-plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> Renderer = PrerenderSPAPlugin.PuppeteerRenderer</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下为配置部分</span></span><br><span class="line"><span class="keyword">new</span> PrerenderSPAPlugin(&#123;</span><br><span class="line">  <span class="comment">// 该路径代表了在`npm run build`之后开启监听的路径，Chromium默认开启`localhost:8000`，可通过字段server配置端口号，如下staticDir配置将会托管dist文件目录</span></span><br><span class="line">  staticDir: path.join(__dirname, <span class="string">'../dist'</span>),</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 打包后文件输出路径，默认与staticDir配置相同</span></span><br><span class="line">  <span class="comment">// outputDir: path.join(__dirname, '../dist'),</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 该部分表示需要预渲染的路由，前提需要将router模式改为history，并且如果部署环境非根目录，而是放在baseDir目录下，则在router中还需配置base或者直接写全路由路径，否则会出现白屏</span></span><br><span class="line">  routes: [<span class="string">'/baseDir/'</span>, <span class="string">'/baseDir/page1'</span>, <span class="string">'/baseDir/page2'</span>],</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 渲染内核配置部分</span></span><br><span class="line">  renderer: <span class="keyword">new</span> Renderer(&#123;</span><br><span class="line">    <span class="comment">// 以下2个配置在预渲染打开Chromium浏览器时会挂载到window对象上，访问途径`window.__PRERENDER_INJECTED.isPrerenderMode`，该配置很大的作用是用于区分预渲染环境与正式环境，从而指定不同接口基准路径访问测试环境数据与正式环境数据，如`const base = window.__PRERENDER_INJECTED &amp;&amp; window.__PRERENDER_INJECTED.isPrerenderMode ? 'http://localhost:10086/baseDir/' : '/baseDir/'`</span></span><br><span class="line">    injectProperty: <span class="string">'__PRERENDER_INJECTED'</span>,</span><br><span class="line">    inject: &#123; <span class="attr">isPrerenderMode</span>: <span class="literal">true</span> &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置是否在build过程中打开Chromium界面，建议设置为false，方便debugger看到build端口并验证路由地址</span></span><br><span class="line">    headless: <span class="literal">false</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 该配置为触发渲染的事件名，在main.js中Vue实例挂载完成之后执行document.dispatchEvent(new Event('render-event'))触发预渲染执行。</span></span><br><span class="line">    renderAfterDocumentEvent: <span class="string">'render-event'</span></span><br><span class="line">  &#125;),</span><br><span class="line">  <span class="comment">// 服务端口配置</span></span><br><span class="line">  server: &#123;</span><br><span class="line">    port: <span class="number">8000</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 延时执行渲染配置</span></span><br><span class="line">  <span class="comment">// renderAfterTime: 5000,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 代码压缩部分配置</span></span><br><span class="line">  minify: &#123;</span><br><span class="line">    collapseBooleanAttributes: <span class="literal">true</span>,</span><br><span class="line">    collapseWhitespace: <span class="literal">true</span>,</span><br><span class="line">    decodeEntities: <span class="literal">true</span>,</span><br><span class="line">    keepClosingSlash: <span class="literal">true</span>,</span><br><span class="line">    sortAttributes: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Vue实例化部分</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  router,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: <span class="string">'&lt;App/&gt;'</span>,</span><br><span class="line">  <span class="comment">// 触发预渲染</span></span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="built_in">document</span>.dispatchEvent(<span class="keyword">new</span> Event(<span class="string">'render-event'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>预渲染效果图：</p>
+<p><img src="https://raw.githubusercontent.com/zhangbinglin/zhangbinglin.github.io/master/pubpic/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20181205202639.jpg" alt></p>
+<p>end</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/18/keyframes动画的动态生成/" rel="next" title="keyframes动画的动态生成">
+                <i class="fa fa-chevron-left"></i> keyframes动画的动态生成
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/10/静态资源本地化缓存方案/" rel="prev" title="静态资源本地化缓存方案">
+                静态资源本地化缓存方案 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+<ul class="-mob-share-list">
+    <li class="-mob-share-weixin"><p class="describeP">微信</p></li>
+    <li class="-mob-share-weibo"><p class="describeP">新浪微博</p></li>
+    <li class="-mob-share-qq"><p class="describeP">QQ好友</p></li>
+    <li class="-mob-share-qzone"><p class="describeP">QQ空间</p></li>
+    <li class="-mob-share-facebook"><p class="describeP">Facebook</p></li>
+    <li class="-mob-share-twitter"><p class="describeP">Twitter</p></li>
+</ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1db2155cc54e0"></script>
+<!--MOB SHARE END-->
+
+      
+    </div>
+
+    <script>
+    ~function() {
+      var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+      var xml = new XMLHttpRequest()
+      xml.open('GET', 'https://zhangbinglin.cn:10088/addVisitedCount?key=' + key)
+      xml.onreadystatechange = function() {}
+      xml.send(null)
+    }()
+    </script>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="zhangbinglin">
+          <p class="site-author-name" itemprop="name">zhangbinglin</p>
+           
+              <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count redNumber">58</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/binglinzhang/binglinzhang.github.io" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://i2.muimg.com/588926/46f22becb5fe0573.jpg" target="_blank" title="微信公众号">
+                  
+                    <i class="fa fa-fw fa-wechat"></i>
+                  
+                  微信公众号
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="308" height="52" src="//music.163.com/outchain/player?type=2&id=857896&auto=0&height=32" class="musicIN"></iframe>
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#v-if结合定时器按需渲染"><span class="nav-number">1.</span> <span class="nav-text">v-if结合定时器按需渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明式预渲染"><span class="nav-number">2.</span> <span class="nav-text">声明式预渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端本地缓存第三方库"><span class="nav-number">3.</span> <span class="nav-text">客户端本地缓存第三方库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态资源缓存与压缩"><span class="nav-number">4.</span> <span class="nav-text">静态资源缓存与压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态加载较大体积的工具包"><span class="nav-number">5.</span> <span class="nav-text">动态加载较大体积的工具包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启GPU渲染动画"><span class="nav-number">6.</span> <span class="nav-text">开启GPU渲染动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webworker并行计算"><span class="nav-number">7.</span> <span class="nav-text">webworker并行计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原生封装替换第三方库"><span class="nav-number">8.</span> <span class="nav-text">原生封装替换第三方库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件的DOM缓存"><span class="nav-number">9.</span> <span class="nav-text">组件的DOM缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端本地存储的利用"><span class="nav-number">10.</span> <span class="nav-text">客户端本地存储的利用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css样式的复用"><span class="nav-number">11.</span> <span class="nav-text">css样式的复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack持久化缓存"><span class="nav-number">12.</span> <span class="nav-text">webpack持久化缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用骨架屏"><span class="nav-number">13.</span> <span class="nav-text">使用骨架屏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端与预渲染"><span class="nav-number">14.</span> <span class="nav-text">服务端与预渲染</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhangbinglin</span>
+</div>
+
+
+<div class="powered-by">
+  由 <span class="theme-link" href="https://hexo.io">Hexo</span> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <span class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

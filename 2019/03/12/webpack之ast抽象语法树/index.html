@@ -4,18 +4,18 @@
 
 
 <html class="theme-next pisces" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -33,7 +33,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -67,35 +67,44 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="前端,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1">
 
 
 
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="zhangbinglin">
-<meta property="og:url" content="http://zhangbinglin.cn/404.html">
+<meta name="description" content="抽象语法树(abstract syntax tree简写AST)，是一种将源代码抽象为一种树状结构的表现形式。js为开发者能更好的完成编程工作设计响应的语法，但这些语法并不适合程序理解，因此实际对语法进行程序分析时需要转化为AST进行应用，浏览器编译器一般会把源码转化为AST完成进一步分析操作应用等。">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack之ast抽象语法树">
+<meta property="og:url" content="http://zhangbinglin.cn/2019/03/12/webpack之ast抽象语法树/index.html">
 <meta property="og:site_name" content="zhangbinglin">
+<meta property="og:description" content="抽象语法树(abstract syntax tree简写AST)，是一种将源代码抽象为一种树状结构的表现形式。js为开发者能更好的完成编程工作设计响应的语法，但这些语法并不适合程序理解，因此实际对语法进行程序分析时需要转化为AST进行应用，浏览器编译器一般会把源码转化为AST完成进一步分析操作应用等。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-05-03T13:04:50.000Z">
+<meta property="og:image" content="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast1.png">
+<meta property="og:image" content="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast2.jpg">
+<meta property="og:image" content="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast3.png">
+<meta property="og:image" content="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast4.png">
+<meta property="og:updated_time" content="2019-05-23T14:42:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zhangbinglin">
+<meta name="twitter:title" content="webpack之ast抽象语法树">
+<meta name="twitter:description" content="抽象语法树(abstract syntax tree简写AST)，是一种将源代码抽象为一种树状结构的表现形式。js为开发者能更好的完成编程工作设计响应的语法，但这些语法并不适合程序理解，因此实际对语法进行程序分析时需要转化为AST进行应用，浏览器编译器一般会把源码转化为AST完成进一步分析操作应用等。">
+<meta name="twitter:image" content="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast1.png">
 
 
 
@@ -123,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://zhangbinglin.cn/404.html"/>
+  <link rel="canonical" href="http://zhangbinglin.cn/2019/03/12/webpack之ast抽象语法树/">
 
 
 
 
 
-  <title> | zhangbinglin</title>
+  <title>webpack之ast抽象语法树 | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,7 +163,7 @@
     
   
 
-  <div class="container sidebar-position-right  ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -163,7 +172,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">zhangbinglin</span>
         <span class="logo-line-after"><i></i></span>
@@ -193,7 +202,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -203,7 +212,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-clock-o"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-clock-o"></i> <br>
             
             时光轴
           </a>
@@ -213,7 +222,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -226,7 +235,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             站内搜索
           </a>
@@ -248,9 +257,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result" style="display:none;background:#fff;"></div>
@@ -283,34 +290,239 @@ document.getElementById('local-search-input').onkeyup = function() {
             
 
   <div id="posts" class="posts-expand">
-  <header class="post-header">
+    
 
-	<h1 class="post-title" itemprop="name headline"></h1>
+  
 
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2019/03/12/webpack之ast抽象语法树/">
 
-</header>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangbinglin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangbinglin">
+    </span>
 
     
-    
-      <!DOCTYPE HTML>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta http-equiv="content-type" content="text/html;charset=utf-8;">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="robots" content="all">
-  <meta name="robots" content="index,follow">
-  <link rel="stylesheet" type="text/css" href="https://qzone.qq.com/gy/404/style/404style.css">
-</head>
-<body>
-  <script type="text/plain" src="http://www.qq.com/404/search_children.js" charset="utf-8" homepageurl="/" homepagename="回到我的主页">
-  </script>
-  <script src="https://qzone.qq.com/gy/404/data.js" charset="utf-8"></script>
-  <script src="https://qzone.qq.com/gy/404/page.js" charset="utf-8"></script>
-</body>
-</html>
+      <header class="post-header">
 
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                webpack之ast抽象语法树
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-12T15:10:32+08:00">
+                2019-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">webpack</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>抽象语法树(abstract syntax tree简写AST)，是一种将源代码抽象为一种树状结构的表现形式。js为开发者能更好的完成编程工作设计响应的语法，但这些语法并不适合程序理解，因此实际对语法进行程序分析时需要转化为AST进行应用，浏览器编译器一般会把源码转化为AST完成进一步分析操作应用等。</p>
+<a id="more"></a>
+<h3 id="关于抽象语法树"><a href="#关于抽象语法树" class="headerlink" title="关于抽象语法树"></a>关于抽象语法树</h3><ul>
+<li>通过解析器将源码抽象为一种树状结构的表现形式。</li>
+<li>这颗树定义了代码的结构，可以精准的定位到声明语句、赋值语句、运算语句等。</li>
+<li>可视化分析平台  <a href="https://astexplorer.net/" target="_blank" rel="noopener">https://astexplorer.net/</a></li>
+<li>babel官方文档   <a href="https://babeljs.io/docs/en/babel-core" target="_blank" rel="noopener">https://babeljs.io/docs/en/babel-core</a><br><img src="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast1.png" alt></li>
+</ul>
+<h3 id="有啥用"><a href="#有啥用" class="headerlink" title="有啥用"></a>有啥用</h3><ul>
+<li>代码语法检查、错误提示、自动补全<ul>
+<li>如esLint对代码错误检测</li>
+</ul>
+</li>
+<li>转换代码格式或结构<ul>
+<li>如babeljs将es6代码转换为es5</li>
+<li>webpack替换引用路径<br>代码混淆压缩</li>
+<li>UglifyJS2等<br><img src="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast2.jpg" alt></li>
+</ul>
+</li>
+</ul>
+<h3 id="常用的JavaScript-Parser"><a href="#常用的JavaScript-Parser" class="headerlink" title="常用的JavaScript Parser"></a>常用的JavaScript Parser</h3><p>JavaScript Parser，把js源码转化为抽象语法树的解析器。<br>浏览器会把js源码通过解析器转为抽象语法树，再进一步转化为字节码或直接生成机器码。<br>一般来说每个js引擎都会有自己的抽象语法树格式，Chrome的v8引擎，firefox的SpiderMonkey引擎等等，MDN提供了详细SpiderMonkey AST format的详细说明，算是业界的标准。</p>
+<ul>
+<li>babylon</li>
+<li>esprima</li>
+<li>traceur</li>
+<li>acorn</li>
+<li>shift</li>
+</ul>
+<h3 id="抽象语法树一个应用栗子"><a href="#抽象语法树一个应用栗子" class="headerlink" title="抽象语法树一个应用栗子"></a>抽象语法树一个应用栗子</h3><p>将<code>const a = 2 * 3 * 4; log(a);</code>转换为<code>const a = 2 * 3 * 4; console.log(a);</code>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> babel = <span class="built_in">require</span>(<span class="string">'@babel/core'</span>)</span><br><span class="line"><span class="keyword">const</span> t = <span class="built_in">require</span>(<span class="string">'@babel/types'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> code = <span class="string">`const a = 2 * 3 * 4; log(a);`</span></span><br><span class="line"><span class="keyword">const</span> visitor = &#123;</span><br><span class="line">  CallExpression(path) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(path.node)</span><br><span class="line">      <span class="keyword">if</span> (path.node.callee.name === <span class="string">'log'</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> callee = t.memberExpression(t.identifier(<span class="string">'console'</span>), t.identifier(<span class="string">'log'</span>))</span><br><span class="line">        <span class="keyword">const</span> args = path.node.arguments</span><br><span class="line">        path.replaceWith(t.callExpression(callee, args))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> result = babel.transform(code, &#123;</span><br><span class="line">  plugins: [&#123;</span><br><span class="line">    visitor</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(result.code)</span><br></pre></td></tr></table></figure></p>
+<p>astexplorer上的分析结果:</p>
+<p><img src="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast3.png" alt></p>
+<p><img src="https://github.com/zhangbinglin/zhangbinglin.github.io/blob/master/pubpic/ast4.png" alt></p>
+<p>end</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/11/基于webpack的require.context的自动化配置/" rel="next" title="基于webpack的require.context的自动化配置">
+                <i class="fa fa-chevron-left"></i> 基于webpack的require.context的自动化配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/25/webpack֮Tapable/" rel="prev" title="webpack之Tapable">
+                webpack之Tapable <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+<ul class="-mob-share-list">
+    <li class="-mob-share-weixin"><p class="describeP">微信</p></li>
+    <li class="-mob-share-weibo"><p class="describeP">新浪微博</p></li>
+    <li class="-mob-share-qq"><p class="describeP">QQ好友</p></li>
+    <li class="-mob-share-qzone"><p class="describeP">QQ空间</p></li>
+    <li class="-mob-share-facebook"><p class="describeP">Facebook</p></li>
+    <li class="-mob-share-twitter"><p class="describeP">Twitter</p></li>
+</ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1db2155cc54e0"></script>
+<!--MOB SHARE END-->
+
+      
+    </div>
+
+    <script>
+    ~function() {
+      var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+      var xml = new XMLHttpRequest()
+      xml.open('GET', 'https://zhangbinglin.cn:10088/addVisitedCount?key=' + key)
+      xml.onreadystatechange = function() {}
+      xml.send(null)
+    }()
+    </script>
   </div>
 
 
@@ -342,12 +554,19 @@ document.getElementById('local-search-input').onkeyup = function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.png"
-               alt="zhangbinglin" />
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="zhangbinglin">
           <p class="site-author-name" itemprop="name">zhangbinglin</p>
            
               <p class="site-description motion-element" itemprop="description"><i>You deserve IT <br>Do More Do Better</i></p>
@@ -421,13 +640,29 @@ document.getElementById('local-search-input').onkeyup = function() {
         
 
         
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=308 height=52 src="//music.163.com/outchain/player?type=2&id=857896&auto=0&height=32" class="musicIN"></iframe>
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="308" height="52" src="//music.163.com/outchain/player?type=2&id=857896&auto=0&height=32" class="musicIN"></iframe>
 
         
 
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于抽象语法树"><span class="nav-number">1.</span> <span class="nav-text">关于抽象语法树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有啥用"><span class="nav-number">2.</span> <span class="nav-text">有啥用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的JavaScript-Parser"><span class="nav-number">3.</span> <span class="nav-text">常用的JavaScript Parser</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象语法树一个应用栗子"><span class="nav-number">4.</span> <span class="nav-text">抽象语法树一个应用栗子</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -443,7 +678,7 @@ document.getElementById('local-search-input').onkeyup = function() {
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2019</span>
@@ -549,6 +784,10 @@ document.getElementById('local-search-input').onkeyup = function() {
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
