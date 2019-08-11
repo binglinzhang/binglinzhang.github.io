@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="前端,">
 
 
 
@@ -88,16 +88,18 @@
 
 
 
-<meta name="description" content="You deserve IT Do More Do Better">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zhangbinglin">
-<meta property="og:url" content="http://zhangbinglin.cn/archives/2019/07/index.html">
+<meta name="description" content="基于await与promise，探索一种比较扁平、简洁的处理接口调用异常的方案。">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一种扁平化接口异常错误处理解决方案">
+<meta property="og:url" content="http://zhangbinglin.cn/2019/08/10/一种扁平化接口异常错误处理解决方案/index.html">
 <meta property="og:site_name" content="zhangbinglin">
-<meta property="og:description" content="You deserve IT Do More Do Better">
+<meta property="og:description" content="基于await与promise，探索一种比较扁平、简洁的处理接口调用异常的方案。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-11T13:30:27.836Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zhangbinglin">
-<meta name="twitter:description" content="You deserve IT Do More Do Better">
+<meta name="twitter:title" content="一种扁平化接口异常错误处理解决方案">
+<meta name="twitter:description" content="基于await与promise，探索一种比较扁平、简洁的处理接口调用异常的方案。">
 
 
 
@@ -125,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://zhangbinglin.cn/archives/2019/07/">
+  <link rel="canonical" href="http://zhangbinglin.cn/2019/08/10/一种扁平化接口异常错误处理解决方案/">
 
 
 
 
 
-  <title>归档 | zhangbinglin</title>
+  <title>一种扁平化接口异常错误处理解决方案 | zhangbinglin</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -156,7 +158,7 @@
     
   
 
-  <div class="container sidebar-position-right  page-archive  ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -282,63 +284,216 @@ document.getElementById('local-search-input').onkeyup = function() {
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-       
-        
-      好! 目前共计 60 篇日志。 继续努力。
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://zhangbinglin.cn/2019/08/10/一种扁平化接口异常错误处理解决方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhangbinglin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zhangbinglin">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一种扁平化接口异常错误处理解决方案
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-10T11:11:11+08:00">
+                2019-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <p>基于await与promise，探索一种比较扁平、简洁的处理接口调用异常的方案。</p>
+<a id="more"></a>
+<p>最近接手一个项目，涉及大量的接口调用及错误处理，往常情况下，借助axios库调用接口相当方便，它返回的结果为一个promise对象，我们可以直接通过该对象上的<code>then</code>与<code>catch</code>方法进行结果获取与错误捕获，举个简单栗子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fetchData() &#123;</span><br><span class="line">  <span class="keyword">this</span>.loading = <span class="literal">true</span></span><br><span class="line">  <span class="keyword">const</span> res = axios.get(<span class="string">'/api/getList'</span>)</span><br><span class="line">    .then(<span class="function">(<span class="params">res</span>) =&gt;</span> <span class="keyword">return</span> res)</span><br><span class="line">    .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="built_in">console</span>.warn(err))</span><br><span class="line">  <span class="keyword">this</span>.loading = <span class="literal">false</span></span><br><span class="line">  <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上方式可以很好的处理接口正常响应与错误捕获两种情况，但如果存在多层嵌套时，代码将变得非常冗余，因此我们借助es7提供的async/await的方式进行扁平书写，代码变成：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> fetchData() &#123;</span><br><span class="line">  <span class="keyword">this</span>.loading = <span class="literal">true</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> axios.get(<span class="string">'/api/getList'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">  &#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.warn(err)</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.loading = <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于async/await没有提供错误捕获的机制，因此只能使用最原始的<code>try...catch</code>方式进行错误处理，但显然这种方式又使得代码变得非常冗余难读，有没有一种可以结合以上两种方案各自优点的方式。联想数据库操作中处理回调的方式，通过暴露两个关键参数(<code>error, data</code>)，分别代表异常错误标识error与成功响应数据对象，从而通过判断error标识状态进行异常处理。引申到await中可以这么处理：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">$awaitTo</span>(<span class="params">p</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!p.then) <span class="keyword">return</span></span><br><span class="line">	<span class="keyword">return</span> p.then(<span class="function">(<span class="params">data</span>) =&gt;</span> [<span class="literal">null</span>, data]).catch(<span class="function">(<span class="params">err</span>) =&gt;</span> [err, <span class="literal">undefined</span>])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 两点注意：</span></span><br><span class="line"><span class="comment">// 1、await等待的必须是一个promise对象，因此return值必须为一个promise实例</span></span><br><span class="line"><span class="comment">// 2、捕获错误返回的应该是个undefined值(或者不写)，这样后面的解构赋值才能获取到默认值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> fetchData() &#123;</span><br><span class="line">  <span class="keyword">this</span>.loading = <span class="literal">true</span></span><br><span class="line">  <span class="keyword">const</span> [err, res = &#123;&#125;] = <span class="keyword">await</span> $awaitTo(axios.get(<span class="string">'/api/getList'</span>))</span><br><span class="line">  <span class="keyword">this</span>.loading = <span class="literal">false</span></span><br><span class="line">  <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.warn(err)</span><br><span class="line">  <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上方式可以相当扁平化的处理异常错误，使用方式也简单，给每个接口调用套用一层$awaitTo接口即可。但当接口数量庞多的时候给每个都手动添加一层也是繁琐，其实借助axios拦截还可以有更简洁的方式，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">axiosIns.interceptors.response.use(</span><br><span class="line">  (&#123; data = &#123;&#125; &#125;) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; success, msg &#125; = data</span><br><span class="line">    <span class="keyword">if</span> (success) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve([<span class="literal">null</span>, data])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject([msg, <span class="literal">undefined</span>])</span><br><span class="line">  &#125;,</span><br><span class="line">  (error) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject([error, <span class="literal">undefined</span>])</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> fetchData() &#123;</span><br><span class="line">  <span class="keyword">this</span>.loading = <span class="literal">true</span></span><br><span class="line">  <span class="keyword">const</span> [err, res = &#123;&#125;] = <span class="keyword">await</span> axios.get(<span class="string">'/api/getList'</span>)</span><br><span class="line">  <span class="keyword">this</span>.loading = <span class="literal">false</span></span><br><span class="line">  <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.warn(err)</span><br><span class="line">  <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上。</p>
+<p>end</p>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2019">2019</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
         </div>
       
+
+      
+        
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/16/基于less+webpack实现按需加载换肤样式/" rel="next" title="基于less+webpack实现按需加载换肤样式">
+                <i class="fa fa-chevron-left"></i> 基于less+webpack实现按需加载换肤样式
+              </a>
+            
+          </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          <span class="post-nav-divider"></span>
 
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/16/基于less+webpack实现按需加载换肤样式/" itemprop="url">
-              
-                <span itemprop="name">基于less+webpack实现按需加载换肤样式</span>
-              
-            </a>
-        
-      </h1>
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-16T21:23:32+08:00" content="2019-07-16">
-          07-16
-        </time>
-      </div>
-
-    </header>
+      
+      
+    </footer>
   </article>
 
 
 
-    
+    <div class="post-spread">
+      
+        <!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+<ul class="-mob-share-list">
+    <li class="-mob-share-weixin"><p class="describeP">微信</p></li>
+    <li class="-mob-share-weibo"><p class="describeP">新浪微博</p></li>
+    <li class="-mob-share-qq"><p class="describeP">QQ好友</p></li>
+    <li class="-mob-share-qzone"><p class="describeP">QQ空间</p></li>
+    <li class="-mob-share-facebook"><p class="describeP">Facebook</p></li>
+    <li class="-mob-share-twitter"><p class="describeP">Twitter</p></li>
+</ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=1db2155cc54e0"></script>
+<!--MOB SHARE END-->
 
-  </section>
+      
+    </div>
 
-  
-
+    <script>
+    ~function() {
+      var key = document.getElementsByTagName('title')[0].innerText.split('|')[0].trim()
+      var xml = new XMLHttpRequest()
+      xml.open('GET', 'https://zhangbinglin.cn:10088/addVisitedCount?key=' + key)
+      xml.onreadystatechange = function() {}
+      xml.send(null)
+    }()
+    </script>
+  </div>
 
 
           </div>
@@ -346,6 +501,10 @@ document.getElementById('local-search-input').onkeyup = function() {
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -570,7 +729,9 @@ document.getElementById('local-search-input').onkeyup = function() {
 
 
   
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   
